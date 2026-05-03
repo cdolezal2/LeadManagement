@@ -10,7 +10,7 @@
     2. Replace [YOUR PHONE] with your Google Voice number
     3. Replace [YOUR EMAIL] with your business email
     4. Replace [YOUR CITY] with your city/service area
-    5. Replace YOUR_MAKE_WEBHOOK_URL_HERE with your Make.com webhook
+    5. Replace YOUR_MAKE_WEBHOOK_URL_HERE with your Apps Script webhook
     ============================================================ -->
 
   <title>[YOUR NAME] — Websites & Lead Management for Small Businesses</title>
@@ -985,8 +985,8 @@
 </footer>
 
 <script>
-  // ── WEBHOOK — replace with your Make.com URL when ready
-  const WEBHOOK_URL = 'YOUR_MAKE_WEBHOOK_URL_HERE';
+  // ── WEBHOOK — replace with your Apps Script URL when ready
+  const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyT7Z7KB2z63sCl7UdvTJySSw6j35XVv-ZBZWeK0t_CHKwi8-BeMEU0aJ8_tUQd_bJ7/exec';
 
   async function handleSubmit() {
     const name     = document.getElementById('f-name').value.trim();
@@ -1013,7 +1013,7 @@
     };
 
     try {
-      if (WEBHOOK_URL !== 'YOUR_MAKE_WEBHOOK_URL_HERE') {
+      if (WEBHOOK_URL !== 'https://script.google.com/macros/s/AKfycbyT7Z7KB2z63sCl7UdvTJySSw6j35XVv-ZBZWeK0t_CHKwi8-BeMEU0aJ8_tUQd_bJ7/exec') {
         await fetch(WEBHOOK_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
