@@ -575,23 +575,36 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
+      section { padding: 64px 0; }
       .hero { grid-template-columns: 1fr; min-height: auto; }
-      .hero-left { padding: 100px 28px 60px; }
-      .hero-right { height: 380px; }
+      .hero-left { padding: 56px 28px 40px; }
+      .hero-right { height: 320px; }
       .steps { grid-template-columns: 1fr 1fr; }
       .step-connector { display: none; }
       .packages-grid { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; }
-      .why-grid { grid-template-columns: 1fr; gap: 40px; }
-      .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+      .packages-header { margin-bottom: 28px; }
+      .why-grid { grid-template-columns: 1fr; gap: 32px; }
+      .why-callout { padding: 32px 28px; }
+      .why-callout blockquote { font-size: 21px; margin-bottom: 20px; }
+      .why-callout-stat { gap: 24px; }
+      .contact-inner { grid-template-columns: 1fr; gap: 32px; }
       .contact-info { position: static; }
       .nav-links, .nav-cta { display: none; }
       .nav-toggle { display: flex; }
     }
     @media (max-width: 600px) {
-      .hero-stats { flex-direction: column; gap: 20px; }
+      section { padding: 48px 0; }
+      .hero-left { padding: 44px 20px 32px; }
+      .hero-right { height: 260px; }
+      .hero-stats { flex-direction: row; flex-wrap: wrap; gap: 20px 32px; }
       .field-row { grid-template-columns: 1fr; }
       .form-card { padding: 28px 20px; }
       .steps { grid-template-columns: 1fr; }
+      .step-num { font-size: 38px; margin-bottom: 10px; }
+      .why-callout { padding: 24px 20px; }
+      .why-callout blockquote { font-size: 19px; }
+      .why-callout-stat { flex-direction: column; gap: 16px; }
+      .form-guarantee { flex-direction: column; gap: 6px; }
     }
   </style>
 </head>
@@ -735,7 +748,7 @@
           <li>Google Sheets lead tracker</li>
           <li>1 content update / month</li>
           <li>Custom domain connected</li>
-          <li class="no">AI lead summaries</li>
+          <li class="no">Real-time lead alerts</li>
           <li class="no">Google Business Profile setup</li>
         </ul>
         <a href="#contact" class="pkg-cta pkg-cta-outline">Get started</a>
