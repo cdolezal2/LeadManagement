@@ -307,8 +307,8 @@
       margin-bottom: 52px; flex-wrap: wrap;
     }
     .packages-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 20px; max-width: 820px; margin: 0 auto;
     }
     .pkg {
       background: var(--surface);
@@ -584,7 +584,7 @@
       .hero-card { padding: 24px 20px; max-width: 100%; }
       .steps { grid-template-columns: 1fr 1fr; }
       .step-connector { display: none; }
-      .packages-grid { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; }
+      .packages-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
       .packages-header { margin-bottom: 28px; }
       .why-grid { grid-template-columns: 1fr; gap: 32px; }
       .why-callout { padding: 32px 28px; }
@@ -729,76 +729,52 @@
     <div class="packages-header">
       <div>
         <div class="section-label">Pricing</div>
-        <h2>Three clear <em>packages.</em></h2>
+        <h2>Two simple <em>products.</em></h2>
       </div>
-      <p class="section-sub" style="max-width:340px">All setup fees split 50/50 — deposit due on signing, remaining balance due before go-live. 60-day money-back guarantee on monthly fees.</p>
+      <p class="section-sub" style="max-width:340px">One-time setup fee to get you live. One flat monthly rate to keep leads coming in. 60-day money-back guarantee on monthly fees.</p>
     </div>
 
     <div class="packages-grid">
 
-      <!-- STARTER -->
-      <div class="pkg">
-        <div class="pkg-name">Starter</div>
-        <div class="pkg-tagline">Just getting started? This is your foundation.</div>
-        <div class="pkg-price">
-          <div class="pkg-price-setup">$800</div>
-          <div class="pkg-price-note">one-time setup fee</div>
-        </div>
-        <div class="pkg-monthly">+ $79 / month</div>
-        <hr class="pkg-divider" />
-        <ul class="pkg-features">
-          <li>Professional one-page website</li>
-          <li>Lead intake form</li>
-          <li>Google Sheets lead tracker</li>
-          <li>1 content update / month</li>
-          <li>Custom domain connected</li>
-          <li class="no">Real-time lead alerts</li>
-          <li class="no">Google Business Profile setup</li>
-        </ul>
-        <a href="#contact" class="pkg-cta pkg-cta-outline">Get started</a>
-      </div>
-
-      <!-- GROWTH (featured) -->
+      <!-- WEBSITE + LEAD MANAGEMENT (featured) -->
       <div class="pkg featured">
         <div class="pkg-badge">Most popular</div>
-        <div class="pkg-name">Growth</div>
-        <div class="pkg-tagline">The complete system most clients choose.</div>
+        <div class="pkg-name">Website + Lead Management</div>
+        <div class="pkg-tagline">Everything you need to go from invisible to booked.</div>
         <div class="pkg-price">
-          <div class="pkg-price-setup">$1,200</div>
+          <div class="pkg-price-setup">$750</div>
           <div class="pkg-price-note">one-time setup fee</div>
         </div>
-        <div class="pkg-monthly">+ $99 / month</div>
+        <div class="pkg-monthly">+ $69 / month</div>
         <hr class="pkg-divider" />
         <ul class="pkg-features">
           <li>Professional one-page website</li>
-          <li>Lead intake form</li>
+          <li>Lead intake form — built in</li>
+          <li>Leads delivered to your inbox within minutes</li>
+          <li>Email or text alert for every new lead</li>
           <li>Google Sheets lead tracker</li>
-          <li>3 content updates / month</li>
+          <li>Ongoing site tweaks &amp; edits</li>
           <li>Custom domain connected</li>
-          <li>Real-time lead alerts + morning digest</li>
-          <li class="no">Google Business Profile setup</li>
         </ul>
         <a href="#contact" class="pkg-cta pkg-cta-filled">Get started</a>
       </div>
 
-      <!-- PRO -->
+      <!-- LEAD INTAKE + LEAD MANAGEMENT -->
       <div class="pkg">
-        <div class="pkg-name">Pro</div>
-        <div class="pkg-tagline">Maximum visibility and hands-on support.</div>
+        <div class="pkg-name">Lead Intake + Lead Management</div>
+        <div class="pkg-tagline">Already have a site? Put it to work.</div>
         <div class="pkg-price">
-          <div class="pkg-price-setup">$1,500</div>
+          <div class="pkg-price-setup">$400</div>
           <div class="pkg-price-note">one-time setup fee</div>
         </div>
-        <div class="pkg-monthly">+ $139 / month</div>
+        <div class="pkg-monthly">+ $59 / month</div>
         <hr class="pkg-divider" />
         <ul class="pkg-features">
-          <li>Professional one-page website</li>
-          <li>Lead intake form</li>
+          <li>Lead intake form added to your existing site</li>
+          <li>Leads delivered to your inbox within minutes</li>
+          <li>Email or text alert for every new lead</li>
           <li>Google Sheets lead tracker</li>
-          <li>6 content updates / month</li>
-          <li>Custom domain connected</li>
-          <li>Real-time lead alerts + morning digest</li>
-          <li>Google Business Profile setup</li>
+          <li>Ongoing site tweaks &amp; edits</li>
         </ul>
         <a href="#contact" class="pkg-cta pkg-cta-outline">Get started</a>
       </div>
