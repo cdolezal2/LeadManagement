@@ -596,6 +596,88 @@
     footer strong { color: rgba(255,255,255,0.8); }
     footer a { color: var(--tan); text-decoration: none; }
 
+    /* ── CUSTOM CALENDAR ── */
+    .cal-widget {
+      background: #fff; border-radius: var(--radius);
+      padding: 24px 20px 16px; margin-top: 4px;
+    }
+    .cal-header-title {
+      font-family: var(--font-d); font-size: 20px; font-weight: 700;
+      color: var(--espresso); text-align: center; margin-bottom: 18px;
+    }
+    .cal-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .cal-nav-btn {
+      background: var(--warm-white); border: none; cursor: pointer;
+      width: 34px; height: 34px; border-radius: 50%;
+      font-size: 24px; line-height: 1; color: var(--espresso);
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s;
+    }
+    .cal-nav-btn:hover:not(:disabled) { background: var(--sand); }
+    .cal-nav-btn:disabled { opacity: 0.25; cursor: default; }
+    .cal-month-label {
+      font-size: 15px; font-weight: 500; color: var(--espresso);
+    }
+    .cal-weekdays {
+      display: grid; grid-template-columns: repeat(7, 1fr);
+      text-align: center; margin-bottom: 4px;
+    }
+    .cal-weekdays span {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.05em;
+      color: var(--muted); padding: 4px 0; text-transform: uppercase;
+    }
+    .cal-grid {
+      display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px;
+    }
+    .cal-day {
+      aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+      font-size: 13px; border-radius: 50%; cursor: pointer;
+      color: var(--espresso); font-weight: 600; position: relative;
+      transition: background 0.15s, color 0.15s;
+    }
+    .cal-day:hover:not(.cal-day--past):not(.cal-day--empty) {
+      background: var(--sand); color: var(--brown-d);
+    }
+    .cal-day--past { color: #ccc; cursor: default; font-weight: 400; }
+    .cal-day--empty { cursor: default; }
+    .cal-day--today::after {
+      content: ''; position: absolute; bottom: 3px; left: 50%;
+      transform: translateX(-50%); width: 4px; height: 4px;
+      border-radius: 50%; background: var(--brown);
+    }
+    .cal-timezone {
+      text-align: center; margin-top: 12px;
+      font-size: 11px; color: var(--muted);
+    }
+
+    /* ── BOOKING MODAL ── */
+    .cal-modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.65); z-index: 500;
+      align-items: center; justify-content: center; padding: 20px;
+    }
+    .cal-modal-overlay.open { display: flex; }
+    .cal-modal {
+      background: #fff; border-radius: var(--radius);
+      position: relative; width: 100%; max-width: 440px;
+      overflow: hidden; box-shadow: 0 24px 80px rgba(0,0,0,0.25);
+    }
+    #cal-modal-content iframe {
+      display: block; width: 100%; height: 700px; border: none;
+    }
+    .cal-modal-close {
+      position: absolute; top: 10px; right: 10px; z-index: 10;
+      background: rgba(0,0,0,0.08); border: none; cursor: pointer;
+      width: 30px; height: 30px; border-radius: 50%;
+      font-size: 13px; color: var(--espresso);
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s;
+    }
+    .cal-modal-close:hover { background: rgba(0,0,0,0.15); }
+
     /* ── ANIMATIONS ── */
     @keyframes slideUp {
       from { opacity: 0; transform: translateY(28px); }
@@ -898,12 +980,18 @@
           <li>Quote delivered on the call</li>
           <li>No commitment, no pressure</li>
         </ul>
-        <div class="calendly-wrap">
-          <div class="calendly-inline-widget"
-            data-url="https://calendly.com/crdolezal2/15-minute-meeting?hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=3d72a8"
-            style="min-width:280px;height:500px;">
+        <div class="cal-widget">
+          <div class="cal-header-title">Select a Day</div>
+          <div class="cal-nav">
+            <button class="cal-nav-btn" id="cal-prev">&#8249;</button>
+            <span class="cal-month-label" id="cal-month-label"></span>
+            <button class="cal-nav-btn" id="cal-next">&#8250;</button>
           </div>
-          <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+          <div class="cal-weekdays">
+            <span>SUN</span><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span>
+          </div>
+          <div class="cal-grid" id="cal-grid"></div>
+          <div class="cal-timezone" id="cal-timezone"></div>
         </div>
       </div>
 
@@ -986,6 +1074,14 @@
   </div>
 </section>
 
+<!-- ── BOOKING MODAL ── -->
+<div class="cal-modal-overlay" id="cal-modal-overlay">
+  <div class="cal-modal">
+    <button class="cal-modal-close" id="cal-modal-close">&#x2715;</button>
+    <div id="cal-modal-content"></div>
+  </div>
+</div>
+
 <!-- ── FOOTER ── -->
 <footer>
   <strong>[YOUR NAME]</strong> · [YOUR CITY] · <a href="tel:[YOUR PHONE]">[YOUR PHONE]</a> · <a href="mailto:[YOUR EMAIL]">[YOUR EMAIL]</a><br />
@@ -1054,6 +1150,93 @@
         : '';
     }
   }
+
+  // ── CUSTOM CALENDAR
+  (function () {
+    const CALENDLY = 'https://calendly.com/crdolezal2/15-minute-meeting';
+    const MONTHS   = ['January','February','March','April','May','June',
+                      'July','August','September','October','November','December'];
+
+    const userTZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    document.getElementById('cal-timezone').textContent =
+      'Times shown in ' + userTZ.replace(/_/g, ' ');
+
+    const today = new Date(); today.setHours(0,0,0,0);
+    let viewYear = today.getFullYear();
+    let viewMonth = today.getMonth();
+
+    function render() {
+      document.getElementById('cal-month-label').textContent =
+        MONTHS[viewMonth] + ' ' + viewYear;
+
+      const prevBtn = document.getElementById('cal-prev');
+      prevBtn.disabled = (viewYear === today.getFullYear() && viewMonth === today.getMonth());
+
+      const grid  = document.getElementById('cal-grid');
+      grid.innerHTML = '';
+
+      const firstDay    = new Date(viewYear, viewMonth, 1).getDay();
+      const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+
+      for (let i = 0; i < firstDay; i++) {
+        const el = document.createElement('div');
+        el.className = 'cal-day cal-day--empty';
+        grid.appendChild(el);
+      }
+
+      for (let d = 1; d <= daysInMonth; d++) {
+        const date = new Date(viewYear, viewMonth, d);
+        const el   = document.createElement('div');
+        el.className = 'cal-day';
+        el.textContent = d;
+
+        if (date < today) {
+          el.classList.add('cal-day--past');
+        } else {
+          if (date.getTime() === today.getTime()) el.classList.add('cal-day--today');
+          const y = viewYear, m = viewMonth, day = d;
+          el.addEventListener('click', function () { openModal(y, m, day); });
+        }
+        grid.appendChild(el);
+      }
+    }
+
+    document.getElementById('cal-prev').addEventListener('click', function () {
+      if (viewMonth === 0) { viewMonth = 11; viewYear--; } else viewMonth--;
+      render();
+    });
+    document.getElementById('cal-next').addEventListener('click', function () {
+      if (viewMonth === 11) { viewMonth = 0; viewYear++; } else viewMonth++;
+      render();
+    });
+
+    render();
+
+    function openModal(y, m, d) {
+      const dateStr = y + '-' + String(m + 1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
+      const url = CALENDLY + '?date=' + dateStr
+        + '&hide_gdpr_banner=1&primary_color=3d72a8'
+        + '&timezone=' + encodeURIComponent(userTZ);
+      document.getElementById('cal-modal-content').innerHTML =
+        '<iframe src="' + url + '" allowfullscreen></iframe>';
+      document.getElementById('cal-modal-overlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    document.getElementById('cal-modal-close').addEventListener('click', closeModal);
+    document.getElementById('cal-modal-overlay').addEventListener('click', function (e) {
+      if (e.target === this) closeModal();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    function closeModal() {
+      document.getElementById('cal-modal-overlay').classList.remove('open');
+      document.getElementById('cal-modal-content').innerHTML = '';
+      document.body.style.overflow = '';
+    }
+  })();
 
   // ── SMOOTH SCROLL with nav offset
   document.querySelectorAll('a[href^="#"]').forEach(a => {
