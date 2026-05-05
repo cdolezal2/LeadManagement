@@ -317,6 +317,7 @@
       padding: 36px 32px;
       transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
       position: relative;
+      display: flex; flex-direction: column;
     }
     .pkg:hover {
       transform: translateY(-4px);
@@ -389,6 +390,7 @@
       font-size: 13px; font-weight: 600;
       letter-spacing: 0.06em; text-transform: uppercase;
       text-decoration: none; transition: all 0.2s;
+      margin-top: auto;
     }
     .pkg-cta-outline {
       border: 1.5px solid var(--tan); color: var(--brown);
@@ -731,7 +733,7 @@
         <div class="section-label">Pricing</div>
         <h2>Two simple <em>products.</em></h2>
       </div>
-      <p class="section-sub" style="max-width:340px">One-time setup fee to get you live. One flat monthly rate to keep leads coming in. 60-day money-back guarantee on monthly fees.</p>
+      <p class="section-sub" style="max-width:340px">Setup fee split 50/50 — deposit due on signing, balance due at go-live. Monthly fee keeps your lead system running and your site maintained. 60-day money-back guarantee on monthly fees.</p>
     </div>
 
     <div class="packages-grid">
@@ -774,7 +776,6 @@
           <li>Leads delivered to your inbox within minutes</li>
           <li>Email or text alert for every new lead</li>
           <li>Google Sheets lead tracker</li>
-          <li>Ongoing site tweaks &amp; edits</li>
         </ul>
         <a href="#contact" class="pkg-cta pkg-cta-outline">Get started</a>
       </div>
