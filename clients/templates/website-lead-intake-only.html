@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- ============================================================
-    CLIENT WEBSITE TEMPLATE
+    CLIENT WEBSITE TEMPLATE — LEAD INTAKE ONLY (no scheduling)
     ============================================================
     FIND EVERY LINE MARKED "EDIT:" AND UPDATE IT FOR THIS CLIENT.
     Search the file for "EDIT:" to jump to each one.
@@ -462,99 +462,6 @@
     }
     .form-success p { font-size: 15px; color: var(--muted); }
 
-    /* ── SCHEDULING SECTION ── */
-    .schedule { background: var(--warm-white); }
-    .schedule-inner {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 60px; align-items: start;
-    }
-    .schedule-info { position: sticky; top: 90px; }
-    .schedule-info h2 { margin-bottom: 16px; }
-    .schedule-info p { font-size: 16px; color: var(--muted); font-weight: 300; margin-bottom: 28px; }
-    .schedule-perks { list-style: none; }
-    .schedule-perks li {
-      font-size: 14px; color: var(--text);
-      margin-bottom: 12px; display: flex; align-items: center; gap: 10px;
-    }
-    .schedule-perks li::before {
-      content: '✓'; font-size: 12px; font-weight: 700;
-      color: var(--accent); flex-shrink: 0;
-    }
-
-    /* ── CUSTOM CALENDAR ── */
-    .cal-widget {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 24px 20px 16px;
-      box-shadow: var(--shadow);
-    }
-    .cal-header-title {
-      font-family: var(--font-d); font-size: 20px; font-weight: 700;
-      color: var(--dark); text-align: center; margin-bottom: 18px;
-    }
-    .cal-nav {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 16px;
-    }
-    .cal-nav-btn {
-      background: var(--warm-white); border: none; cursor: pointer;
-      width: 34px; height: 34px; border-radius: 50%;
-      font-size: 24px; line-height: 1; color: var(--dark);
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.15s;
-    }
-    .cal-nav-btn:hover:not(:disabled) { background: var(--sand); }
-    .cal-nav-btn:disabled { opacity: 0.25; cursor: default; }
-    .cal-month-label { font-size: 15px; font-weight: 500; color: var(--dark); }
-    .cal-weekdays {
-      display: grid; grid-template-columns: repeat(7, 1fr);
-      text-align: center; margin-bottom: 4px;
-    }
-    .cal-weekdays span {
-      font-size: 10px; font-weight: 600; letter-spacing: 0.05em;
-      color: var(--muted); padding: 4px 0; text-transform: uppercase;
-    }
-    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
-    .cal-day {
-      aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
-      font-size: 13px; border-radius: 50%; cursor: pointer;
-      color: var(--dark); font-weight: 600; position: relative;
-      transition: background 0.15s, color 0.15s;
-    }
-    .cal-day:hover:not(.cal-day--past):not(.cal-day--empty) {
-      background: var(--sand); color: var(--accent-d);
-    }
-    .cal-day--past { color: #ccc; cursor: default; font-weight: 400; }
-    .cal-day--empty { cursor: default; }
-    .cal-day--today::after {
-      content: ''; position: absolute; bottom: 3px; left: 50%;
-      transform: translateX(-50%); width: 4px; height: 4px;
-      border-radius: 50%; background: var(--accent);
-    }
-    .cal-timezone { text-align: center; margin-top: 12px; font-size: 11px; color: var(--muted); }
-
-    /* ── BOOKING MODAL ── */
-    .cal-modal-overlay {
-      display: none; position: fixed; inset: 0;
-      background: rgba(0,0,0,0.65); z-index: 500;
-      align-items: center; justify-content: center; padding: 20px;
-    }
-    .cal-modal-overlay.open { display: flex; }
-    .cal-modal {
-      background: #fff; border-radius: var(--radius);
-      position: relative; width: 100%; max-width: 440px;
-      overflow: hidden; box-shadow: 0 24px 80px rgba(0,0,0,0.25);
-    }
-    #cal-modal-content iframe { display: block; width: 100%; height: 700px; border: none; }
-    .cal-modal-close {
-      position: absolute; top: 10px; right: 10px; z-index: 10;
-      background: rgba(0,0,0,0.08); border: none; cursor: pointer;
-      width: 30px; height: 30px; border-radius: 50%;
-      font-size: 13px; color: var(--dark);
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.15s;
-    }
-    .cal-modal-close:hover { background: rgba(0,0,0,0.15); }
-
     /* ── FOOTER ── */
     footer {
       background: var(--dark); color: rgba(255,255,255,0.45);
@@ -585,8 +492,6 @@
       .areas-grid { grid-template-columns: repeat(2, 1fr); }
       .contact-inner { grid-template-columns: 1fr; gap: 32px; }
       .contact-info { position: static; }
-      .schedule-inner { grid-template-columns: 1fr; gap: 32px; }
-      .schedule-info { position: static; }
       .nav-links, .nav-cta { display: none; }
       .nav-toggle { display: flex; }
     }
@@ -618,7 +523,6 @@
       <li><a href="#services">Services</a></li>
       <li><a href="#why">About</a></li>
       <li><a href="#areas">Areas Served</a></li>
-      <li><a href="#schedule">Book Online</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <a href="#contact" class="nav-cta">Get a free quote</a>
@@ -721,7 +625,6 @@
       <!-- SERVICE CARD 1 — EDIT -->
       <div class="service-card">
         <div class="service-icon">
-          <!-- Wrench icon — swap SVG path for a more relevant icon if needed -->
           <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
         </div>
         <h3>[SERVICE_1]</h3>
@@ -736,7 +639,6 @@
       <!-- SERVICE CARD 2 — EDIT -->
       <div class="service-card">
         <div class="service-icon">
-          <!-- Home icon -->
           <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         </div>
         <h3>[SERVICE_2]</h3>
@@ -751,7 +653,6 @@
       <!-- SERVICE CARD 3 — EDIT -->
       <div class="service-card">
         <div class="service-icon">
-          <!-- Shield/check icon -->
           <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
         <h3>[SERVICE_3]</h3>
@@ -766,7 +667,6 @@
       <!-- SERVICE CARD 4 (optional — delete this block if not needed) — EDIT -->
       <div class="service-card">
         <div class="service-icon">
-          <!-- Star icon -->
           <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         </div>
         <h3>[SERVICE_4]</h3>
@@ -781,7 +681,6 @@
       <!-- SERVICE CARD 5 (optional — delete this block if not needed) — EDIT -->
       <div class="service-card">
         <div class="service-icon">
-          <!-- Clock icon -->
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
         <h3>[SERVICE_5]</h3>
@@ -796,7 +695,6 @@
       <!-- SERVICE CARD 6 (optional — delete this block if not needed) — EDIT -->
       <div class="service-card">
         <div class="service-icon">
-          <!-- Phone icon -->
           <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.58 3.47 2 2 0 0 1 3.55 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.09a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         </div>
         <h3>[SERVICE_6]</h3>
@@ -919,51 +817,6 @@
   </div>
 </section>
 
-<!-- ── SCHEDULING / BOOK ONLINE ──────────────────────────────────
-  EDIT: [CLIENT_CALENDLY_URL] — paste this client's Calendly URL in the JS below.
-  EDIT: update intro text and perks list to match the client's service.
-  DELETE this entire section if client did not purchase scheduling.
-──────────────────────────────────────────────────────────────── -->
-<section class="schedule" id="schedule">
-  <div class="container">
-    <div class="schedule-inner">
-
-      <div class="schedule-info">
-        <div class="section-label">Schedule online</div>
-        <!-- EDIT: headline -->
-        <h2>Book a free<br /><em>consultation.</em></h2>
-        <!-- EDIT: supporting paragraph -->
-        <p>Pick a time that works for you. We'll come out, take a look, and give you a quote — no pressure, no commitment.</p>
-
-        <!-- EDIT: update perks to match this client's service offering -->
-        <ul class="schedule-perks">
-          <li>Free in-person or virtual consultation</li>
-          <li>Quote delivered on the spot</li>
-          <li>No obligation to book</li>
-          <li>Available 7 days a week</li>
-        </ul>
-      </div>
-
-      <div>
-        <div class="cal-widget">
-          <div class="cal-header-title">Select a Day</div>
-          <div class="cal-nav">
-            <button class="cal-nav-btn" id="cal-prev">&#8249;</button>
-            <span class="cal-month-label" id="cal-month-label"></span>
-            <button class="cal-nav-btn" id="cal-next">&#8250;</button>
-          </div>
-          <div class="cal-weekdays">
-            <span>SUN</span><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span>
-          </div>
-          <div class="cal-grid" id="cal-grid"></div>
-          <div class="cal-timezone" id="cal-timezone"></div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
 <!-- ── CONTACT / QUOTE FORM ──────────────────────────────────────
   EDIT: update the contact details and the service dropdown options.
 ──────────────────────────────────────────────────────────────── -->
@@ -1019,7 +872,7 @@
           <div class="form-sub">Tell us about your project and we'll reach out to schedule a time.</div>
 
           <div class="form-response-badge">
-            <span style="font-size:20px">⚡</span>
+            <span style="font-size:20px">&#9889;</span>
             <!-- EDIT: response promise — e.g. "We respond to every request within a few hours during business hours." -->
             <p><strong>Fast response guaranteed.</strong> [RESPONSE_PROMISE]</p>
           </div>
@@ -1068,13 +921,13 @@
           </div>
 
           <button class="form-submit" id="submit-btn" onclick="handleSubmit()">
-            Send my request →
+            Send my request &#8594;
           </button>
           <p class="form-note">No spam. No commitment. Just a free estimate.</p>
         </div>
 
         <div class="form-success" id="form-success">
-          <div class="success-icon">✓</div>
+          <div class="success-icon">&#10003;</div>
           <h3>Got it, <span id="success-name"></span>!</h3>
           <!-- EDIT: success message -->
           <p>We'll review your request and reach out within 24 hours to discuss your project and schedule a free estimate.</p>
@@ -1085,19 +938,11 @@
   </div>
 </section>
 
-<!-- ── BOOKING MODAL ── -->
-<div class="cal-modal-overlay" id="cal-modal-overlay">
-  <div class="cal-modal">
-    <button class="cal-modal-close" id="cal-modal-close">&#x2715;</button>
-    <div id="cal-modal-content"></div>
-  </div>
-</div>
-
 <!-- ── FOOTER ── -->
 <!-- EDIT: all four placeholders below -->
 <footer>
-  <strong>[CLIENT_BUSINESS_NAME]</strong> · [CLIENT_CITY] · <a href="tel:[CLIENT_PHONE]">[CLIENT_PHONE]</a> · <a href="mailto:[CLIENT_EMAIL]">[CLIENT_EMAIL]</a><br />
-  <span style="font-size:12px;margin-top:8px;display:block">© 2025 [CLIENT_BUSINESS_NAME]. All rights reserved. Website by <a href="[YOUR_WEBSITE_URL]">[YOUR_BUSINESS_NAME]</a>.</span>
+  <strong>[CLIENT_BUSINESS_NAME]</strong> &middot; [CLIENT_CITY] &middot; <a href="tel:[CLIENT_PHONE]">[CLIENT_PHONE]</a> &middot; <a href="mailto:[CLIENT_EMAIL]">[CLIENT_EMAIL]</a><br />
+  <span style="font-size:12px;margin-top:8px;display:block">&copy; 2025 [CLIENT_BUSINESS_NAME]. All rights reserved. Website by <a href="[YOUR_WEBSITE_URL]">[YOUR_BUSINESS_NAME]</a>.</span>
 </footer>
 
 <script>
@@ -1138,7 +983,7 @@
       document.getElementById('form-success').classList.add('show');
     } catch (err) {
       btn.disabled = false;
-      btn.textContent = 'Send my request →';
+      btn.textContent = 'Send my request \u2192';
       alert('Something went wrong. Please call or email us directly.');
     }
   }
@@ -1160,94 +1005,6 @@
         : '';
     }
   }
-
-  // ── CUSTOM CALENDAR ──
-  // EDIT: replace [CLIENT_CALENDLY_URL] with this client's Calendly link
-  (function () {
-    const CALENDLY = '[CLIENT_CALENDLY_URL]';
-    const MONTHS   = ['January','February','March','April','May','June',
-                      'July','August','September','October','November','December'];
-
-    const userTZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    document.getElementById('cal-timezone').textContent =
-      'Times shown in ' + userTZ.replace(/_/g, ' ');
-
-    const today = new Date(); today.setHours(0,0,0,0);
-    let viewYear  = today.getFullYear();
-    let viewMonth = today.getMonth();
-
-    function render() {
-      document.getElementById('cal-month-label').textContent =
-        MONTHS[viewMonth] + ' ' + viewYear;
-
-      const prevBtn = document.getElementById('cal-prev');
-      prevBtn.disabled = (viewYear === today.getFullYear() && viewMonth === today.getMonth());
-
-      const grid = document.getElementById('cal-grid');
-      grid.innerHTML = '';
-
-      const firstDay    = new Date(viewYear, viewMonth, 1).getDay();
-      const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
-
-      for (let i = 0; i < firstDay; i++) {
-        const el = document.createElement('div');
-        el.className = 'cal-day cal-day--empty';
-        grid.appendChild(el);
-      }
-
-      for (let d = 1; d <= daysInMonth; d++) {
-        const date = new Date(viewYear, viewMonth, d);
-        const el   = document.createElement('div');
-        el.className = 'cal-day';
-        el.textContent = d;
-
-        if (date < today) {
-          el.classList.add('cal-day--past');
-        } else {
-          if (date.getTime() === today.getTime()) el.classList.add('cal-day--today');
-          const y = viewYear, m = viewMonth, day = d;
-          el.addEventListener('click', function () { openModal(y, m, day); });
-        }
-        grid.appendChild(el);
-      }
-    }
-
-    document.getElementById('cal-prev').addEventListener('click', function () {
-      if (viewMonth === 0) { viewMonth = 11; viewYear--; } else viewMonth--;
-      render();
-    });
-    document.getElementById('cal-next').addEventListener('click', function () {
-      if (viewMonth === 11) { viewMonth = 0; viewYear++; } else viewMonth++;
-      render();
-    });
-
-    render();
-
-    function openModal(y, m, d) {
-      const dateStr = y + '-' + String(m + 1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
-      const url = CALENDLY + '?date=' + dateStr
-        + '&hide_gdpr_banner=1'
-        + '&timezone=' + encodeURIComponent(userTZ);
-      document.getElementById('cal-modal-content').innerHTML =
-        '<iframe src="' + url + '" allowfullscreen></iframe>';
-      document.getElementById('cal-modal-overlay').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    document.getElementById('cal-modal-close').addEventListener('click', closeModal);
-    document.getElementById('cal-modal-overlay').addEventListener('click', function (e) {
-      if (e.target === this) closeModal();
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') closeModal();
-    });
-
-    function closeModal() {
-      document.getElementById('cal-modal-overlay').classList.remove('open');
-      document.getElementById('cal-modal-content').innerHTML = '';
-      document.body.style.overflow = '';
-    }
-  })();
 
   // ── SMOOTH SCROLL with nav offset ──
   document.querySelectorAll('a[href^="#"]').forEach(a => {

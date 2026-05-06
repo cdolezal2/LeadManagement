@@ -1,0 +1,245 @@
+<!--
+  ================================================================
+  CLIENT SNIPPET — LEAD INTAKE FORM ONLY
+  ================================================================
+  Use this when a client already has a website and you just need
+  to drop a lead intake form into it.
+
+  HOW TO USE:
+  1. Copy the <style> block into the <head> of the client's site
+     (or paste it into their existing stylesheet).
+  2. Copy the <!-- SNIPPET HTML --> block and paste it wherever
+     you want the form to appear on the page.
+  3. Copy the <script> block and paste it just before </body>.
+  4. Replace every placeholder:
+       WEBHOOK_URL  — the Apps Script deployment URL for this client
+       [CLIENT_BUSINESS_NAME] — e.g. "Rivera Plumbing"
+       [SERVICE_X]  — the client's actual service names
+  ================================================================
+-->
+
+<!-- ══ 1. PASTE THIS IN <head> ══════════════════════════════════ -->
+<style>
+  /* Lead Intake Form — client snippet */
+  .li-section {
+    padding: 80px 28px;
+    background: #faf7f2;
+    font-family: 'Jost', system-ui, sans-serif;
+  }
+  .li-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .li-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent, #3d72a8);
+    margin-bottom: 10px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .li-label::before {
+    content: ''; display: block;
+    width: 24px; height: 1.5px; background: var(--accent-lt, #6b9bc4);
+  }
+  .li-heading {
+    font-family: Georgia, serif;
+    font-size: clamp(28px, 4vw, 40px);
+    letter-spacing: -0.02em; color: var(--dark, #1a2f50);
+    line-height: 1.1; margin-bottom: 32px;
+    font-style: normal;
+  }
+  .li-heading em { font-style: italic; color: var(--accent, #3d72a8); }
+  .li-card {
+    background: #ffffff;
+    border: 1px solid #ccd8ea;
+    border-radius: 10px;
+    padding: 44px 40px;
+    box-shadow: 0 4px 32px rgba(26,47,80,0.10);
+  }
+  .li-form-title {
+    font-family: Georgia, serif; font-size: 24px; font-weight: 700;
+    color: #1a2f50; margin-bottom: 6px;
+  }
+  .li-form-sub { font-size: 14px; color: #5c7898; margin-bottom: 24px; }
+  .li-badge {
+    display: flex; align-items: center; gap: 10px;
+    background: #f5edd8; border: 1px solid #d8e4f0;
+    border-radius: 5px; padding: 12px 14px; margin-bottom: 24px;
+  }
+  .li-badge p { font-size: 13px; color: #2a5589; margin: 0; }
+  .li-badge strong { font-weight: 600; }
+  .li-field { margin-bottom: 16px; }
+  .li-field label {
+    display: block; font-size: 12px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: #5c7898; margin-bottom: 8px;
+  }
+  .li-field input,
+  .li-field select,
+  .li-field textarea {
+    width: 100%; padding: 12px 16px;
+    border: 1px solid #ccd8ea; border-radius: 5px;
+    font-family: inherit; font-size: 15px;
+    color: #1c2d45; background: #faf7f2;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none; -webkit-appearance: none;
+  }
+  .li-field input:focus,
+  .li-field select:focus,
+  .li-field textarea:focus {
+    border-color: var(--accent, #3d72a8);
+    box-shadow: 0 0 0 3px rgba(61,114,168,0.1);
+    background: #fff;
+  }
+  .li-field textarea { height: 110px; resize: vertical; }
+  .li-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .li-submit {
+    width: 100%; padding: 15px;
+    background: var(--accent, #3d72a8); color: #fff; border: none;
+    border-radius: 5px; font-family: inherit;
+    font-size: 13px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; cursor: pointer;
+    transition: background 0.2s, transform 0.15s; margin-top: 6px;
+  }
+  .li-submit:hover { background: var(--accent-d, #2a5589); transform: translateY(-1px); }
+  .li-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .li-note { font-size: 12px; color: #5c7898; text-align: center; margin-top: 12px; }
+  .li-success { display: none; text-align: center; padding: 40px 20px; }
+  .li-success.show { display: block; }
+  .li-success-icon {
+    width: 60px; height: 60px; margin: 0 auto 20px;
+    background: #f5edd8; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; font-size: 26px;
+  }
+  .li-success h3 { font-family: Georgia, serif; font-size: 24px; color: #1a2f50; margin-bottom: 10px; }
+  .li-success p { font-size: 15px; color: #5c7898; }
+  @media (max-width: 600px) {
+    .li-card { padding: 28px 20px; }
+    .li-row { grid-template-columns: 1fr; }
+  }
+</style>
+<!-- ══ END <head> STYLES ═════════════════════════════════════════ -->
+
+
+<!-- ══ 2. PASTE THIS WHERE YOU WANT THE FORM ════════════════════ -->
+<section class="li-section">
+  <div class="li-inner">
+    <div class="li-label">Get in touch</div>
+    <!-- EDIT: headline -->
+    <h2 class="li-heading">Request a free<br /><em>estimate.</em></h2>
+
+    <div class="li-card">
+      <div id="li-form-body">
+        <div class="li-form-title">Send us your project details</div>
+        <!-- EDIT: form subtitle -->
+        <div class="li-form-sub">Tell us what you need and we'll get back to you within 24 hours.</div>
+
+        <div class="li-badge">
+          <span style="font-size:20px">&#9889;</span>
+          <!-- EDIT: response promise -->
+          <p><strong>Fast response guaranteed.</strong> We respond to every request within a few hours during business hours.</p>
+        </div>
+
+        <div class="li-row">
+          <div class="li-field">
+            <label>Your name *</label>
+            <input type="text" id="li-name" placeholder="Jane Smith" required />
+          </div>
+          <div class="li-field">
+            <label>Phone *</label>
+            <input type="tel" id="li-phone" placeholder="(555) 000-0000" required />
+          </div>
+        </div>
+        <div class="li-field">
+          <label>Email</label>
+          <input type="email" id="li-email" placeholder="jane@email.com" />
+        </div>
+
+        <!-- EDIT: update service options to match this client -->
+        <div class="li-row">
+          <div class="li-field">
+            <label>Service needed *</label>
+            <select id="li-service" required>
+              <option value="">Select a service...</option>
+              <option>[SERVICE_1]</option>
+              <option>[SERVICE_2]</option>
+              <option>[SERVICE_3]</option>
+              <option>[SERVICE_4]</option>
+              <option>[SERVICE_5]</option>
+              <option>Other / Not sure</option>
+            </select>
+          </div>
+          <div class="li-field">
+            <label>Your city / area</label>
+            <input type="text" id="li-area" placeholder="e.g. Naperville, IL" />
+          </div>
+        </div>
+
+        <div class="li-field">
+          <label>Tell us about your project</label>
+          <!-- EDIT: update placeholder to match this client's industry -->
+          <textarea id="li-notes" placeholder="Describe what you need — rough timeline, size of the job, any special considerations."></textarea>
+        </div>
+
+        <button class="li-submit" id="li-submit-btn" onclick="liHandleSubmit()">
+          Send my request &#8594;
+        </button>
+        <p class="li-note">No spam. No commitment. Just a free estimate.</p>
+      </div>
+
+      <div class="li-success" id="li-success">
+        <div class="li-success-icon">&#10003;</div>
+        <h3>Got it, <span id="li-success-name"></span>!</h3>
+        <!-- EDIT: success message -->
+        <p>We'll review your request and reach out within 24 hours to discuss your project.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ══ END FORM HTML ═════════════════════════════════════════════ -->
+
+
+<!-- ══ 3. PASTE THIS JUST BEFORE </body> ════════════════════════ -->
+<script>
+  // EDIT: paste this client's Apps Script deployment URL here
+  const LI_WEBHOOK_URL = 'YOUR_APPS_SCRIPT_WEBHOOK_URL_HERE';
+
+  async function liHandleSubmit() {
+    const name    = document.getElementById('li-name').value.trim();
+    const phone   = document.getElementById('li-phone').value.trim();
+    const email   = document.getElementById('li-email').value.trim();
+    const service = document.getElementById('li-service').value;
+    const area    = document.getElementById('li-area').value.trim();
+    const notes   = document.getElementById('li-notes').value.trim();
+
+    if (!name || !phone || !service) {
+      alert('Please fill in your name, phone number, and service needed.');
+      return;
+    }
+
+    const btn = document.getElementById('li-submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    const payload = {
+      name, phone, email, service, area, notes,
+      submitted_at: new Date().toISOString()
+    };
+
+    try {
+      await fetch(LI_WEBHOOK_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify(payload)
+      });
+      document.getElementById('li-success-name').textContent = name.split(' ')[0];
+      document.getElementById('li-form-body').style.display = 'none';
+      document.getElementById('li-success').classList.add('show');
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = 'Send my request \u2192';
+      alert('Something went wrong. Please call or email us directly.');
+    }
+  }
+</script>
+<!-- ══ END SCRIPT ════════════════════════════════════════════════ -->
