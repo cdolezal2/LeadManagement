@@ -473,7 +473,7 @@ def build():
 
     add_wide_table(doc, [
         ('',                       'Our Service',        'GoHighLevel',      'Jobber',           'Thryv',            'DIY (no system)'),
-        ('Price / month',          '$59 – $69',          '$97+',             '$59 – $349',       '$250+',            '$0'),
+        ('Price / month',          '$59 – $79',          '$97+',             '$59 – $349',       '$250+',            '$0'),
         ('Who manages it',         'We do — for you',    'You do',           'You do',           'You do',           'Nobody'),
         ('Setup required',         'We handle it all',   'Extensive',        'Moderate',         'Extensive',        'You figure it out'),
         ('Lead form capture',      'Yes',                'Yes',              'Limited',          'Yes',              'Maybe'),
@@ -519,7 +519,7 @@ def build():
         ('Revenue difference: 3 additional jobs × $500',
          '$1,500 in additional revenue per month from leads you would have missed.'),
         ('Subscription cost',
-         '$69/month — less than 5% of the revenue recovered from one missed lead.'),
+         '$79/month — less than 5% of the revenue recovered from one missed lead.'),
     ])
 
     add_body(doc,

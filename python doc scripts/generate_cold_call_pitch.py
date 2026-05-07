@@ -305,7 +305,7 @@ def build():
     add_h3(doc, "The Two Services")
     add_table(doc, [
         ("__header__", ("Service", "What's Included")),
-        ("Website + Lead Management\n$750 setup + $69/mo",
+        ("Website + Lead Management\n$750 setup + $79/mo",
          "Professional one-page website, lead intake form (built in), instant email + text alert for every lead, "
          "Google Sheets lead log, monthly lead summary report, quarterly Google Business Profile audit, "
          "speed-to-lead facts sheet, form updates always included, ongoing site edits, custom domain connected"),
@@ -404,7 +404,7 @@ def build():
     add_bullet_item(doc, "Their domain, their Google Sheet, their data. They own everything and can walk away any time.", bold_prefix="Ownership: ")
     add_bullet_item(doc, "They deal with one person — not a support ticket or a rotating team.", bold_prefix="One person: ")
     add_bullet_item(doc, "60 days to decide if it's working. Monthly fees come back if they're not satisfied.", bold_prefix="Guarantee: ")
-    add_bullet_item(doc, "Affordable — $69/month for the full website + lead management package. $59/month if they already have a site.", bold_prefix="Price: ")
+    add_bullet_item(doc, "Affordable — $79/month for the full website + lead management package. $59/month if they already have a site.", bold_prefix="Price: ")
 
     # ══════════════════════════════════════════════════════════════════════════
     # PART 4 — RETURN ON INVESTMENT
@@ -423,16 +423,16 @@ def build():
         ("Average plumbing job value",       "$400 – $1,500 (use $600 as a conservative estimate)"),
         ("Leads missed per month (typical)", "3 – 5 leads lost to slow follow-up or no website presence"),
         ("Revenue lost per month",           "3 missed leads x $600 = $1,800 lost every month"),
-        ("Website + Lead Management cost",   "$69/month after a one-time $750 setup fee"),
+        ("Website + Lead Management cost",   "$79/month after a one-time $750 setup fee"),
         ("Lead Intake + Lead Management",    "$59/month after a one-time $400 setup fee"),
         ("Break-even point",                 "One saved job covers a full year of monthly fees"),
-        ("ROI if only 1 lead saved/month",  "$600 recovered – $69 cost = $531 net gain, every month"),
+        ("ROI if only 1 lead saved/month",  "$600 recovered – $79 cost = $521 net gain, every month"),
     ])
 
     add_h3(doc, "Say This on the Call")
     add_code(doc,
         '"Here\'s the honest math — if you\'re a plumber and the average job is $600, and you recover '
-        'even one lead a month that you would have missed otherwise, that\'s $600 coming in against $69 '
+        'even one lead a month that you would have missed otherwise, that\'s $600 coming in against $79 '
         'going out. The service pays for itself the first time your phone buzzes with a lead while '
         'you\'re under a sink."'
     )
@@ -478,7 +478,7 @@ def build():
         'people are searching — and I wire up a system so that every lead that comes in goes straight to '
         'your inbox within minutes, organized and ready to call back. You\'re not staring at a spreadsheet. '
         'You\'re just getting a text that says: \'New lead — Maria G., kitchen remodel, $12K budget, '
-        'wants to start in 3 weeks. Call today.\' You\'re live in under a week. And it\'s $69 a month '
+        'wants to start in 3 weeks. Call today.\' You\'re live in under a week. And it\'s $79 a month '
         'after a one-time setup fee."'
     )
 
@@ -603,7 +603,7 @@ def build():
     add_h3(doc, "Quick Reference — Pricing Cheat Sheet")
     add_table(doc, [
         ("__header__", ("Service", "Setup / Monthly")),
-        ("Website + Lead Management",        "$750 setup — $69/month"),
+        ("Website + Lead Management",        "$750 setup — $79/month"),
         ("Lead Intake + Lead Management",    "$400 setup — $59/month"),
         ("Payment terms",                    "50% deposit on signing, balance before go-live"),
         ("Guarantee",                        "60-day money-back on monthly fees — no questions asked"),
