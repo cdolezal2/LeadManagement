@@ -262,7 +262,7 @@ def build():
         doc,
         "COLD CALL SALES PITCH",
         "HOW-TO GUIDE",
-        "A ready-to-use script for selling websites & lead management to small service businesses"
+        "A ready-to-use script for selling website + lead management services to small service businesses"
     )
 
     # ── WHAT'S INSIDE TABLE
@@ -296,22 +296,31 @@ def build():
 
     add_h2(doc, "Step 1 — Know Your Product Cold")
     add_body(doc,
-        "You sell two things that work together: a professional website and a lead management system. "
-        "The website puts the business on the map. The lead system makes sure no customer inquiry falls "
-        "through the cracks. Together, they turn a phone that barely rings into a pipeline of organized, "
-        "ready-to-call leads."
+        "You offer two services. The first is for businesses that need everything — a professional website "
+        "and a full lead management system built in. The second is for businesses that already have a website "
+        "but are losing leads because nothing is capturing or tracking them. Both services include the same "
+        "lead management backbone: instant alerts, an organized lead log, monthly reports, and ongoing support."
     )
 
-    add_h3(doc, "The Three Packages")
+    add_h3(doc, "The Two Services")
     add_table(doc, [
-        ("__header__", ("Package", "What's Included")),
-        ("Starter\n$800 setup + $79/mo",
-         "Professional one-page website, lead intake form, Google Sheets lead tracker, 1 content update/month, custom domain connected"),
-        ("Growth — Most Popular\n$1,200 setup + $99/mo",
-         "Everything in Starter plus real-time lead alerts, morning lead digest emailed to you, 3 content updates/month"),
-        ("Pro\n$1,500 setup + $139/mo",
-         "Everything in Growth plus Google Business Profile setup, 6 content updates/month — maximum local visibility"),
+        ("__header__", ("Service", "What's Included")),
+        ("Website + Lead Management\n$750 setup + $69/mo",
+         "Professional one-page website, lead intake form (built in), instant email + text alert for every lead, "
+         "Google Sheets lead log, monthly lead summary report, quarterly Google Business Profile audit, "
+         "speed-to-lead facts sheet, form updates always included, ongoing site edits, custom domain connected"),
+        ("Lead Intake + Lead Management\n$400 setup + $59/mo",
+         "Lead intake form added to their existing website, instant email + text alert for every lead, "
+         "Google Sheets lead log, monthly lead summary report, quarterly Google Business Profile audit, "
+         "speed-to-lead facts sheet, form updates always included — no new website needed"),
     ])
+
+    add_h3(doc, "Which Service to Lead With")
+    add_body(doc,
+        "Before the call, do a quick Google search on the prospect. If they have no website or a weak one, "
+        "lead with Website + Lead Management. If they already have a decent website, lead with "
+        "Lead Intake + Lead Management — it's a lower barrier to entry and solves a more immediate problem."
+    )
 
     add_h3(doc, "The Guarantee")
     add_body(doc,
@@ -395,7 +404,7 @@ def build():
     add_bullet_item(doc, "Their domain, their Google Sheet, their data. They own everything and can walk away any time.", bold_prefix="Ownership: ")
     add_bullet_item(doc, "They deal with one person — not a support ticket or a rotating team.", bold_prefix="One person: ")
     add_bullet_item(doc, "60 days to decide if it's working. Monthly fees come back if they're not satisfied.", bold_prefix="Guarantee: ")
-    add_bullet_item(doc, "Affordable — less than $100 a month for the Growth package.", bold_prefix="Price: ")
+    add_bullet_item(doc, "Affordable — $69/month for the full website + lead management package. $59/month if they already have a site.", bold_prefix="Price: ")
 
     # ══════════════════════════════════════════════════════════════════════════
     # PART 4 — RETURN ON INVESTMENT
@@ -414,15 +423,16 @@ def build():
         ("Average plumbing job value",       "$400 – $1,500 (use $600 as a conservative estimate)"),
         ("Leads missed per month (typical)", "3 – 5 leads lost to slow follow-up or no website presence"),
         ("Revenue lost per month",           "3 missed leads x $600 = $1,800 lost every month"),
-        ("Growth package cost",              "$99/month after a one-time $1,200 setup fee"),
-        ("Break-even point",                 "One saved job covers 12 months of service fees"),
-        ("ROI if only 1 lead saved/month",  "$600 recovered – $99 cost = $501 net gain, every month"),
+        ("Website + Lead Management cost",   "$69/month after a one-time $750 setup fee"),
+        ("Lead Intake + Lead Management",    "$59/month after a one-time $400 setup fee"),
+        ("Break-even point",                 "One saved job covers a full year of monthly fees"),
+        ("ROI if only 1 lead saved/month",  "$600 recovered – $69 cost = $531 net gain, every month"),
     ])
 
     add_h3(doc, "Say This on the Call")
     add_code(doc,
         '"Here\'s the honest math — if you\'re a plumber and the average job is $600, and you recover '
-        'even one lead a month that you would have missed otherwise, that\'s $600 coming in against $99 '
+        'even one lead a month that you would have missed otherwise, that\'s $600 coming in against $69 '
         'going out. The service pays for itself the first time your phone buzzes with a lead while '
         'you\'re under a sink."'
     )
@@ -468,15 +478,15 @@ def build():
         'people are searching — and I wire up a system so that every lead that comes in goes straight to '
         'your inbox within minutes, organized and ready to call back. You\'re not staring at a spreadsheet. '
         'You\'re just getting a text that says: \'New lead — Maria G., kitchen remodel, $12K budget, '
-        'wants to start in 3 weeks. Call today.\' You\'re live in under a week. And it costs less than '
-        '$100 a month after setup."'
+        'wants to start in 3 weeks. Call today.\' You\'re live in under a week. And it\'s $69 a month '
+        'after a one-time setup fee."'
     )
 
     add_h3(doc, "The ROI Moment (1:45 – 2:15)")
     add_code(doc,
         '"Here\'s the math — if your average job is $600 and you recover even one lead a month you '
-        'would have missed, the service pays for itself six times over. One saved job covers a full '
-        'year of my fee. And if it doesn\'t work in the first 60 days — if you\'re not getting leads '
+        'would have missed, you\'re up $531 that month alone. One saved job covers a full year of my '
+        'fee. And if it doesn\'t work in the first 60 days — if you\'re not getting leads '
         'or you\'re not happy for any reason — I refund every monthly payment, no questions. I take '
         'all the risk on this."'
     )
@@ -592,13 +602,12 @@ def build():
 
     add_h3(doc, "Quick Reference — Pricing Cheat Sheet")
     add_table(doc, [
-        ("__header__", ("Package", "Setup / Monthly")),
-        ("Starter",            "$800 setup — $79/month"),
-        ("Growth (Most Popular)", "$1,200 setup — $99/month"),
-        ("Pro",                "$1,500 setup — $139/month"),
-        ("Payment terms",      "50% deposit on signing, balance before go-live"),
-        ("Guarantee",          "60-day money-back on monthly fees — no questions asked"),
-        ("Timeline",           "Live in 3–5 business days from signing"),
+        ("__header__", ("Service", "Setup / Monthly")),
+        ("Website + Lead Management",        "$750 setup — $69/month"),
+        ("Lead Intake + Lead Management",    "$400 setup — $59/month"),
+        ("Payment terms",                    "50% deposit on signing, balance before go-live"),
+        ("Guarantee",                        "60-day money-back on monthly fees — no questions asked"),
+        ("Timeline",                         "Live in 3–5 business days from signing"),
     ])
 
     out_path = "/Users/creighbaby/LeadManagement/Cold Call Sales Pitch — How-To Guide.docx"
