@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ================================================================
+  TWILIO VOICEMAIL — TwiML BIN TEMPLATE
+  ================================================================
+  Paste this into a Twilio TwiML Bin (twilio.com/console/twiml-bins).
+  Then point the client's Twilio phone number Voice URL to that bin.
+
+  BEFORE PASTING, replace:
+    [BUSINESS_NAME]           — e.g. "Smith Plumbing"
+    [APPS_SCRIPT_WEBHOOK_URL] — the client's Apps Script deployment URL
+                                (same URL used as WEBHOOK_URL in index.html)
+
+  HOW TO SET UP IN TWILIO:
+    1. twilio.com → Console → Explore Products → TwiML Bins → Create
+    2. Give it a name (e.g. "Smith Plumbing Voicemail")
+    3. Paste this file's contents (with placeholders replaced)
+    4. Save the bin — copy the bin URL
+    5. Go to Phone Numbers → Manage → click the client's number
+    6. Under Voice Configuration → A call comes in:
+       - Set to: TwiML Bin
+       - Select the bin you just created
+    7. Save the number configuration
+
+  HOW IT WORKS:
+    - Customer calls the Twilio number
+    - Twilio plays the greeting below
+    - Customer leaves a message (up to 2 minutes)
+    - Twilio transcribes the recording
+    - Twilio POSTs the transcription to the Apps Script webhook
+    - Apps Script logs it to Sheets and SMS's the client
+  ================================================================
+-->
+
+<Response>
+  <Say>
+    You've reached [BUSINESS_NAME]. We're with a customer right now —
+    please leave your name, your phone number, and what you need help with,
+    and we will call you back as soon as possible. Please speak after the beep.
+  </Say>
+  <Record
+    maxLength="120"
+    transcribe="true"
+    transcribeCallback="[APPS_SCRIPT_WEBHOOK_URL]"
+    playBeep="true"
+    timeout="5"
+  />
+  <Say>Thank you — we will be in touch shortly.</Say>
+</Response>
