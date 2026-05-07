@@ -261,8 +261,8 @@ def build():
     add_table(doc, [
         ('Section', 'Contents'),
         ('Part 1 — The Problem', 'Why most home service businesses lose leads before they even know they had one'),
-        ('Part 2 — What the Subscription Includes', 'Every deliverable, running every month, on your behalf'),
-        ('Part 3 — What You Do With Your Leads', 'How to respond fast and close more from the leads we send'),
+        ('Part 2 — What the Subscription Includes', 'Every deliverable — all seven, running every month, on your behalf'),
+        ('Part 3 — Speed to Lead: The Market Reality', 'The research behind response time and what it means for your close rate'),
         ('Part 4 — How We Compare', 'Side-by-side with GoHighLevel, Jobber, Thryv, and DIY'),
         ('Part 5 — The Numbers', 'Data that shows exactly what a missed lead costs your business'),
         ('Part 6 — Why This Works Long-Term', 'How the subscription pays for itself — and then some'),
@@ -348,65 +348,117 @@ def build():
         'it is all there.'
     )
 
-    add_h2(doc, 'Step 4 — Monthly Lead Summary')
+    add_h2(doc, 'Step 4 — Speed-to-Lead Facts Sheet (Included at Onboarding)')
+
+    add_body(doc,
+        'At the start of your subscription, we send you a one-page Speed-to-Lead Facts Sheet. '
+        'It is not a how-to guide — it is a breakdown of the market research on lead response behavior '
+        'in home services: what the data says about how quickly homeowners make hiring decisions, '
+        'what your competitors are doing (and not doing), and what the numbers show about timing and close rates. '
+        'Consider it background intelligence on the market you are competing in.'
+    )
+
+    add_h2(doc, 'Step 5 — Monthly Lead Summary')
 
     add_body(doc,
         'On the first of every month, you receive a summary from us covering:'
     )
     add_bullet(doc, 'How many leads came in during the month')
-    add_bullet(doc, 'Which days and times are busiest for your inquiries')
-    add_bullet(doc, 'Any notes or recommendations from our side')
+    add_bullet(doc, 'Which days and times had the most inquiries')
+    add_bullet(doc, 'Any notes or observations from our side')
     add_body(doc,
-        'This is your proof that the system is working. You will always know exactly what your subscription is doing for you.'
+        'This is your proof that the system is working. '
+        'You will always know exactly what your subscription is doing for you — no guessing, no logging in anywhere.'
     )
 
-    add_h2(doc, 'Step 5 — Ongoing Maintenance (Included, No Extra Charge)')
+    add_h2(doc, 'Step 6 — Google Business Profile Audit (Quarterly)')
+
+    add_body(doc,
+        'Google Business Profile is the single biggest driver of free local leads for home service businesses — '
+        'it determines whether you appear when someone nearby searches for what you do. '
+        'Most business owners set it up once and never revisit it. '
+        'Every quarter, we review yours and flag anything that is incomplete, outdated, or costing you visibility: '
+        'category accuracy, service areas, photos, hours, and Q&A. '
+        'No extra charge.'
+    )
+
+    add_h2(doc, 'Step 7 — Ongoing Maintenance & Form Updates (Always Included)')
 
     add_body(doc,
         'Your lead intake system is not set-and-forgotten. We actively maintain it:'
     )
-    add_bullet(doc, 'Service or price changes on your form — we update it.')
-    add_bullet(doc, 'Technical issues — we fix them before you know there was a problem.')
-    add_bullet(doc, 'Form optimization — if we see a way to improve how your leads come in, we make it.')
-    add_bullet(doc, 'Google Business Profile check (quarterly) — we verify your listing is complete and accurate, since GBP is the top source of free local leads for home service businesses.')
+    add_bullet(doc, 'Service or price changes on your form — we update it, no charge.')
+    add_bullet(doc, 'Technical issues — we handle them before you know there was a problem.')
+    add_bullet(doc, 'Form adjustments — if we see an improvement, we make it.')
 
     add_spacer(doc)
     add_table(doc, [
         ('What Is Included', 'Details'),
-        ('Lead intake form',         'Professional form, live on your site 24/7'),
-        ('Instant email alert',      'Full lead details to your inbox the moment it submits'),
-        ('Instant SMS alert',        'Text to your phone — no app, no login needed'),
-        ('Google Sheet lead log',    'Permanent record of every lead, always accessible'),
-        ('Monthly lead summary',     'Simple report sent to you on the 1st of each month'),
-        ('Form updates',             'Any changes to your form — included, no extra charge'),
-        ('Technical maintenance',    'We keep it running; you keep working'),
-        ('GBP quarterly check',      'Your Google Business Profile reviewed every 3 months'),
+        ('Lead intake form',            'Professional form, live on your site 24/7'),
+        ('Instant email alert',         'Full lead details to your inbox the moment it submits'),
+        ('Instant SMS alert',           'Text to your phone — no app, no login needed'),
+        ('Google Sheet lead log',       'Permanent record of every lead, always accessible'),
+        ('Speed-to-Lead Facts Sheet',   'Market research on lead response sent at onboarding'),
+        ('Monthly lead summary',        'Simple report sent to you on the 1st of each month'),
+        ('GBP audit (quarterly)',       'Your Google Business Profile reviewed every 3 months'),
+        ('Form updates & maintenance',  'Any changes to your form or system — included, no extra charge'),
     ])
 
     # ════════════════════════════════════════════════════════════
-    # PART 3 — WHAT YOU DO WITH YOUR LEADS
+    # PART 3 — SPEED TO LEAD: THE MARKET REALITY
     # ════════════════════════════════════════════════════════════
-    add_h1(doc, 'Part 3 — What You Do With Your Leads')
+    add_h1(doc, 'Part 3 — Speed to Lead: The Market Reality')
 
     add_body(doc,
-        'The subscription handles capture and delivery. What happens next is up to you — '
-        'and the faster you move, the more you win.'
+        'This section is not about tactics — it is about understanding the market your business operates in. '
+        'The research on how homeowners hire contractors tells a consistent story, '
+        'and it is worth knowing the numbers.'
     )
 
-    add_h2(doc, 'The 5-Minute Rule')
+    add_h2(doc, 'How Homeowners Actually Make Hiring Decisions')
 
     add_body(doc,
-        'Research shows that responding to a web lead within 5 minutes makes you up to 100 times more '
-        'likely to qualify that lead than if you wait an hour. Here is what a fast response looks like:'
+        'When a homeowner needs a home service — a repair, an install, a cleanup — '
+        'the typical behavior is not to research multiple companies carefully and choose the best one. '
+        'It is to submit one or two inquiries and respond to whoever contacts them first. '
+        'The decision often happens within minutes of that first contact, not hours.'
     )
-    add_bullet(doc, 'You get the text. You call the number right away — even if it goes to voicemail.')
-    add_bullet(doc, 'Leave a brief message: your name, your business, that you saw their request and want to help.')
-    add_bullet(doc, 'Send a follow-up text if they do not answer: "Hi [Name], this is [Your Name] from [Business]. Saw your request — happy to help. When is a good time to talk?"')
-    add_bullet(doc, 'If no response in 24 hours, follow up once more. Then move on.')
+    add_body(doc,
+        'This is well-documented in the research:'
+    )
+
+    add_table(doc, [
+        ('Finding', 'Source Data'),
+        ('78% of customers hire the first contractor to respond',
+         'Industry-wide finding across home services. Being second rarely results in a booking.'),
+        ('Lead conversion drops by up to 100x after 5 minutes',
+         'A lead that gets a response in under 5 minutes is dramatically more likely to convert '
+         'than one that waits even 30 minutes. The window closes fast.'),
+        ('The average home service business takes 42+ hours to respond to web leads',
+         'Most competitors are not responding quickly. The bar is low — and that is an advantage '
+         'for any business with a reliable notification system.'),
+        ('74% of businesses miss the 5-minute window entirely',
+         'Fewer than 1 in 4 businesses respond within the timeframe that has the highest conversion rate.'),
+        ('62% of home service businesses have no web lead capture system at all',
+         'The majority of competitors are not capturing web leads in any systematic way. '
+         'They are relying on calls, referrals, or manual follow-up.'),
+    ])
+
+    add_h2(doc, 'What This Means in Practice')
 
     add_body(doc,
-        'Remember: 78% of customers hire the first contractor who responds. '
-        'Being 10% cheaper does not matter if someone else called first.'
+        'The market is set up to reward the business that is simply aware and available when a lead comes in. '
+        'It is less about being the cheapest or having the most reviews — '
+        'and more about being the one that shows up in the customer\'s inbox or voicemail before anyone else does.'
+    )
+    add_body(doc,
+        'Our system is designed around this reality. '
+        'The instant email and text notification exists specifically because the research shows '
+        'that the time between a lead submitting a form and a business responding is where most revenue is lost. '
+        'You receive the lead the moment it is submitted — the rest is in your hands.'
+    )
+    add_body(doc,
+        'For a deeper breakdown of the data, see the Speed-to-Lead Facts Sheet included with your subscription.'
     )
 
     # ════════════════════════════════════════════════════════════
@@ -420,17 +472,20 @@ def build():
     )
 
     add_wide_table(doc, [
-        ('',                  'Our Service',       'GoHighLevel',      'Jobber',           'Thryv',            'DIY (no system)'),
-        ('Price / month',     '$59 – $69',         '$97+',             '$59 – $349',       '$250+',            '$0'),
-        ('Who manages it',    'We do — for you',   'You do',           'You do',           'You do',           'Nobody'),
-        ('Setup required',    'We handle it all',  'Extensive',        'Moderate',         'Extensive',        'You figure it out'),
-        ('Lead form capture', 'Yes',               'Yes',              'Limited',          'Yes',              'Maybe'),
-        ('Instant SMS alert', 'Yes',               'With setup',       'No',               'With setup',       'No'),
-        ('Lead log / history','Yes (Google Sheet)','Yes (CRM)',        'Yes (CRM)',         'Yes (CRM)',        'No'),
-        ('Monthly report',    'Yes — we send it',  'You pull it',      'You pull it',       'You pull it',      'No'),
-        ('Learning curve',    'None',              'High',             'Medium',           'High',             'None (nothing works)'),
-        ('Ongoing support',   'Direct — us',       'Chat/ticket',      'Chat/ticket',      'Chat/ticket',      'None'),
-    ], col_widths=[1.5, 1.1, 1.1, 1.0, 1.0, 1.1])
+        ('',                       'Our Service',        'GoHighLevel',      'Jobber',           'Thryv',            'DIY (no system)'),
+        ('Price / month',          '$59 – $69',          '$97+',             '$59 – $349',       '$250+',            '$0'),
+        ('Who manages it',         'We do — for you',    'You do',           'You do',           'You do',           'Nobody'),
+        ('Setup required',         'We handle it all',   'Extensive',        'Moderate',         'Extensive',        'You figure it out'),
+        ('Lead form capture',      'Yes',                'Yes',              'Limited',          'Yes',              'Maybe'),
+        ('Instant SMS alert',      'Yes',                'With setup',       'No',               'With setup',       'No'),
+        ('Lead log / history',     'Yes (Google Sheet)', 'Yes (CRM)',        'Yes (CRM)',        'Yes (CRM)',        'No'),
+        ('Monthly report',         'Yes — we send it',   'You pull it',      'You pull it',      'You pull it',      'No'),
+        ('GBP audit (quarterly)',  'Yes — we do it',     'No',               'No',               'No',               'No'),
+        ('Speed-to-lead intel',    'Yes — included',     'No',               'No',               'No',               'No'),
+        ('Form updates included',  'Yes — always',       'You do it',        'You do it',        'You do it',        'N/A'),
+        ('Learning curve',         'None',               'High',             'Medium',           'High',             'None (nothing works)'),
+        ('Ongoing support',        'Direct — us',        'Chat/ticket',      'Chat/ticket',      'Chat/ticket',      'None'),
+    ], col_widths=[1.5, 1.05, 1.05, 0.95, 0.95, 1.1])
 
     add_body(doc,
         'The most important column in that table is "Who manages it." '
