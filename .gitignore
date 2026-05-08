@@ -1,9 +1,0 @@
-# Word temporary lock files
-~$*
-
-# Claude Code local settings
-.claude/
-
-# Playwright test artifacts
-.playwright-mcp/
-*.png
