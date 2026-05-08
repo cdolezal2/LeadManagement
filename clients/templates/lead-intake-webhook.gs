@@ -154,6 +154,7 @@ function logToSheet(lead) {
       .setBackground('#2c1f0e')
       .setFontColor('#ffffff');
     sheet.setFrozenRows(1);
+    applyStatusDropdown(sheet);
   }
 
   sheet.appendRow([
@@ -281,6 +282,33 @@ function sendMorningDigest() {
   ].join('\n');
 
   MailApp.sendEmail({ to: config.notifyEmail, subject: subject, body: body });
+}
+
+
+// ── STATUS DROPDOWN ────────────────────────────────────────────────────────────
+// Applies a dropdown to the entire Status column (rows 2 onward) so clients
+// can close out leads with a single click instead of typing.
+
+function applyStatusDropdown(sheet) {
+  const statusCol = HEADERS.indexOf('Status') + 1; // column 9
+  const rule = SpreadsheetApp.newDataValidation()
+    .requireValueInList(['New', 'Called — No Answer', 'Booked', 'Not Interested', 'Follow Up'], true)
+    .setAllowInvalid(false)
+    .build();
+  sheet.getRange(2, statusCol, 1000, 1).setDataValidation(rule);
+}
+
+// Run this manually from the Apps Script editor (select it in the dropdown,
+// click Run) to add the status dropdown to an existing Leads sheet.
+function setupStatusDropdown() {
+  const ss    = SpreadsheetApp.getActiveSpreadsheet();
+  const sheet = ss.getSheetByName(SHEET_NAME);
+  if (!sheet) {
+    Logger.log('No "' + SHEET_NAME + '" sheet found — submit a test lead first to create it.');
+    return;
+  }
+  applyStatusDropdown(sheet);
+  Logger.log('Status dropdown applied to column ' + HEADERS.indexOf('Status') + 1 + '.');
 }
 
 
