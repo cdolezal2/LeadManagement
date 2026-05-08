@@ -304,15 +304,18 @@ def build():
 
     add_h3(doc, "The Two Services")
     add_table(doc, [
-        ("__header__", ("Service", "What's Included")),
+        ("__header__", ("Service", "What It Does — In Plain Language")),
         ("Website + Lead Management\n$750 setup + $79/mo",
-         "Professional one-page website, lead intake form (built in), instant email + text alert for every lead, "
-         "Google Sheets lead log, monthly lead summary report, quarterly Google Business Profile audit, "
-         "speed-to-lead facts sheet, form updates always included, ongoing site edits, custom domain connected"),
+         "Builds a professional mobile-ready website and wires it up so that every time someone submits the "
+         "contact form OR calls and misses you, the owner gets a text on their phone within minutes — "
+         "name, number, and what they need. Every lead is automatically saved to a Google Sheet. "
+         "Daily digest email every morning. Monthly report on the 1st. "
+         "Quarterly Google Business Profile review. Ongoing site edits always included."),
         ("Lead Intake + Lead Management\n$400 setup + $59/mo",
-         "Lead intake form added to their existing website, instant email + text alert for every lead, "
-         "Google Sheets lead log, monthly lead summary report, quarterly Google Business Profile audit, "
-         "speed-to-lead facts sheet, form updates always included — no new website needed"),
+         "No new website needed. Adds a lead capture form to their existing site and wires up the same "
+         "alert system — every form submission and every missed call sends a text to the owner's phone "
+         "within minutes. Everything logged automatically in Google Sheets. "
+         "Same daily digest, monthly report, and GBP audit as the full package."),
     ])
 
     add_h3(doc, "Which Service to Lead With")
@@ -386,7 +389,11 @@ def build():
         ("No website or a bad one",
          "Customers Google them, find nothing, and call a competitor. They lose jobs they never even know they lost."),
         ("Leads come in while they're on a job",
-         "A customer fills out a form or calls. They miss it. By the time they call back, the customer booked someone else."),
+         "A customer fills out a form or calls while the owner is under a sink. They miss it. "
+         "By the time they call back — hours later — the customer already booked someone else."),
+        ("Missed calls with no follow-up system",
+         "They get a voicemail. They listen to it at 6pm, forget by morning, and never call back. "
+         "That was a $600 job. Gone."),
         ("No system to track who called",
          "They're juggling names and numbers in their head or in a notes app. Leads fall through the cracks every week."),
         ("Invisible on Google",
@@ -401,10 +408,11 @@ def build():
 
     add_h3(doc, "What Sets You Apart")
     add_bullet_item(doc, "Live in under a week — not 6 weeks like an agency.", bold_prefix="Speed: ")
+    add_bullet_item(doc, "Covers both form submissions AND missed calls — both log as leads and both send a text alert to the owner.", bold_prefix="Voicemail-to-lead: ")
     add_bullet_item(doc, "Their domain, their Google Sheet, their data. They own everything and can walk away any time.", bold_prefix="Ownership: ")
     add_bullet_item(doc, "They deal with one person — not a support ticket or a rotating team.", bold_prefix="One person: ")
     add_bullet_item(doc, "60 days to decide if it's working. Monthly fees come back if they're not satisfied.", bold_prefix="Guarantee: ")
-    add_bullet_item(doc, "Affordable — $79/month for the full website + lead management package. $59/month if they already have a site.", bold_prefix="Price: ")
+    add_bullet_item(doc, "$79/month for the full website + lead management package. $59/month if they already have a site.", bold_prefix="Price: ")
 
     # ══════════════════════════════════════════════════════════════════════════
     # PART 4 — RETURN ON INVESTMENT
@@ -466,20 +474,21 @@ def build():
     add_h3(doc, "The Hook (0:30 – 1:00)")
     add_code(doc,
         '"Here\'s the thing — most [plumbers] I talk to are losing 3 or 4 jobs a month and they don\'t '
-        'even know it. A customer Googles them, finds nothing — or finds a website that looks like it\'s '
-        'from 2009 — and calls the next guy. Or they fill out a form while you\'re on a job and by the '
-        'time you call back, they\'ve already booked someone else. That\'s real money walking out the door '
-        'every single month."'
+        'even know it. A customer Googles them, finds nothing — or finds a site that looks like it\'s from '
+        '2009 — and calls the next guy. Or they fill out a form while you\'re on a job and by the time '
+        'you call back, they\'ve already booked someone else. Or they leave a voicemail, and you hear it '
+        'at 7pm, forget about it by morning, and that was a $600 job gone. That\'s real money walking out '
+        'the door every single month."'
     )
 
     add_h3(doc, "The Solution (1:00 – 1:45)")
     add_code(doc,
         '"What I do is build you a professional website that looks great on a phone — because that\'s how '
-        'people are searching — and I wire up a system so that every lead that comes in goes straight to '
-        'your inbox within minutes, organized and ready to call back. You\'re not staring at a spreadsheet. '
-        'You\'re just getting a text that says: \'New lead — Maria G., kitchen remodel, $12K budget, '
-        'wants to start in 3 weeks. Call today.\' You\'re live in under a week. And it\'s $79 a month '
-        'after a one-time setup fee."'
+        'people are searching — and wire up a system so that every lead that comes in goes straight to '
+        'your phone as a text within minutes. Form submission, missed call, voicemail — all of it. '
+        'Your phone buzzes and it says: \'New lead — Mike R., leaking pipe under kitchen sink, Naperville. '
+        'Call back today.\' You\'re not checking a dashboard. You\'re not logging into anything. '
+        'You just get a text. You\'re live in under a week. It\'s $79 a month after a one-time setup."'
     )
 
     add_h3(doc, "The ROI Moment (1:45 – 2:15)")
@@ -531,7 +540,7 @@ def build():
     add_h3(doc, "Objection: 'I can\'t afford it right now.'")
     add_code(doc,
         '"I hear you — and that\'s exactly why I want to show you the math. If one saved lead a month '
-        'is worth $600 to you, and my fee is $99 a month, you\'re net positive by $500 every single '
+        'is worth $600 to you, and my fee is $79 a month, you\'re net positive by over $500 every single '
         'month. And if it doesn\'t work in 60 days, you get every monthly payment back. You\'re not '
         'risking the money — you\'re risking 60 days of your time."'
     )
@@ -610,7 +619,7 @@ def build():
         ("Timeline",                         "Live in 3–5 business days from signing"),
     ])
 
-    out_path = "/Users/creighbaby/LeadManagement/Cold Call Sales Pitch — How-To Guide.docx"
+    out_path = "/Users/creighbaby/LeadManagement/docs/Cold Call Sales Pitch — How-To Guide.docx"
     doc.save(out_path)
     print(f"Saved: {out_path}")
 
