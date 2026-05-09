@@ -142,8 +142,8 @@ Low = just exploring, no clear need, or outside target market.`;
 
 // ── SEND EMAIL ────────────────────────────────────────────────────
 function sendEmail(data, summary) {
-  const emoji = { High: '🔴', Medium: '🟡', Low: '🟢' }[summary.priority] || '⚪';
-  const subject = `${emoji} New Prospect — ${data.business||'No Business Listed'} | ${data.name||'Unknown'}`;
+  const priority_tag = { High: '[HIGH]', Medium: '[MEDIUM]', Low: '[LOW]' }[summary.priority] || '[NEW]';
+  const subject = `${priority_tag} New Prospect — ${data.business||'No Business Listed'} | ${data.name||'Unknown'}`;
   const body = [
     `New prospect from bowlaneleads.com`,
     '─'.repeat(48),
