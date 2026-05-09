@@ -14,7 +14,19 @@
     ============================================================ -->
 
   <title>Bow Lane Leads — Websites & Lead Management for Small Businesses</title>
-  <meta name="description" content="We build professional websites and AI-powered lead systems for small businesses. Get more customers, miss fewer leads." />
+  <meta name="description" content="Bow Lane Leads builds professional websites and lead management systems for small home service businesses. Every inquiry reaches your phone within minutes. Live in under a week." />
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231a2f50'/><text x='50%' y='54%' font-family='Georgia,serif' font-size='13' font-weight='bold' fill='%23f5edd8' text-anchor='middle' dominant-baseline='middle'>BL</text></svg>" />
+
+  <!-- Google Analytics — replace G-XXXXXXXXXX with your Measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -473,6 +485,61 @@
       font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 4px;
     }
 
+    /* ── ABOUT ── */
+    .about { background: var(--surface); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center; margin-top: 52px;
+    }
+    .about-text p {
+      font-size: 16px; color: var(--muted);
+      line-height: 1.8; margin-bottom: 20px;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-text strong { color: var(--espresso); font-weight: 600; }
+    .about-card {
+      background: var(--espresso);
+      border-radius: var(--radius);
+      padding: 48px;
+      position: relative; overflow: hidden;
+    }
+    .about-card-pattern {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: radial-gradient(circle at 20% 80%, rgba(196,168,130,0.1) 0%, transparent 60%);
+    }
+    .about-card-name {
+      font-family: var(--font-d);
+      font-size: 32px; font-weight: 700;
+      color: #fff; margin-bottom: 4px;
+    }
+    .about-card-title {
+      font-size: 13px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--tan); margin-bottom: 28px;
+    }
+    .about-card-details { list-style: none; }
+    .about-card-details li {
+      font-size: 14px; color: rgba(255,255,255,0.7);
+      margin-bottom: 12px; display: flex; align-items: center; gap: 10px;
+    }
+    .about-card-details li::before {
+      content: '→'; color: var(--tan); font-weight: 600; flex-shrink: 0;
+    }
+    .about-card-contact {
+      margin-top: 28px; padding-top: 28px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .about-card-contact a {
+      display: block; font-size: 14px;
+      color: var(--tan); text-decoration: none;
+      margin-bottom: 8px; transition: color 0.2s;
+    }
+    .about-card-contact a:hover { color: #fff; }
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; gap: 32px; }
+      .about-card { padding: 32px 28px; }
+    }
+
     /* ── CONTACT ── */
     .contact { background: var(--warm-white); }
     .contact-direct {
@@ -755,6 +822,7 @@
       <li><a href="#how">How it works</a></li>
       <li><a href="#packages">Packages</a></li>
       <li><a href="#why">Why me</a></li>
+      <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <a href="tel:3122989153" class="nav-contact">312-298-9153</a>
@@ -986,6 +1054,39 @@
   </div>
 </section>
 
+<!-- ── ABOUT ── -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="section-label">About</div>
+    <h2>Built by someone who <em>gets it.</em></h2>
+
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Bow Lane Leads is a <strong>one-person operation</strong> built on a simple idea: small service businesses deserve a professional online presence and a lead system that actually works — without the agency price tag, the long timelines, or the learning curve.</p>
+        <p>Most home service business owners are busy doing the work. They're on job sites, in crawl spaces, on rooftops. They're not sitting at a desk managing software. Every system we build is designed around that reality — <strong>your phone buzzes, you call the lead back, you get the job.</strong></p>
+        <p>There's no team, no account managers, no support tickets. When you're a client, you deal directly with me — before, during, and after setup. If something needs to change, you call or text and it gets handled.</p>
+      </div>
+
+      <div class="about-card">
+        <div class="about-card-pattern"></div>
+        <div class="about-card-name">Creighton Dolezal</div>
+        <div class="about-card-title">Founder, Bow Lane Leads</div>
+        <ul class="about-card-details">
+          <li>Websites live in 3–5 business days</li>
+          <li>One point of contact — always</li>
+          <li>No lock-in — you own everything</li>
+          <li>60-day money-back on monthly fees</li>
+          <li>Serving home service businesses nationwide</li>
+        </ul>
+        <div class="about-card-contact">
+          <a href="tel:3122989153">(312) 298-9153</a>
+          <a href="mailto:creighton@bowlaneleads.com">creighton@bowlaneleads.com</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ── CONTACT ── -->
 <section class="contact" id="contact">
   <div class="container">
@@ -1118,7 +1219,7 @@
 <!-- ── FOOTER ── -->
 <footer>
   <strong>Bow Lane Leads</strong> · <a href="tel:3122989153">312-298-9153</a> · <a href="mailto:creighton@bowlaneleads.com">creighton@bowlaneleads.com</a><br />
-  <span style="font-size:12px;margin-top:8px;display:block">© 2026 Bow Lane Leads. All rights reserved. · <a href="/privacy.html">Privacy Policy</a></span>
+  <span style="font-size:12px;margin-top:8px;display:block">© 2026 Bow Lane Leads. All rights reserved. · <a href="/privacy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Service</a></span>
 </footer>
 
 <script>
