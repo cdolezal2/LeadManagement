@@ -29,7 +29,7 @@ const HEADERS = [
 function doPost(e) {
   try {
     const data = JSON.parse(e.postData.contents);
-    const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    const sheet = SpreadsheetApp.openById('1cmMVP4_3h_5cGNJbWcYkgwXSRtftlijNIZu4N_LyOVg').getActiveSheet();
     setupSheet(sheet);
     sheet.appendRow(buildRow(data));
     const summary = getAiSummary(data);
