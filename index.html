@@ -95,6 +95,12 @@
       transition: background 0.2s;
     }
     .nav-cta:hover { background: var(--brown-d); }
+    .nav-contact {
+      font-size: 13px; font-weight: 500;
+      color: var(--muted); text-decoration: none;
+      letter-spacing: 0.02em; transition: color 0.2s;
+    }
+    .nav-contact:hover { color: var(--espresso); }
     .nav-toggle {
       display: none; background: none; border: none;
       cursor: pointer; padding: 6px; flex-direction: column; gap: 5px;
@@ -466,6 +472,17 @@
 
     /* ── CONTACT ── */
     .contact { background: var(--warm-white); }
+    .contact-direct {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 32px;
+      font-size: 16px; font-weight: 500;
+      color: var(--muted);
+    }
+    .contact-direct a {
+      color: var(--brown); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-direct a:hover { color: var(--brown-d); text-decoration: underline; }
     .contact-top { margin-bottom: 48px; }
     .contact-top h2 { margin-bottom: 12px; }
     .contact-options {
@@ -705,7 +722,7 @@
       .why-callout-stat { gap: 24px; }
       .contact-options { grid-template-columns: 1fr; }
       .book-card { padding: 32px 24px; }
-      .nav-links, .nav-cta { display: none; }
+      .nav-links, .nav-cta, .nav-contact { display: none; }
       .nav-toggle { display: flex; }
     }
     @media (max-width: 600px) {
@@ -737,6 +754,7 @@
       <li><a href="#why">Why me</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <a href="tel:3122989153" class="nav-contact">312-298-9153</a>
     <a href="#contact" class="nav-cta">Get a quote</a>
     <button class="nav-toggle" onclick="toggleNav(this)" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -973,6 +991,12 @@
       <div class="section-label">Get started</div>
       <h2>Two ways to <em>get started.</em></h2>
       <p class="section-sub">Book a 15-minute call and we'll walk you through the system live and quote you on the spot — or fill out the form and we'll follow up within 24 hours.</p>
+    </div>
+
+    <div class="contact-direct">
+      <a href="tel:3122989153">312-298-9153</a>
+      <span>·</span>
+      <a href="mailto:creighton@bowlaneleads.com">creighton@bowlaneleads.com</a>
     </div>
 
     <div class="contact-options">
