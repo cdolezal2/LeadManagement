@@ -17,6 +17,9 @@ const CONFIG = {
   NOTIFICATION_EMAIL: 'creighton@bowlaneleads.com',
   BUSINESS_NAME:      'Bow Lane Leads',
   LEAD_TYPE:          'prospect',
+  QUO_API_KEY:        'a16f17109387eab642d209939fe484d3e32933cf12909cf50c43e633ac0cdc5b',
+  QUO_FROM_NUMBER:    '+12242284037',
+  QUO_TO_NUMBER:      '+13129055782',
 };
 // ─────────────────────────────────────────────────────────────────
 
@@ -39,6 +42,7 @@ function doPost(e) {
     sheet.getRange(lastRow, 11).setValue('New');
     colorRow(sheet, lastRow, summary.priority);
     sendEmail(data, summary);
+    sendQuoNotification(data, summary);
     return ContentService
       .createTextOutput(JSON.stringify({ status: 'success' }))
       .setMimeType(ContentService.MimeType.JSON);
@@ -162,6 +166,32 @@ function sendEmail(data, summary) {
     '─'.repeat(48),
   ].join('\n');
   GmailApp.sendEmail(CONFIG.NOTIFICATION_EMAIL, subject, body);
+}
+
+// ── SEND QUO NOTIFICATION ─────────────────────────────────────────
+function sendQuoNotification(data, summary) {
+  const priority_emoji = { High: '🔴', Medium: '🟡', Low: '🟢' }[summary.priority] || '🔔';
+  const message = [
+    `${priority_emoji} New lead — ${summary.priority} priority`,
+    `Name: ${data.name||'—'}`,
+    `Biz: ${data.business||'—'}`,
+    `Phone: ${data.phone||'—'}`,
+    `Email: ${data.email||'—'}`,
+    `Industry: ${data.industry||'—'}`,
+    `Next step: ${summary.next_step||'—'}`,
+  ].join('\n');
+
+  UrlFetchApp.fetch('https://api.openphone.com/v1/messages', {
+    method: 'post',
+    contentType: 'application/json',
+    headers: { 'Authorization': CONFIG.QUO_API_KEY },
+    payload: JSON.stringify({
+      from: CONFIG.QUO_FROM_NUMBER,
+      to: [CONFIG.QUO_TO_NUMBER],
+      content: message,
+    }),
+    muteHttpExceptions: true,
+  });
 }
 
 // ── TEST FUNCTION ─────────────────────────────────────────────────
