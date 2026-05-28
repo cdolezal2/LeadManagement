@@ -1272,6 +1272,8 @@
       document.getElementById('success-name').textContent = name.split(' ')[0];
       document.getElementById('form-body').style.display = 'none';
       document.getElementById('form-success').classList.add('show');
+      // Google Ads conversion — replace CONVERSION_LABEL with label from Google Ads Goals
+      gtag('event', 'conversion', { send_to: 'AW-18190952996/CONVERSION_LABEL' });
     } catch (err) {
       btn.disabled = false;
       btn.textContent = 'Send my request →';
