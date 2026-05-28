@@ -369,14 +369,25 @@
     .pkg-price {
       margin-bottom: 6px;
     }
-    .pkg-price-setup {
+    .pkg-price-main {
+      display: flex; align-items: baseline; gap: 6px;
+      margin-bottom: 4px;
+    }
+    .pkg-price-amt {
       font-family: var(--font-d);
-      font-size: 38px; font-weight: 700;
+      font-size: 42px; font-weight: 700;
       color: var(--espresso); letter-spacing: -0.03em; line-height: 1;
     }
-    .pkg.featured .pkg-price-setup { color: #fff; }
+    .pkg.featured .pkg-price-amt { color: #fff; }
+    .pkg-price-per {
+      font-family: var(--font-d);
+      font-size: 22px; font-weight: 700;
+      color: var(--espresso); letter-spacing: -0.01em;
+    }
+    .pkg.featured .pkg-price-per { color: rgba(255,255,255,0.85); }
     .pkg-price-note {
-      font-size: 12px; color: var(--muted); margin-bottom: 4px;
+      font-size: 11px; color: var(--muted); margin-bottom: 20px;
+      text-transform: uppercase; letter-spacing: 0.06em;
     }
     .pkg.featured .pkg-price-note { color: rgba(255,255,255,0.4); }
     .pkg-monthly {
@@ -853,7 +864,7 @@
     <a href="#" class="nav-logo">Bow Lane <span>Leads</span></a>
     <ul class="nav-links">
       <li><a href="#how">How it works</a></li>
-      <li><a href="#packages">Packages</a></li>
+      <li><a href="#packages">Pricing</a></li>
       <li><a href="#why">Why me</a></li>
 <li><a href="#contact">Contact</a></li>
     </ul>
@@ -876,12 +887,12 @@
     </p>
     <div class="hero-actions">
       <a href="#contact" class="btn-primary">Get a free quote</a>
-      <a href="#packages" class="btn-ghost">See packages</a>
+      <a href="#packages" class="btn-ghost">See pricing</a>
     </div>
     <div class="hero-stats">
       <div>
-        <div class="stat-val">60</div>
-        <div class="stat-label">Day guarantee on monthly fees</div>
+        <div class="stat-val">$0</div>
+        <div class="stat-label">Setup fee — none, ever</div>
       </div>
       <div>
         <div class="stat-val">&lt;1 week</div>
@@ -965,7 +976,7 @@
         <div class="section-label">Pricing</div>
         <h2>One flat <em>monthly rate.</em></h2>
       </div>
-      <p class="section-sub" style="max-width:340px">No setup fees. No surprises. A single monthly rate that keeps your site live, your leads flowing, and your business visible. 60-day money-back guarantee.</p>
+      <p class="section-sub" style="max-width:340px">No setup fees. No surprises. A single flat monthly rate that keeps your site live, your leads flowing, and your business visible.</p>
     </div>
 
     <div class="packages-grid">
@@ -975,8 +986,11 @@
         <div class="pkg-name">Starter</div>
         <div class="pkg-tagline">Everything a small service business needs to get found and capture leads.</div>
         <div class="pkg-price">
-          <div class="pkg-price-setup">$150</div>
-          <div class="pkg-price-note">/ month &mdash; no setup fee, ever</div>
+          <div class="pkg-price-main">
+            <span class="pkg-price-amt">$150</span>
+            <span class="pkg-price-per">/ month</span>
+          </div>
+          <div class="pkg-price-note">No setup fee &mdash; ever</div>
         </div>
         <hr class="pkg-divider" />
         <ul class="pkg-features">
@@ -1060,8 +1074,8 @@
         <blockquote>According to industry research, 78% of homeowners hire the first contractor who responds — not the cheapest, not the best reviewed. The first. The average competitor takes over 42 hours to reply.</blockquote>
         <div class="why-callout-stat">
           <div>
-            <div class="why-callout-num">60</div>
-            <div class="why-callout-label">Day guarantee — or your monthly fees back</div>
+            <div class="why-callout-num">$150</div>
+            <div class="why-callout-label">Flat monthly rate — no contracts, no setup fee</div>
           </div>
           <div>
             <div class="why-callout-num">&lt;5 min</div>
@@ -1120,11 +1134,6 @@
         <div id="form-body">
           <div class="form-title">Request a free quote</div>
           <div class="form-sub">Tell us about your business and we'll put together a package recommendation.</div>
-
-          <div class="form-guarantee">
-            <span style="font-size:20px">🛡</span>
-            <p><strong>60-day guarantee on your monthly fee.</strong> Not happy in the first 60 days? We refund every monthly payment — no questions asked.</p>
-          </div>
 
           <div class="field-row">
             <div class="field">
