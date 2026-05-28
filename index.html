@@ -421,6 +421,39 @@
       background: var(--tan); color: var(--espresso);
     }
     .pkg-cta-filled:hover { background: var(--gold); }
+    .pkg-more {
+      background: var(--cream);
+      border: 2px dashed var(--tan);
+      border-radius: var(--radius);
+      padding: 36px 32px;
+      display: flex; flex-direction: column;
+    }
+    .pkg-more-label {
+      font-family: var(--font-d);
+      font-size: 22px; font-weight: 700;
+      color: var(--espresso); margin-bottom: 8px;
+    }
+    .pkg-more-intro {
+      font-size: 13px; color: var(--muted);
+      margin-bottom: 24px; line-height: 1.6;
+    }
+    .pkg-more-list {
+      list-style: none; margin-bottom: 24px; flex: 1;
+    }
+    .pkg-more-list li {
+      font-size: 14px; color: var(--text);
+      margin-bottom: 10px; display: flex;
+      align-items: flex-start; gap: 10px; line-height: 1.5;
+    }
+    .pkg-more-list li::before {
+      content: '+'; font-size: 14px; font-weight: 700;
+      color: var(--tan); flex-shrink: 0;
+    }
+    .pkg-more-cta {
+      font-size: 13px; color: var(--muted);
+      margin-bottom: 20px; line-height: 1.6;
+      font-style: italic;
+    }
 
     /* ── WHY US ── */
     .why { background: var(--cream); }
@@ -930,59 +963,46 @@
     <div class="packages-header">
       <div>
         <div class="section-label">Pricing</div>
-        <h2>Two simple <em>products.</em></h2>
+        <h2>One flat <em>monthly rate.</em></h2>
       </div>
-      <p class="section-sub" style="max-width:340px">Setup fee split 50/50 — deposit due on signing, balance due at go-live. Monthly fee keeps your lead system running and your site maintained. 60-day money-back guarantee on monthly fees.</p>
+      <p class="section-sub" style="max-width:340px">No setup fees. No surprises. A single monthly rate that keeps your site live, your leads flowing, and your business visible. 60-day money-back guarantee.</p>
     </div>
 
     <div class="packages-grid">
 
-      <!-- WEBSITE + LEAD MANAGEMENT (featured) -->
+      <!-- STARTER -->
       <div class="pkg featured">
-        <div class="pkg-badge">Most popular</div>
-        <div class="pkg-name">Website + Lead Management</div>
-        <div class="pkg-tagline">Everything you need to go from invisible to booked.</div>
+        <div class="pkg-name">Starter</div>
+        <div class="pkg-tagline">Everything a small service business needs to get found and capture leads.</div>
         <div class="pkg-price">
-          <div class="pkg-price-setup">$750</div>
-          <div class="pkg-price-note">one-time setup fee</div>
+          <div class="pkg-price-setup">$150</div>
+          <div class="pkg-price-note">/ month &mdash; no setup fee, ever</div>
         </div>
-        <div class="pkg-monthly">+ $79 / month</div>
         <hr class="pkg-divider" />
         <ul class="pkg-features">
-          <li>Professional one-page website</li>
+          <li>Simple one-page professional website</li>
           <li>Lead intake form — built in</li>
-          <li>Instant email + text alert for every lead</li>
-          <li>Voicemail transcription — missed calls logged as leads automatically</li>
-          <li>Google Sheets lead log — every lead, forever</li>
-          <li>Monthly lead summary report</li>
-          <li>Google Business Profile audit (quarterly)</li>
-          <li>Form updates — always included, no charge</li>
-          <li>Ongoing site tweaks &amp; edits</li>
-          <li>Custom domain connected</li>
+          <li>Lead-to-text notifications for form submissions &amp; voicemail</li>
+          <li>Google Business Profile linked to your site</li>
+          <li>Ongoing site tweaks &amp; edits — always included</li>
         </ul>
         <a href="#contact" class="pkg-cta pkg-cta-filled">Get started</a>
       </div>
 
-      <!-- LEAD INTAKE + LEAD MANAGEMENT -->
-      <div class="pkg">
-        <div class="pkg-name">Lead Intake + Lead Management</div>
-        <div class="pkg-tagline">Already have a site? Put it to work.</div>
-        <div class="pkg-price">
-          <div class="pkg-price-setup">$400</div>
-          <div class="pkg-price-note">one-time setup fee</div>
-        </div>
-        <div class="pkg-monthly">+ $59 / month</div>
-        <hr class="pkg-divider" />
-        <ul class="pkg-features">
-          <li>Lead intake form added to your existing site</li>
-          <li>Instant email + text alert for every lead</li>
-          <li>Voicemail transcription — missed calls logged as leads automatically</li>
-          <li>Google Sheets lead log — every lead, forever</li>
-          <li>Monthly lead summary report</li>
-          <li>Google Business Profile audit (quarterly)</li>
-          <li>Form updates — always included, no charge</li>
+      <!-- NEED MORE -->
+      <div class="pkg-more">
+        <div class="pkg-more-label">Need something more?</div>
+        <p class="pkg-more-intro">We can build on top of your plan for whatever your business needs next.</p>
+        <ul class="pkg-more-list">
+          <li>Online booking &amp; scheduling</li>
+          <li>Advanced website customization</li>
+          <li>Multi-page website</li>
+          <li>Automated lead follow-up</li>
+          <li>Review management</li>
+          <li>And more — just ask</li>
         </ul>
-        <a href="#contact" class="pkg-cta pkg-cta-outline">Get started</a>
+        <p class="pkg-more-cta">Submit the intake form below and describe what you're looking for — we'll put together a price estimate tailored to your needs.</p>
+        <a href="#contact" class="pkg-cta pkg-cta-outline">Get a quote</a>
       </div>
 
     </div>
@@ -1103,7 +1123,7 @@
 
           <div class="form-guarantee">
             <span style="font-size:20px">🛡</span>
-            <p><strong>60-day guarantee on your monthly fee.</strong> Not happy in the first 60 days? We refund every monthly payment — no questions. Setup fees are non-refundable once work begins.</p>
+            <p><strong>60-day guarantee on your monthly fee.</strong> Not happy in the first 60 days? We refund every monthly payment — no questions asked.</p>
           </div>
 
           <div class="field-row">
@@ -1147,8 +1167,8 @@
               <label>Package interest</label>
               <select id="f-package">
                 <option value="">Not sure yet</option>
-                <option>Website + Lead Management — $750 setup / $79/mo</option>
-                <option>Lead Intake + Lead Management — $400 setup / $59/mo</option>
+                <option>Starter — $150/mo</option>
+                <option>Something custom — I'll describe below</option>
               </select>
             </div>
           </div>
