@@ -272,6 +272,70 @@
     }
     .hero-card-footer strong { color: var(--tan); }
 
+    /* ── HERO PRICING TILES ── */
+    .hero-tiles-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--tan);
+      margin-bottom: 18px; text-align: center;
+    }
+    .hero-tiles {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 14px; width: 100%; max-width: 380px;
+    }
+    .hero-tile {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(196,168,130,0.2);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      position: relative;
+    }
+    .hero-tile-featured {
+      border-color: rgba(184,146,42,0.45);
+      background: rgba(255,255,255,0.1);
+    }
+    .hero-tile-badge {
+      position: absolute; top: -10px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold); color: var(--espresso);
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 3px 12px; border-radius: 20px; white-space: nowrap;
+    }
+    .hero-tile-name {
+      font-family: var(--font-d);
+      font-size: 19px; font-weight: 700;
+      color: #fff; margin-bottom: 4px;
+    }
+    .hero-tile-price {
+      font-size: 30px; font-weight: 700;
+      color: var(--tan); letter-spacing: -0.02em;
+      line-height: 1; margin-bottom: 14px;
+    }
+    .hero-tile-price span {
+      font-size: 13px; font-weight: 400;
+      color: rgba(255,255,255,0.45);
+    }
+    .hero-tile-list { list-style: none; }
+    .hero-tile-list li {
+      font-size: 12px; color: rgba(255,255,255,0.7);
+      margin-bottom: 7px; display: flex;
+      align-items: flex-start; gap: 7px; line-height: 1.4;
+    }
+    .hero-tile-list li::before {
+      content: '✓'; font-size: 10px; font-weight: 700;
+      color: var(--tan); flex-shrink: 0; margin-top: 2px;
+    }
+    .hero-tile-cta {
+      display: inline-block; margin-top: 22px;
+      font-size: 13px; font-weight: 500;
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(196,168,130,0.3);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .hero-tile-cta:hover { color: var(--tan); border-color: var(--tan); }
+
     /* ── SECTION COMMON ── */
     section { padding: 100px 0; }
     .section-label {
@@ -914,31 +978,33 @@
   <div class="hero-right">
     <div class="hero-pattern"></div>
     <div class="hero-right-content">
-      <div class="hero-card">
-        <div class="hero-card-label">Your leads — this morning</div>
+      <div class="hero-tiles-label">Simple, honest pricing</div>
+      <div class="hero-tiles">
 
-        <div class="hero-result">
-          <div class="hero-result-name">Maria G.</div>
-          <div class="hero-result-detail">Kitchen remodel · $12K budget · Wants to start in 3 weeks</div>
-          <span class="hero-result-badge badge-hot">Call today</span>
+        <div class="hero-tile">
+          <div class="hero-tile-name">Starter</div>
+          <div class="hero-tile-price">$49<span>/mo</span></div>
+          <ul class="hero-tile-list">
+            <li>Professional website — built for you</li>
+            <li>Lead intake form included</li>
+            <li>Google Business connection</li>
+            <li>Ongoing edits anytime</li>
+          </ul>
         </div>
 
-        <div class="hero-result">
-          <div class="hero-result-name">Tom R.</div>
-          <div class="hero-result-detail">Painting quote · Has permit ready · Mornings only</div>
-          <span class="hero-result-badge badge-warm">Follow up</span>
+        <div class="hero-tile hero-tile-featured">
+          <div class="hero-tile-badge">Most popular</div>
+          <div class="hero-tile-name">Growth</div>
+          <div class="hero-tile-price">$99<span>/mo</span></div>
+          <ul class="hero-tile-list">
+            <li>Everything in Starter</li>
+            <li>Text alerts the moment a lead comes in</li>
+            <li>Daily lead summary every morning</li>
+          </ul>
         </div>
 
-        <div class="hero-result">
-          <div class="hero-result-name">Sandra K.</div>
-          <div class="hero-result-detail">Flooring · $5K range · Just exploring for now</div>
-          <span class="hero-result-badge badge-warm">Low urgency</span>
-        </div>
-
-        <div class="hero-card-footer">
-          New leads in your inbox within minutes · <strong>Full digest every morning</strong>
-        </div>
       </div>
+      <a href="#packages" class="hero-tile-cta">See full plan details below &darr;</a>
     </div>
   </div>
 </section>
