@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>M&G International Landscape Design Corp.</title>
+  <meta name="description" content="M&G International Landscape Design Corp. — Professional landscaping, design, and lawn care services. Serving the greater Chicago area." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── DESIGN TOKENS ── */
+    :root {
+      --cream:      #f8f6f1;
+      --warm-white: #f2ede3;
+      --sand:       #c8dbc0;
+      --tan:        #5a9e6f;
+      --brown:      #2d6a4f;
+      --brown-d:    #1b4d38;
+      --espresso:   #152d1e;
+      --text:       #1c2d1e;
+      --muted:      #5c7862;
+      --border:     #ccdac5;
+      --gold:       #b8922a;
+      --gold-lt:    #f5edd8;
+      --surface:    #ffffff;
+      --font-d:     'Cormorant Garamond', Georgia, serif;
+      --font-b:     'Jost', system-ui, sans-serif;
+      --radius:     10px;
+      --radius-sm:  5px;
+      --max-w:      1080px;
+      --shadow:     0 4px 32px rgba(21,45,30,0.09);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-b);
+      background: var(--cream);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 28px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(248,246,241,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 28px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 66px;
+    }
+    .nav-logo {
+      font-family: var(--font-d);
+      font-size: 19px; font-weight: 700;
+      color: var(--espresso);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+    .nav-logo span { color: var(--brown); font-style: italic; }
+    .nav-logo small {
+      display: block; font-family: var(--font-b);
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); margin-top: 1px;
+    }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: 13px; font-weight: 500; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--muted);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--espresso); }
+    .nav-contact {
+      font-size: 13px; font-weight: 600;
+      color: #fff; text-decoration: none;
+      letter-spacing: 0.04em;
+      background: var(--espresso);
+      padding: 9px 18px; border-radius: 20px;
+      transition: background 0.2s;
+    }
+    .nav-contact:hover { background: #000; }
+    .nav-cta {
+      background: var(--brown);
+      color: #fff; text-decoration: none;
+      padding: 9px 22px; border-radius: var(--radius-sm);
+      font-size: 13px; font-weight: 600;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--brown-d); }
+    .nav-toggle {
+      display: none; background: none; border: none;
+      cursor: pointer; padding: 6px; flex-direction: column; gap: 5px;
+    }
+    .nav-toggle span {
+      display: block; width: 22px; height: 2px;
+      background: var(--espresso); border-radius: 2px; transition: all 0.3s;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 66px;
+      overflow: hidden;
+    }
+    .hero-left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 80px 60px 80px 0;
+      padding-left: calc((100vw - var(--max-w)) / 2 + 28px);
+      animation: slideUp 0.8s ease both;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--brown);
+      margin-bottom: 24px;
+    }
+    .hero-tag::before {
+      content: ''; display: block;
+      width: 28px; height: 1.5px; background: var(--tan);
+    }
+    h1 {
+      font-family: var(--font-d);
+      font-size: clamp(40px, 5.2vw, 64px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--espresso);
+      margin-bottom: 24px;
+    }
+    h1 em { font-style: italic; color: var(--brown); }
+    .hero-sub {
+      font-size: 17px; font-weight: 300;
+      color: var(--muted); max-width: 420px;
+      line-height: 1.7; margin-bottom: 40px;
+    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--brown); color: #fff;
+      padding: 14px 30px; border-radius: var(--radius-sm);
+      font-family: var(--font-b); font-size: 13px;
+      font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--brown-d); transform: translateY(-1px); }
+    .btn-ghost {
+      background: transparent; color: var(--brown);
+      padding: 14px 30px; border-radius: var(--radius-sm);
+      font-family: var(--font-b); font-size: 13px;
+      font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; text-decoration: none;
+      border: 1.5px solid var(--tan);
+      transition: all 0.2s; display: inline-block;
+    }
+    .btn-ghost:hover { border-color: var(--brown); background: var(--warm-white); }
+
+    .hero-stats {
+      display: flex; gap: 40px;
+      padding-top: 40px; margin-top: 40px;
+      border-top: 1px solid var(--border);
+    }
+    .stat-val {
+      font-family: var(--font-b);
+      font-size: 30px; font-weight: 600;
+      color: var(--espresso); letter-spacing: -0.01em;
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 12px; color: var(--muted);
+      letter-spacing: 0.04em; margin-top: 4px;
+    }
+
+    /* ── HERO RIGHT ── */
+    .hero-right {
+      background: var(--espresso);
+      position: relative; overflow: hidden;
+      animation: fadeIn 1s ease 0.3s both;
+    }
+    .hero-logo-slot {
+      width: 100%; max-width: 400px;
+      margin-bottom: 36px;
+      display: flex; justify-content: center;
+    }
+    .hero-logo-placeholder {
+      display: inline-block;
+    }
+    .hero-logo-placeholder svg {
+      display: block;
+    }
+    .hero-right-content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 56px 48px;
+      text-align: center;
+    }
+    /* ── SERVICE AREA PANEL ── */
+    .hero-rings {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .ring {
+      position: absolute; border-radius: 50%;
+      border: 1px solid rgba(90,158,111,0.09);
+      transform: translate(-50%, -50%);
+    }
+    .ring-1 { width: 180px; height: 180px; }
+    .ring-2 { width: 340px; height: 340px; }
+    .ring-3 { width: 500px; height: 500px; border-color: rgba(90,158,111,0.05); }
+    .ring-4 { width: 680px; height: 680px; border-color: rgba(90,158,111,0.03); }
+    .sa-panel { width: 100%; max-width: 400px; position: relative; }
+    .sa-eyebrow {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--tan);
+      margin-bottom: 16px;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .sa-eyebrow::before {
+      content: ''; display: block;
+      width: 20px; height: 1.5px; background: var(--tan);
+    }
+    .sa-eyebrow::after {
+      content: ''; display: block;
+      width: 20px; height: 1.5px; background: var(--tan);
+    }
+    .sa-headline {
+      font-family: var(--font-d);
+      font-size: 34px; font-weight: 700;
+      color: #fff; line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    .sa-sub {
+      font-size: 13px; color: rgba(255,255,255,0.4);
+      margin-bottom: 28px; line-height: 1.6;
+    }
+    .sa-tags {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+    .sa-tag {
+      font-size: 12px; font-weight: 500;
+      color: rgba(255,255,255,0.65);
+      background: rgba(90,158,111,0.1);
+      border: 1px solid rgba(90,158,111,0.2);
+      border-radius: 20px;
+      padding: 5px 13px;
+    }
+    .sa-tag--featured {
+      background: rgba(90,158,111,0.22);
+      border-color: rgba(90,158,111,0.45);
+      color: var(--tan); font-weight: 600;
+    }
+    .sa-divider {
+      height: 1px; background: rgba(90,158,111,0.15);
+      margin-bottom: 20px;
+    }
+    .sa-note {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      font-size: 13px; color: rgba(255,255,255,0.45);
+      line-height: 1.5;
+    }
+    .sa-note svg { width: 16px; height: 16px; stroke: var(--tan); flex-shrink: 0; }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 100px 0; }
+    .section-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--brown);
+      margin-bottom: 14px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-label::before {
+      content: ''; display: block;
+      width: 24px; height: 1.5px; background: var(--tan);
+    }
+    h2 {
+      font-family: var(--font-d);
+      font-size: clamp(30px, 4vw, 48px);
+      letter-spacing: -0.02em;
+      color: var(--espresso); line-height: 1.1;
+      margin-bottom: 18px;
+    }
+    h2 em { font-style: italic; color: var(--brown); }
+    .section-sub {
+      font-size: 17px; color: var(--muted);
+      font-weight: 300; max-width: 520px; line-height: 1.7;
+    }
+
+    /* ── SERVICES ── */
+    .services { background: var(--surface); }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px; margin-top: 56px;
+    }
+    .service-card {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+      border-color: var(--tan);
+    }
+    .service-card-icon {
+      margin-bottom: 16px; display: block;
+    }
+    .service-card-icon svg {
+      width: 32px; height: 32px;
+      stroke: var(--brown);
+    }
+    .service-card h3 {
+      font-family: var(--font-d);
+      font-size: 22px; font-weight: 700;
+      color: var(--espresso); margin-bottom: 10px;
+    }
+    .service-card p {
+      font-size: 14px; color: var(--muted); line-height: 1.7;
+    }
+
+    /* ── ABOUT ── */
+    .about { background: var(--warm-white); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 72px; align-items: center; margin-top: 52px;
+    }
+    .about-text p {
+      font-size: 16px; color: var(--muted);
+      line-height: 1.8; margin-bottom: 20px;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-text strong { color: var(--espresso); font-weight: 600; }
+    .about-card {
+      background: var(--espresso);
+      border-radius: var(--radius);
+      padding: 48px;
+      position: relative; overflow: hidden;
+    }
+    .about-card-pattern {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: radial-gradient(circle at 20% 80%, rgba(90,158,111,0.15) 0%, transparent 60%);
+    }
+    .about-card-name {
+      font-family: var(--font-d);
+      font-size: 30px; font-weight: 700;
+      color: #fff; margin-bottom: 4px;
+    }
+    .about-card-title {
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--tan); margin-bottom: 28px;
+    }
+    .about-card-details { list-style: none; }
+    .about-card-details li {
+      font-size: 14px; color: rgba(255,255,255,0.7);
+      margin-bottom: 12px; display: flex; align-items: center; gap: 10px;
+    }
+    .about-card-details li::before {
+      content: '-'; color: var(--tan); font-weight: 600; flex-shrink: 0;
+    }
+    .about-card-contact {
+      margin-top: 28px; padding-top: 28px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .about-card-contact a {
+      display: block; font-size: 14px;
+      color: var(--tan); text-decoration: none;
+      margin-bottom: 8px; transition: color 0.2s;
+    }
+    .about-card-contact a:hover { color: #fff; }
+
+    /* ── GALLERY ── */
+    .gallery { background: var(--surface); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 240px 240px;
+      gap: 16px;
+      margin-top: 52px;
+    }
+    .gallery-item {
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+    }
+    .gallery-item:first-child {
+      grid-column: span 2;
+    }
+    .gallery-item-inner {
+      width: 100%; height: 100%;
+      display: flex; align-items: flex-end;
+      padding: 20px;
+      position: relative;
+    }
+    .gallery-item-label {
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: #fff; background: rgba(21,45,30,0.65);
+      backdrop-filter: blur(4px);
+      padding: 6px 14px; border-radius: 20px;
+      position: relative; z-index: 1;
+    }
+    /* Placeholder photo backgrounds using CSS gradients */
+    .g1 .gallery-item-inner { background: linear-gradient(135deg, #2d6a4f 0%, #52b788 40%, #95d5b2 100%); }
+    .g2 .gallery-item-inner { background: linear-gradient(135deg, #1b4d38 0%, #2d6a4f 50%, #40916c 100%); }
+    .g3 .gallery-item-inner { background: linear-gradient(135deg, #52b788 0%, #74c69d 50%, #b7e4c7 100%); }
+    .g4 .gallery-item-inner { background: linear-gradient(135deg, #40916c 0%, #52b788 60%, #95d5b2 100%); }
+    .g5 .gallery-item-inner { background: linear-gradient(135deg, #1b4d38 0%, #40916c 40%, #74c69d 100%); }
+    /* Texture overlays */
+    .gallery-item-inner::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.12) 0%, transparent 50%),
+        radial-gradient(circle at 70% 70%, rgba(0,0,0,0.2) 0%, transparent 50%);
+    }
+    .gallery-note {
+      text-align: center; margin-top: 24px;
+      font-size: 14px; color: var(--muted); font-style: italic;
+    }
+
+    /* ── CONTACT ── */
+    .contact { background: var(--warm-white); }
+    .contact-top { margin-bottom: 48px; }
+    .contact-direct {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 40px;
+      font-size: 16px; font-weight: 500;
+      color: var(--muted);
+    }
+    .contact-direct a {
+      color: var(--brown); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-direct a:hover { color: var(--brown-d); text-decoration: underline; }
+    .contact-layout {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 28px; align-items: stretch;
+    }
+    .contact-info-card {
+      background: var(--espresso);
+      border-radius: var(--radius);
+      padding: 44px 40px;
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .contact-info-card::before {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: radial-gradient(circle at 90% 10%, rgba(90,158,111,0.18) 0%, transparent 60%);
+    }
+    .contact-info-card h3 {
+      font-family: var(--font-d);
+      font-size: 28px; font-weight: 700;
+      color: #fff; margin-bottom: 12px;
+    }
+    .contact-info-card p {
+      font-size: 15px; color: rgba(255,255,255,0.55);
+      font-weight: 300; line-height: 1.7; margin-bottom: 32px;
+    }
+    .contact-info-list {
+      list-style: none; margin-bottom: 0;
+      flex: 1; display: flex; flex-direction: column; justify-content: flex-start; gap: 75px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 28px 0 0;
+    }
+    .contact-info-list li {
+      font-size: 17px; color: rgba(255,255,255,0.8);
+      display: flex; align-items: center; gap: 18px;
+      line-height: 1.4;
+    }
+    .contact-info-list li .ci-icon {
+      width: 46px; height: 46px; flex-shrink: 0;
+      background: rgba(90,158,111,0.18);
+      border: 1px solid rgba(90,158,111,0.3);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .contact-info-list li .ci-icon svg {
+      width: 22px; height: 22px;
+      stroke: var(--tan);
+    }
+    .contact-info-list li strong {
+      display: block; color: #fff; font-size: 12px;
+      font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .contact-info-list li a {
+      color: var(--tan); text-decoration: none;
+    }
+    .contact-info-list li a:hover { color: #fff; }
+    .contact-sa {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 28px;
+      font-size: 13px; color: rgba(255,255,255,0.4);
+      line-height: 1.6;
+    }
+
+    /* ── FORM ── */
+    .form-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 44px 40px;
+      box-shadow: var(--shadow);
+    }
+    .form-title {
+      font-family: var(--font-d);
+      font-size: 26px; font-weight: 700;
+      color: var(--espresso); margin-bottom: 6px;
+    }
+    .form-sub { font-size: 14px; color: var(--muted); margin-bottom: 28px; }
+    .field { margin-bottom: 18px; }
+    .field label {
+      display: block; font-size: 12px; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 8px;
+    }
+    .field input, .field select, .field textarea {
+      width: 100%; padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-b); font-size: 15px;
+      color: var(--text); background: var(--cream);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none; -webkit-appearance: none;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus {
+      border-color: var(--brown);
+      box-shadow: 0 0 0 3px rgba(45,106,79,0.1);
+      background: #fff;
+    }
+    .field textarea { height: 100px; resize: vertical; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-submit {
+      width: 100%; padding: 15px;
+      background: var(--brown); color: #fff;
+      border: none; border-radius: var(--radius-sm);
+      font-family: var(--font-b); font-size: 13px;
+      font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      margin-top: 6px;
+    }
+    .form-submit:hover { background: var(--brown-d); transform: translateY(-1px); }
+    .form-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .form-note { font-size: 12px; color: var(--muted); text-align: center; margin-top: 12px; }
+
+    .form-success { display: none; text-align: center; padding: 40px 20px; }
+    .form-success.show { display: block; }
+    .success-icon {
+      width: 60px; height: 60px; margin: 0 auto 20px;
+      background: var(--gold-lt); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .success-icon svg {
+      width: 28px; height: 28px;
+      stroke: var(--gold);
+    }
+    .form-success h3 {
+      font-family: var(--font-d); font-size: 26px;
+      color: var(--espresso); margin-bottom: 10px;
+    }
+    .form-success p { font-size: 15px; color: var(--muted); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--espresso); color: rgba(255,255,255,0.45);
+      padding: 40px 28px; text-align: center; font-size: 14px;
+    }
+    footer strong { color: rgba(255,255,255,0.8); }
+    footer a { color: var(--tan); text-decoration: none; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      section { padding: 64px 0; }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 56px 28px 40px; }
+      .hero-right { height: auto; width: 100%; }
+      .hero-right-content { position: relative; inset: unset; padding: 40px 24px; }
+      .hero-card { padding: 24px 20px; max-width: 100%; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 32px; }
+      .about-card { padding: 32px 28px; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 200px 200px 200px; }
+      .gallery-item:first-child { grid-column: span 2; }
+      .contact-layout { grid-template-columns: 1fr; }
+      .nav-links, .nav-cta, .nav-contact { display: none; }
+      .nav-toggle { display: flex; }
+    }
+    @media (max-width: 600px) {
+      section { padding: 48px 0; }
+      .hero-left { padding: 44px 20px 32px; }
+      .hero-right-content { padding: 32px 20px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+      .gallery-item { height: 200px; }
+      .gallery-item:first-child { grid-column: span 1; }
+      .field-row { grid-template-columns: 1fr; }
+      .form-card { padding: 28px 20px; }
+      .contact-info-card { padding: 32px 24px; }
+      .hero-stats { flex-wrap: wrap; gap: 20px 32px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      M&amp;G <span>Landscape</span>
+      <small>International Design Corp.</small>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="tel:5550001234" class="nav-contact">(555) 000-1234</a>
+    <a href="#contact" class="nav-cta">Get a quote</a>
+    <button class="nav-toggle" onclick="toggleNav(this)" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Landscape Design &amp; Maintenance</div>
+    <h1>Beautiful grounds,<br />expertly designed<br />and maintained.</h1>
+    <p class="hero-sub">
+      M&amp;G International Landscape Design Corp. transforms outdoor spaces into stunning, functional environments — for homes and businesses across the greater Chicago area.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Request a free quote</a>
+      <a href="#services" class="btn-ghost">Our services</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-val">15+</div>
+        <div class="stat-label">Years in business</div>
+      </div>
+      <div>
+        <div class="stat-val">500+</div>
+        <div class="stat-label">Projects completed</div>
+      </div>
+      <div>
+        <div class="stat-val">Free</div>
+        <div class="stat-label">On-site estimates</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+<div class="hero-right-content">
+      <div class="hero-logo-slot">
+        <div class="hero-logo-placeholder">
+          <svg viewBox="0 0 220 72" width="220" height="72" xmlns="http://www.w3.org/2000/svg">
+            <text x="110" y="48" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="48" font-weight="700" fill="#ffffff" letter-spacing="-1">M&amp;G</text>
+            <text x="110" y="66" text-anchor="middle" font-family="'Jost', system-ui, sans-serif" font-size="10.5" font-weight="500" fill="rgba(90,158,111,0.9)" letter-spacing="4">LANDSCAPE DESIGN</text>
+          </svg>
+        </div>
+      </div>
+      <div class="sa-panel">
+        <div class="sa-eyebrow">Service Area</div>
+        <div class="sa-headline">Greater Chicago<br />&amp; Suburbs</div>
+        <div class="sa-sub">Serving homeowners and businesses across the region — residential and commercial.</div>
+
+        <div class="sa-tags">
+          <span class="sa-tag sa-tag--featured">Chicago, IL</span>
+          <span class="sa-tag">Evanston</span>
+          <span class="sa-tag">Oak Park</span>
+          <span class="sa-tag">Naperville</span>
+          <span class="sa-tag">Schaumburg</span>
+          <span class="sa-tag">Arlington Heights</span>
+          <span class="sa-tag">Wheaton</span>
+          <span class="sa-tag">Downers Grove</span>
+          <span class="sa-tag">Elmhurst</span>
+          <span class="sa-tag">Lombard</span>
+          <span class="sa-tag">Orland Park</span>
+          <span class="sa-tag">Aurora</span>
+          <span class="sa-tag">+ surrounding areas</span>
+        </div>
+
+        <div class="sa-divider"></div>
+        <div class="sa-note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Free on-site estimates — no travel fee within the service area
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES ── -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-label">What we offer</div>
+    <h2>Full-service landscaping,<br />start to finish.</h2>
+    <p class="section-sub">From initial design to ongoing care, we handle every aspect of your outdoor space so you don't have to.</p>
+
+    <div class="services-grid">
+
+      <div class="service-card">
+        <span class="service-card-icon">
+          <!-- Leaf: landscape design -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M12 12C12 7 8 4.5 3 3.5 3.5 8.5 7 12 12 12Z"/><path d="M12 12C12 7 16 4.5 21 3.5 20.5 8.5 17 12 12 12Z"/></svg>
+        </span>
+        <h3>Landscape Design</h3>
+        <p>We create custom landscape plans that complement your property's architecture and reflect your personal style — plants, layout, lighting, and more.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-card-icon">
+          <!-- Scissors: lawn maintenance -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
+        </span>
+        <h3>Lawn Maintenance</h3>
+        <p>Regular mowing, edging, fertilization, and aeration to keep your lawn healthy and looking its best throughout every season.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-card-icon">
+          <!-- Layers: hardscaping -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 8 12 14 2 8 12 2"/><polyline points="2 14 12 20 22 14"/><polyline points="2 11 12 17 22 11"/></svg>
+        </span>
+        <h3>Hardscaping</h3>
+        <p>Patios, walkways, retaining walls, fire pits, and outdoor living spaces — built to last and designed to impress.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-card-icon">
+          <!-- Droplet: irrigation -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+        </span>
+        <h3>Irrigation Systems</h3>
+        <p>Efficient sprinkler system installation, repair, and seasonal startup and winterization to protect your investment year-round.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-card-icon">
+          <!-- Sun: seasonal cleanup -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </span>
+        <h3>Seasonal Cleanup</h3>
+        <p>Spring and fall cleanups including leaf removal, bed edging, mulching, and debris hauling to prep your yard for every season.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-card-icon">
+          <!-- Building: commercial -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="1" y1="22" x2="23" y2="22"/><rect x="5" y="3" width="14" height="19"/><rect x="9" y="16" width="6" height="6"/><path d="M9 7h2"/><path d="M13 7h2"/><path d="M9 11h2"/><path d="M13 11h2"/></svg>
+        </span>
+        <h3>Commercial Landscaping</h3>
+        <p>Ongoing maintenance contracts for commercial properties, HOAs, and multi-family developments — reliable, professional, and discreet.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="section-label">Our story</div>
+    <h2>Family owned, neighbor trusted,<br />Chicago proud.</h2>
+
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          M&amp;G was started by our family right here in Chicago — <strong>two brothers with a truck, a passion for the outdoors, and a commitment to doing honest work at a fair price.</strong> Over 15 years later, we're still family-owned and operated, and we still show up the same way we did on day one.
+        </p>
+        <p>
+          We know our customers by name. We show up on time, clean up after ourselves, and treat every yard like it's our own. Whether it's a small front lawn or a full backyard transformation, you'll always deal directly with us — not a call center, not a subcontractor.
+        </p>
+        <p>
+          Our reputation is everything to us. When we finish a job, we want you to be proud to show it off to your neighbors — and we want those neighbors to call us next.
+        </p>
+      </div>
+
+      <div class="about-card">
+        <div class="about-card-pattern"></div>
+        <div class="about-card-name">M&amp;G Landscape</div>
+        <div class="about-card-title">Family Owned &amp; Operated Since 2009</div>
+        <ul class="about-card-details">
+          <li>Locally owned — no franchises, no middlemen</li>
+          <li>You work directly with the owners</li>
+          <li>Licensed &amp; insured in Illinois</li>
+          <li>500+ happy customers in the Chicago area</li>
+          <li>Free on-site estimates, no pressure</li>
+        </ul>
+        <div class="about-card-contact">
+          <a href="tel:5550001234">(555) 000-1234</a>
+          <a href="mailto:info@mglandscape.com">info@mglandscape.com</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── GALLERY ── -->
+<section class="gallery" id="gallery">
+  <div class="container">
+    <div class="section-label">Our work</div>
+    <h2>Projects we're proud of.</h2>
+    <p class="section-sub">Every landscape tells a story. Here's a look at some of the outdoor spaces we've had the privilege of creating and maintaining.</p>
+
+    <div class="gallery-grid">
+      <div class="gallery-item g1">
+        <div class="gallery-item-inner">
+          <span class="gallery-item-label">Full Residential Design — Lincoln Park</span>
+        </div>
+      </div>
+      <div class="gallery-item g2">
+        <div class="gallery-item-inner">
+          <span class="gallery-item-label">Patio &amp; Hardscape</span>
+        </div>
+      </div>
+      <div class="gallery-item g3">
+        <div class="gallery-item-inner">
+          <span class="gallery-item-label">Commercial Grounds</span>
+        </div>
+      </div>
+      <div class="gallery-item g4">
+        <div class="gallery-item-inner">
+          <span class="gallery-item-label">Garden Design</span>
+        </div>
+      </div>
+      <div class="gallery-item g5">
+        <div class="gallery-item-inner">
+          <span class="gallery-item-label">Irrigation Install</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="gallery-note">Photos coming soon — we're building out our portfolio page.</p>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-top">
+      <div class="section-label">Get in touch</div>
+      <h2>Ready to transform<br />your outdoor space?</h2>
+      <p class="section-sub">Fill out the form and we'll reach out within 24 hours to schedule your free on-site estimate.</p>
+    </div>
+
+    <div class="contact-direct">
+      <a href="tel:5550001234">(555) 000-1234</a>
+      <span>&middot;</span>
+      <a href="mailto:info@mglandscape.com">info@mglandscape.com</a>
+    </div>
+
+    <div class="contact-layout">
+
+      <!-- ── CONTACT INFO ── -->
+      <div class="contact-info-card">
+        <h3>Let's talk about your project</h3>
+        <p>Whether you have a clear vision or just know you want something better, we'll walk through your space, understand your goals, and put together a plan that fits your budget.</p>
+
+        <ul class="contact-info-list">
+          <li>
+            <span class="ci-icon">
+              <!-- Phone -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.72 12 19.79 19.79 0 0 1 1.7 3.35 2 2 0 0 1 3.66 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.16 6.16l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </span>
+            <div>
+              <strong>Call or Text</strong>
+              <a href="tel:5550001234">(555) 000-1234</a>
+            </div>
+          </li>
+          <li>
+            <span class="ci-icon">
+              <!-- Mail -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </span>
+            <div>
+              <strong>Email</strong>
+              <a href="mailto:info@mglandscape.com">info@mglandscape.com</a>
+            </div>
+          </li>
+          <li>
+            <span class="ci-icon">
+              <!-- Map Pin -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </span>
+            <div>
+              <strong>Service Area</strong>
+              Chicago &amp; surrounding suburbs
+            </div>
+          </li>
+          <li>
+            <span class="ci-icon">
+              <!-- Clock -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </span>
+            <div>
+              <strong>Hours</strong>
+              Mon–Sat, 7am–6pm
+            </div>
+          </li>
+        </ul>
+
+        <div class="contact-sa">
+          Free on-site estimates &middot; Fully licensed &amp; insured &middot; Residential &amp; commercial
+        </div>
+      </div>
+
+      <!-- ── FORM ── -->
+      <div class="form-card">
+        <div id="form-body">
+          <div class="form-title">Request a free estimate</div>
+          <div class="form-sub">Tell us about your property and what you're looking to do — we'll take it from there.</div>
+
+          <div class="field-row">
+            <div class="field">
+              <label>Your name *</label>
+              <input type="text" id="f-name" placeholder="Jane Smith" required />
+            </div>
+            <div class="field">
+              <label>Phone *</label>
+              <input type="tel" id="f-phone" placeholder="(555) 000-0000" required />
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Email *</label>
+            <input type="email" id="f-email" placeholder="jane@email.com" required />
+          </div>
+
+          <div class="field">
+            <label>Address / Service location</label>
+            <input type="text" id="f-address" placeholder="123 Main St, Chicago, IL" />
+          </div>
+
+          <div class="field">
+            <label>Service you're interested in</label>
+            <select id="f-service">
+              <option value="">Select a service...</option>
+              <option>Landscape Design</option>
+              <option>Lawn Maintenance</option>
+              <option>Hardscaping (Patio, Walkways, etc.)</option>
+              <option>Irrigation System</option>
+              <option>Seasonal Cleanup</option>
+              <option>Commercial Landscaping</option>
+              <option>Not sure — need a consultation</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Tell us about your project</label>
+            <textarea id="f-notes" placeholder="Describe your outdoor space and what you'd like to change or improve..."></textarea>
+          </div>
+
+          <!-- SMS CONSENT -->
+          <div class="field" style="display:flex;align-items:flex-start;gap:10px;margin-bottom:18px">
+            <input
+              type="checkbox"
+              id="f-sms-consent"
+              style="margin-top:3px;flex-shrink:0;width:16px;height:16px;min-width:16px;accent-color:var(--brown);cursor:pointer;-webkit-appearance:checkbox;appearance:checkbox;padding:0;border:none;background:none;"
+            />
+            <label for="f-sms-consent" style="font-size:12px;color:var(--muted);text-transform:none;letter-spacing:0;font-weight:400;cursor:pointer">
+              By checking this box, I consent to receive text messages from M&amp;G International Landscape Design Corp. at the number provided. Messages may include estimate confirmations, appointment reminders, project updates, and follow-ups related to my inquiry. Message frequency may vary. Message and data rates may apply. Reply STOP to opt out at any time or HELP for assistance.
+            </label>
+          </div>
+          <p id="sms-consent-error" style="display:none;font-size:12px;color:#c0392b;margin-bottom:12px;">Please check the box above to continue.</p>
+
+          <button class="form-submit" id="submit-btn" onclick="handleSubmit()">
+            Send my request &rarr;
+          </button>
+          <p class="form-note">No commitment. We'll be in touch within 24 hours.</p>
+        </div>
+
+        <div class="form-success" id="form-success">
+          <div class="success-icon">
+            <!-- Checkmark -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h3>Thanks, <span id="success-name"></span>!</h3>
+          <p>We received your request and will reach out within 24 hours to schedule your free on-site estimate.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <strong>M&amp;G International Landscape Design Corp.</strong><br />
+  <a href="tel:5550001234">(555) 000-1234</a> &middot; <a href="mailto:info@mglandscape.com">info@mglandscape.com</a><br />
+  <span style="font-size:12px;margin-top:8px;display:block">&copy; 2026 M&amp;G International Landscape Design Corp. All rights reserved. &middot; Chicago, IL</span>
+</footer>
+
+<script>
+  async function handleSubmit() {
+    const name    = document.getElementById('f-name').value.trim();
+    const phone   = document.getElementById('f-phone').value.trim();
+    const email   = document.getElementById('f-email').value.trim();
+    const address = document.getElementById('f-address').value.trim();
+    const service = document.getElementById('f-service').value;
+    const notes   = document.getElementById('f-notes').value.trim();
+    const smsConsent = document.getElementById('f-sms-consent').checked;
+
+    if (!name || !phone || !email) {
+      alert('Please fill in your name, phone, and email.');
+      return;
+    }
+    if (!smsConsent) {
+      document.getElementById('sms-consent-error').style.display = 'block';
+      document.getElementById('f-sms-consent').focus();
+      return;
+    }
+    document.getElementById('sms-consent-error').style.display = 'none';
+
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    // Demo mode — no webhook, just show success
+    setTimeout(function() {
+      document.getElementById('success-name').textContent = name.split(' ')[0];
+      document.getElementById('form-body').style.display = 'none';
+      document.getElementById('form-success').classList.add('show');
+    }, 800);
+  }
+
+  // ── MOBILE NAV
+  function closeNav() {
+    const btn   = document.querySelector('.nav-toggle');
+    const links = document.querySelector('.nav-links');
+    const cta   = document.querySelector('.nav-cta');
+    const contact = document.querySelector('.nav-contact');
+    if (btn)     btn.classList.remove('open');
+    if (links)   links.style.cssText = '';
+    if (cta)     cta.style.cssText   = '';
+    if (contact) contact.style.cssText = '';
+  }
+
+  function toggleNav(btn) {
+    const isOpen = btn.classList.contains('open');
+    if (isOpen) {
+      closeNav();
+    } else {
+      btn.classList.add('open');
+      const links   = document.querySelector('.nav-links');
+      const cta     = document.querySelector('.nav-cta');
+      const contact = document.querySelector('.nav-contact');
+      if (links)   links.style.cssText   = 'display:flex;flex-direction:column;position:fixed;top:66px;left:0;right:0;background:var(--cream);padding:20px 28px 28px;gap:16px;border-bottom:1px solid var(--border);z-index:99';
+      if (cta)     cta.style.cssText     = 'display:block;position:fixed;bottom:24px;left:28px;right:28px;text-align:center;z-index:99';
+      if (contact) contact.style.cssText = 'display:none';
+    }
+  }
+
+  document.querySelectorAll('.nav-links a').forEach(function(a) {
+    a.addEventListener('click', closeNav);
+  });
+
+  document.addEventListener('click', function(e) {
+    const nav = document.querySelector('nav');
+    if (nav && !nav.contains(e.target)) closeNav();
+  });
+</script>
+
+</body>
+</html>
