@@ -54,3 +54,21 @@ For contact info lists inside a dark card:
 - Small business / family-owned sites: write copy that feels personal and local, not corporate
 - Avoid italicized `<em>` wording in headings — it reads as excessive
 - About sections should reference specific founding story details, direct owner relationships, and local pride
+
+## Footer Attribution & Legal
+
+Every customer website footer must include:
+1. A subtle "Website created by [Bow Lane Leads](https://bowlaneleads.com/)" attribution line
+2. Links to the site's Privacy Policy and Terms of Service pages
+
+Footer attribution markup pattern:
+```html
+<div style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.06);font-size:12px;">
+  <a href="./[demo-slug]-privacy.html">Privacy Policy</a> &middot; <a href="./[demo-slug]-terms.html">Terms of Service</a>
+</div>
+<div style="margin-top:8px;font-size:11px;color:rgba(255,255,255,0.2);">
+  Website created by <a href="https://bowlaneleads.com/" target="_blank" rel="noopener">Bow Lane Leads</a>
+</div>
+```
+
+Each customer site needs its own `[demo-slug]-privacy.html` and `[demo-slug]-terms.html` pages styled to match the site's theme.
