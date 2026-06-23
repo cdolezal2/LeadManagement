@@ -55,6 +55,10 @@ For contact info lists inside a dark card:
 - Avoid italicized `<em>` wording in headings — it reads as excessive
 - About sections should reference specific founding story details, direct owner relationships, and local pride
 
+## Browser Testing
+
+Always use the Playwright CLI tool for browser testing and screenshots — never the MCP browser tools.
+
 ## Footer Attribution & Legal
 
 Every customer website footer must include:

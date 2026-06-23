@@ -614,7 +614,8 @@
       .gallery-grid-3 { grid-template-columns: 1fr 1fr; }
       .gallery-grid-3 .gallery-item:last-child { grid-column: span 2; }
       .contact-layout { grid-template-columns: 1fr; }
-      .nav-links, .nav-cta, .nav-contact { display: none; }
+      .nav-links, .nav-cta { display: none; }
+      .nav-contact { display: block; font-size: 12px; padding: 7px 14px; }
       .nav-toggle { display: flex; }
     }
     @media (max-width: 600px) {
@@ -629,6 +630,9 @@
       .field-row { grid-template-columns: 1fr; }
       .form-card { padding: 28px 20px; }
       .contact-info-card { padding: 32px 24px; }
+      .contact-top { margin-bottom: 32px; }
+      .contact-direct { flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 24px; }
+      .contact-info-list { gap: 16px; }
       .hero-stats { flex-wrap: wrap; gap: 20px 32px; }
       .nav-logo-text { display: none; }
     }
@@ -676,10 +680,6 @@
       <div>
         <div class="stat-val">20+</div>
         <div class="stat-label">Years of experience</div>
-      </div>
-      <div>
-        <div class="stat-val">IL &amp; WI</div>
-        <div class="stat-label">States served</div>
       </div>
       <div>
         <div class="stat-val">Free</div>
@@ -1078,33 +1078,68 @@
   }
 
   function closeNav() {
-    var btn     = document.querySelector('.nav-toggle');
-    var links   = document.querySelector('.nav-links');
-    var cta     = document.querySelector('.nav-cta');
-    var contact = document.querySelector('.nav-contact');
-    if (btn)     btn.classList.remove('open');
-    if (links)   links.style.cssText = '';
-    if (cta)     cta.style.cssText   = '';
-    if (contact) contact.style.cssText = '';
+    var btn      = document.querySelector('.nav-toggle');
+    var nav      = document.querySelector('nav');
+    var navInner = document.querySelector('.nav-inner');
+    var logo     = document.querySelector('.nav-logo');
+    var contact  = document.querySelector('.nav-contact');
+    var links    = document.querySelector('.nav-links');
+    var cta      = document.querySelector('.nav-cta');
+    if (btn)      btn.classList.remove('open');
+    nav.style.background = '';
+    nav.style.borderBottomColor = '';
+    if (navInner) navInner.style.padding = '';
+    if (logo)     logo.style.display = '';
+    if (contact)  contact.style.cssText = '';
+    if (btn)      btn.style.display = '';
+    if (cta)      cta.style.cssText = '';
+    if (links) {
+      links.style.cssText = '';
+      document.querySelectorAll('.nav-links a').forEach(function(a) { a.style.cssText = ''; });
+    }
   }
 
   function toggleNav(btn) {
     var isOpen = btn.classList.contains('open');
-    if (isOpen) {
-      closeNav();
-    } else {
-      btn.classList.add('open');
-      var links   = document.querySelector('.nav-links');
-      var cta     = document.querySelector('.nav-cta');
-      var contact = document.querySelector('.nav-contact');
-      if (links)   links.style.cssText   = 'display:flex;flex-direction:column;position:fixed;top:66px;left:0;right:0;background:var(--dark);padding:20px 28px 28px;gap:16px;border-bottom:1px solid var(--border);z-index:99';
-      if (cta)     cta.style.cssText     = 'display:block;position:fixed;bottom:24px;left:28px;right:28px;text-align:center;z-index:99';
-      if (contact) contact.style.cssText = 'display:none';
+    if (isOpen) { closeNav(); return; }
+
+    btn.classList.add('open');
+    var nav      = document.querySelector('nav');
+    var navInner = document.querySelector('.nav-inner');
+    var logo     = document.querySelector('.nav-logo');
+    var contact  = document.querySelector('.nav-contact');
+    var links    = document.querySelector('.nav-links');
+    var cta      = document.querySelector('.nav-cta');
+
+    // White nav bar
+    nav.style.background = '#ffffff';
+    nav.style.borderBottomColor = 'rgba(0,0,0,0.08)';
+    navInner.style.padding = '0';
+
+    // Hide logo, phone pill, hamburger
+    if (logo)    logo.style.display = 'none';
+    if (contact) contact.style.display = 'none';
+    btn.style.display = 'none';
+
+    // Get a Quote fills the nav bar as header
+    if (cta) cta.style.cssText = 'display:flex;align-items:center;justify-content:center;width:100%;height:66px;background:#ffffff;color:#0a0a0a;font-size:14px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(0,0,0,0.07);';
+
+    // White dropdown links with black text
+    if (links) {
+      links.style.cssText = 'display:flex;flex-direction:column;position:fixed;top:66px;left:0;right:0;background:#ffffff;border-bottom:2px solid rgba(0,0,0,0.08);z-index:99;';
+      document.querySelectorAll('.nav-links a').forEach(function(a) {
+        a.style.cssText = 'color:#0a0a0a;padding:17px 28px;font-size:14px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;border-bottom:1px solid rgba(0,0,0,0.05);display:block;';
+      });
     }
   }
 
+  // Close on nav link or CTA click
   document.querySelectorAll('.nav-links a').forEach(function(a) {
     a.addEventListener('click', closeNav);
+  });
+  var navCta = document.querySelector('.nav-cta');
+  if (navCta) navCta.addEventListener('click', function() {
+    if (document.querySelector('.nav-toggle.open')) closeNav();
   });
 
   document.addEventListener('click', function(e) {
