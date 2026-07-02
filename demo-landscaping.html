@@ -1038,12 +1038,7 @@
       alert('Please fill in your name, phone, and email.');
       return;
     }
-    if (!smsConsent) {
-      document.getElementById('sms-consent-error').style.display = 'block';
-      document.getElementById('f-sms-consent').focus();
-      return;
-    }
-    document.getElementById('sms-consent-error').style.display = 'none';
+    // SMS consent is optional — do not block submission
 
     const btn = document.getElementById('submit-btn');
     btn.disabled = true;

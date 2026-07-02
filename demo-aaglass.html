@@ -1051,7 +1051,7 @@
               By checking this box, I consent to receive text messages from AA Glass LLC at the number provided. Messages may include estimate confirmations, appointment reminders, and project updates. Message frequency may vary. Message and data rates may apply. Reply STOP to opt out at any time or HELP for assistance.
             </label>
           </div>
-          <p id="sms-consent-error" style="display:none;font-size:12px;color:#e05555;margin-bottom:12px;">Please check the box above to continue.</p>
+          <p id="sms-consent-error" style="display:none;font-size:12px;color:#e05555;margin-bottom:12px;"></p>
 
           <button class="form-submit" id="submit-btn" onclick="handleSubmit()">
             Send my request &rarr;
@@ -1096,12 +1096,7 @@
       alert('Please fill in your name, phone, and email.');
       return;
     }
-    if (!smsConsent) {
-      document.getElementById('sms-consent-error').style.display = 'block';
-      document.getElementById('f-sms-consent').focus();
-      return;
-    }
-    document.getElementById('sms-consent-error').style.display = 'none';
+    // SMS consent is optional — do not block submission
 
     var btn = document.getElementById('submit-btn');
     btn.disabled = true;
