@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Activate — Bow Lane Leads Voicemail to Text</title>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231a2f50'/><text x='50%' y='54%' font-family='Georgia,serif' font-size='13' font-weight='bold' fill='%23f5edd8' text-anchor='middle' dominant-baseline='middle'>BL</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --cream:    #faf7f2;
+      --warm:     #f5f0e8;
+      --blue:     #3d72a8;
+      --blue-d:   #2a5589;
+      --navy:     #1a2f50;
+      --text:     #1c2d45;
+      --muted:    #5c7898;
+      --border:   #ccd8ea;
+      --gold:     #b8922a;
+      --gold-lt:  #f5edd8;
+      --green:    #2a7a4f;
+      --green-lt: #e8f5ee;
+      --surface:  #ffffff;
+      --font-d:   'Cormorant Garamond', Georgia, serif;
+      --font-b:   'Jost', system-ui, sans-serif;
+      --radius:   10px;
+      --max-w:    580px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-b);
+      background: var(--cream);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 28px;
+    }
+    .nav-inner {
+      max-width: 1040px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 62px;
+    }
+    .nav-logo {
+      font-family: var(--font-d);
+      font-size: 19px; font-weight: 700;
+      color: var(--navy); text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .nav-logo span { color: var(--blue); }
+    .nav-back {
+      font-size: 13px; font-weight: 500;
+      color: var(--muted); text-decoration: none;
+      display: flex; align-items: center; gap: 5px;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--navy); }
+    .nav-back svg { width: 14px; height: 14px; stroke: currentColor; }
+
+    /* PROGRESS */
+    .progress-bar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 28px;
+    }
+    .progress-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: flex; align-items: center; gap: 0;
+    }
+    .step-dot {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .step-dot.active { color: var(--blue); }
+    .step-dot.done { color: var(--navy); }
+    .step-dot .dot {
+      width: 24px; height: 24px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700;
+      background: var(--border); color: var(--muted);
+      flex-shrink: 0;
+    }
+    .step-dot.active .dot { background: var(--blue); color: #fff; }
+    .step-dot.done .dot { background: var(--navy); color: #fff; }
+    .step-line {
+      flex: 1; height: 1.5px; background: var(--border);
+      margin: 0 10px;
+    }
+    .step-line.done { background: var(--navy); }
+
+    /* MAIN CONTENT */
+    .page-wrap {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 56px 28px 100px;
+    }
+
+    /* ACTIVATE STATE */
+    #activate-view { display: block; }
+    #success-view { display: none; }
+
+    .page-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--blue);
+      margin-bottom: 10px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .page-label::before {
+      content: ''; display: block;
+      width: 22px; height: 1.5px; background: var(--border);
+    }
+    h1 {
+      font-family: var(--font-d);
+      font-size: clamp(28px, 4vw, 40px);
+      letter-spacing: -0.02em; color: var(--navy);
+      line-height: 1.1; margin-bottom: 12px;
+    }
+    .page-sub {
+      font-size: 15px; font-weight: 300; color: var(--muted); line-height: 1.7;
+      margin-bottom: 40px;
+    }
+
+    /* INFO CARD */
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 32px;
+      display: flex; align-items: flex-start; gap: 14px;
+    }
+    .info-card-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      background: rgba(61,114,168,0.08);
+      border: 1px solid rgba(61,114,168,0.15);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .info-card-icon svg { width: 20px; height: 20px; stroke: var(--blue); }
+    .info-card-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 2px;
+    }
+    .info-card-val {
+      font-size: 16px; font-weight: 600; color: var(--navy);
+    }
+
+    /* STEPS */
+    .how-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .activate-steps {
+      display: flex; flex-direction: column; gap: 0;
+      margin-bottom: 32px;
+    }
+    .a-step {
+      display: flex; gap: 16px; align-items: flex-start;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .a-step:last-child { border-bottom: none; }
+    .a-step-num {
+      width: 28px; height: 28px; flex-shrink: 0;
+      background: var(--gold-lt);
+      border: 1px solid rgba(184,146,42,0.2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-d); font-size: 15px; font-weight: 700;
+      color: var(--gold);
+      margin-top: 1px;
+    }
+    .a-step-text { font-size: 14px; color: var(--text); line-height: 1.6; }
+    .a-step-text strong { color: var(--navy); font-weight: 600; }
+    .a-step-text .code {
+      display: inline-block;
+      background: var(--warm); border: 1px solid var(--border);
+      border-radius: 5px; padding: 1px 8px;
+      font-family: monospace; font-size: 13px;
+      color: var(--navy); letter-spacing: 0.04em;
+    }
+
+    /* ACTIVATE BUTTON */
+    .activate-btn {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      width: 100%;
+      background: var(--blue); color: #fff;
+      padding: 18px; border-radius: var(--radius);
+      font-family: var(--font-b); font-size: 15px;
+      font-weight: 600; letter-spacing: 0.05em;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      box-shadow: 0 4px 16px rgba(61,114,168,0.28);
+    }
+    .activate-btn:hover { background: var(--blue-d); transform: translateY(-1px); }
+    .activate-btn svg { width: 20px; height: 20px; stroke: currentColor; }
+
+    .confirm-btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; margin-top: 14px;
+      background: transparent; color: var(--muted);
+      padding: 14px; border-radius: var(--radius);
+      font-family: var(--font-b); font-size: 13px;
+      font-weight: 500; letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+    .confirm-btn:hover { color: var(--navy); border-color: var(--navy); background: var(--warm); }
+    .confirm-btn svg { width: 15px; height: 15px; stroke: currentColor; }
+    .confirm-btn.hidden { display: none; }
+
+    .btn-note {
+      text-align: center; font-size: 12px; color: var(--muted);
+      margin-top: 12px;
+    }
+
+    /* VERIZON NOTICE */
+    .notice-card {
+      background: var(--gold-lt);
+      border: 1px solid rgba(184,146,42,0.25);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      margin-bottom: 28px;
+      display: flex; gap: 12px; align-items: flex-start;
+    }
+    .notice-card svg { width: 18px; height: 18px; stroke: var(--gold); flex-shrink: 0; margin-top: 2px; }
+    .notice-card p { font-size: 13px; color: #7a6020; line-height: 1.6; }
+    .notice-card p strong { color: #5a4010; }
+
+    /* SUCCESS STATE */
+    .success-icon {
+      width: 72px; height: 72px; margin: 0 auto 28px;
+      background: var(--green-lt);
+      border: 2px solid rgba(42,122,79,0.2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .success-icon svg { width: 36px; height: 36px; stroke: var(--green); }
+    #success-view { text-align: center; }
+    #success-view h1 { margin-bottom: 16px; }
+    .success-sub {
+      font-size: 16px; font-weight: 300; color: var(--muted);
+      line-height: 1.75; max-width: 440px; margin: 0 auto 40px;
+    }
+    .success-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px 24px;
+      text-align: left; margin-bottom: 32px;
+    }
+    .success-card-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 12px;
+    }
+    .success-detail {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 0; border-bottom: 1px solid var(--border);
+      font-size: 14px; color: var(--text);
+    }
+    .success-detail:last-child { border-bottom: none; }
+    .success-detail svg { width: 16px; height: 16px; stroke: var(--blue); flex-shrink: 0; }
+    .success-detail strong { color: var(--navy); }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy); color: rgba(255,255,255,0.4);
+      padding: 32px 28px; text-align: center; font-size: 13px;
+    }
+    footer strong { color: rgba(255,255,255,0.7); }
+    footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
+    .cancel-info {
+      margin-top: 12px; font-size: 12px; color: rgba(255,255,255,0.3); line-height: 1.6;
+    }
+
+    @media (max-width: 580px) {
+      .page-wrap { padding: 40px 20px 80px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Bow Lane <span>Leads</span></a>
+    <a href="start-register.html" class="nav-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Back
+    </a>
+  </div>
+</nav>
+
+<div class="progress-bar">
+  <div class="progress-inner">
+    <div class="step-dot done">
+      <div class="dot">
+        <svg viewBox="0 0 24 24" fill="none" width="12" height="12" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Subscribe
+    </div>
+    <div class="step-line done"></div>
+    <div class="step-dot done">
+      <div class="dot">
+        <svg viewBox="0 0 24 24" fill="none" width="12" height="12" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Your Info
+    </div>
+    <div class="step-line done"></div>
+    <div class="step-dot active">
+      <div class="dot">3</div>
+      Activate
+    </div>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+  <!-- ACTIVATE VIEW -->
+  <div id="activate-view">
+    <div class="page-label">Step 3 of 3</div>
+    <h1>One tap to activate.</h1>
+    <p class="page-sub" id="activate-sub">Tap the button below. It will open your dialer with a special code pre-filled. Just press Call — that's it.</p>
+
+    <div class="info-card">
+      <div class="info-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.72 12 19.79 19.79 0 0 1 1.7 3.35 2 2 0 0 1 3.66 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.16 6.16l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </div>
+      <div>
+        <div class="info-card-label">Forwarding from</div>
+        <div class="info-card-val" id="display-phone">—</div>
+      </div>
+    </div>
+
+    <div id="verizon-notice" class="notice-card" style="display:none;">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <p><strong>Verizon note:</strong> Verizon handles call forwarding differently than most carriers. Tap the button below — it will open your dialer. If the code doesn't connect, call Verizon support at <strong>*611</strong> and ask them to enable "conditional call forwarding on no answer" to the number shown.</p>
+    </div>
+
+    <div class="how-label">What will happen</div>
+    <div class="activate-steps" id="steps-container">
+      <!-- filled by JS -->
+    </div>
+
+    <a href="#" class="activate-btn" id="activate-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.72 12 19.79 19.79 0 0 1 1.7 3.35 2 2 0 0 1 3.66 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.16 6.16l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      Tap to Open Dialer
+    </a>
+
+    <button class="confirm-btn hidden" id="confirm-btn" onclick="showSuccess()">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      I made the call — I'm done
+    </button>
+
+    <p class="btn-note">Your phone will open a dialer screen. Press Call, then hang up — you're done.</p>
+  </div>
+
+  <!-- SUCCESS VIEW -->
+  <div id="success-view">
+    <div class="success-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h1>You're all set.</h1>
+    <p class="success-sub">Missed calls to your number will now forward to us. You'll get a text summary within seconds of every voicemail.</p>
+
+    <div class="success-card">
+      <div class="success-card-label">Your setup</div>
+      <div class="success-detail">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span id="success-name">—</span>
+      </div>
+      <div class="success-detail">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.72 12 19.79 19.79 0 0 1 1.7 3.35 2 2 0 0 1 3.66 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.16 6.16l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span>Forwarding from <strong id="success-phone">—</strong></span>
+      </div>
+      <div class="success-detail">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span>Lead summaries sent to <strong id="success-phone2">—</strong></span>
+      </div>
+    </div>
+
+    <p style="font-size:13px;color:var(--muted);text-align:center;line-height:1.7;">
+      Questions? Email us at <a href="mailto:hello@bowlaneleads.com" style="color:var(--blue);text-decoration:none;">hello@bowlaneleads.com</a>
+    </p>
+  </div>
+
+</div>
+
+<footer>
+  <strong>Bow Lane Leads</strong><br />
+  <span style="font-size:12px;margin-top:6px;display:block">&copy; 2026 Bow Lane Leads. All rights reserved.</span>
+  <div class="cancel-info" id="cancel-info">
+    To cancel your subscription and turn off call forwarding, dial <strong style="color:rgba(255,255,255,0.5);">##61#</strong> from your phone. This immediately stops all forwarding.
+  </div>
+</footer>
+
+<script>
+  // ---- CONFIG ----
+  // Replace with your actual Twilio forwarding number
+  var TWILIO_NUMBER = '+18005551234';
+  // ----------------
+
+  var carrier = localStorage.getItem('bll_carrier') || 'other';
+  var phoneRaw = localStorage.getItem('bll_businessPhone') || '';
+  var firstName = localStorage.getItem('bll_firstName') || '';
+  var lastName = localStorage.getItem('bll_lastName') || '';
+  var businessName = localStorage.getItem('bll_businessName') || '';
+
+  function formatPhone(digits) {
+    if (digits.length === 10) {
+      return '(' + digits.slice(0,3) + ') ' + digits.slice(3,6) + '-' + digits.slice(6);
+    }
+    return digits;
+  }
+
+  // Display phone
+  var displayEl = document.getElementById('display-phone');
+  if (displayEl && phoneRaw) {
+    displayEl.textContent = formatPhone(phoneRaw);
+  }
+
+  // Build tel: link
+  // Standard GSM conditional call forwarding (no answer): **61*+1XXXXXXXXXX#
+  // Verizon uses the same code but may require extra carrier steps
+  var e164 = '+1' + phoneRaw; // destination is TWILIO_NUMBER
+  var twilioDigits = TWILIO_NUMBER.replace('+', ''); // e.g. 18005551234
+
+  var telCode;
+  var carrierLabel;
+
+  if (carrier === 'verizon') {
+    // Verizon: same USSD but note shown; also try *71 as fallback
+    telCode = '**61*' + TWILIO_NUMBER + '%23';
+    carrierLabel = 'Verizon';
+    document.getElementById('verizon-notice').style.display = 'flex';
+  } else if (carrier === 'att') {
+    telCode = '**61*' + TWILIO_NUMBER + '%23';
+    carrierLabel = 'AT&T';
+  } else if (carrier === 'tmobile') {
+    telCode = '**61*' + TWILIO_NUMBER + '%23';
+    carrierLabel = 'T-Mobile';
+  } else if (carrier === 'cricket') {
+    telCode = '**61*' + TWILIO_NUMBER + '%23';
+    carrierLabel = 'Cricket Wireless';
+  } else if (carrier === 'metro') {
+    telCode = '**61*' + TWILIO_NUMBER + '%23';
+    carrierLabel = 'Metro by T-Mobile';
+  } else if (carrier === 'boost') {
+    telCode = '**61*' + TWILIO_NUMBER + '%23';
+    carrierLabel = 'Boost Mobile';
+  } else if (carrier === 'uscellular') {
+    telCode = '**61*' + TWILIO_NUMBER + '%23';
+    carrierLabel = 'US Cellular';
+  } else {
+    telCode = '**61*' + TWILIO_NUMBER + '%23';
+    carrierLabel = 'your carrier';
+  }
+
+  var activateLink = document.getElementById('activate-link');
+  if (activateLink) {
+    activateLink.href = 'tel:' + telCode;
+    // Show confirm button after tap
+    activateLink.addEventListener('click', function() {
+      setTimeout(function() {
+        var btn = document.getElementById('confirm-btn');
+        if (btn) btn.classList.remove('hidden');
+      }, 1500);
+    });
+  }
+
+  // Steps
+  var stepsEl = document.getElementById('steps-container');
+  if (stepsEl) {
+    var telDisplay = '**61*' + TWILIO_NUMBER + '#';
+    stepsEl.innerHTML =
+      '<div class="a-step">' +
+        '<div class="a-step-num">1</div>' +
+        '<div class="a-step-text">Tap <strong>Tap to Open Dialer</strong> below — your phone will open with the code <span class="code">' + telDisplay + '</span> pre-filled.</div>' +
+      '</div>' +
+      '<div class="a-step">' +
+        '<div class="a-step-num">2</div>' +
+        '<div class="a-step-text">Press <strong>Call</strong>. You may hear a short confirmation tone. Then hang up.</div>' +
+      '</div>' +
+      '<div class="a-step">' +
+        '<div class="a-step-num">3</div>' +
+        '<div class="a-step-text">Tap <strong>I made the call</strong> below to confirm. That\'s it — forwarding is active.</div>' +
+      '</div>';
+  }
+
+  // Success view
+  function showSuccess() {
+    document.getElementById('activate-view').style.display = 'none';
+    var sv = document.getElementById('success-view');
+    sv.style.display = 'block';
+
+    var fullName = (firstName + ' ' + lastName).trim() || businessName || 'You';
+    var nameEl = document.getElementById('success-name');
+    if (nameEl) nameEl.textContent = fullName + (businessName ? ' — ' + businessName : '');
+
+    var ph = formatPhone(phoneRaw);
+    var phoneEl = document.getElementById('success-phone');
+    if (phoneEl) phoneEl.textContent = ph;
+    var phone2El = document.getElementById('success-phone2');
+    if (phone2El) phone2El.textContent = ph;
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // If missing data, redirect back
+  if (!phoneRaw) {
+    window.location.href = 'start-register.html';
+  }
+</script>
+
+</body>
+</html>
