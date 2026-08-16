@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- ============================================================
+  CUSTOMIZE THIS PAGE:
+  1. Replace YOUR_APPS_SCRIPT_WEBHOOK_URL_HERE with Mary's Apps Script
+     webhook (same pattern as the Bow Lane Leads setup guide — deploy
+     a Sheet + Apps Script for her, then paste the URL below).
+     Payload fields sent: name, email, phone, service, preferredDate,
+     notes, submitted_at.
+  2. Replace [CLIENT_CALENDLY_URL] with Mary's Calendly event link
+     and [CLIENT_ACCENT_HEX] with the accent hex (no #) — see the
+     Client Calendly Setup guide.
+  3. Replace [CLIENT PHONE] / [CLIENT EMAIL] / [CLIENT CITY].
+  ============================================================ -->
+
+<title>Inquire — Mary Papageorge Photography</title>
+<meta name="description" content="Get in touch with Mary Papageorge Photography — send an inquiry or book a free consultation call." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500;1,9..144,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --cream:   #faf6ed;
+    --card:    #fffdf7;
+    --ink:     #262420;
+    --forest:  #38513f;
+    --forest-d:#2a3d30;
+    --sage:    #b7c4ac;
+    --sage-lt: #dbe3d3;
+    --gold:    #c3a257;
+    --gold-lt: #e2cd97;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Jost', system-ui, sans-serif;
+    font-weight: 300;
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  ul { list-style: none; }
+
+  .eyebrow {
+    font-family: 'Jost', sans-serif; font-size: 12px; font-weight: 500;
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--forest);
+    display: flex; align-items: center; gap: 12px; margin-bottom: 18px;
+  }
+  .eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); }
+  .eyebrow--center { justify-content: center; }
+  .eyebrow--center::before { display: none; }
+
+  h1, h2, h3 { font-family: 'Fraunces', serif; font-weight: 400; color: var(--forest); line-height: 1.08; }
+  em { font-style: italic; font-weight: 400; color: var(--gold); }
+
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+  .wrap-narrow { max-width: 880px; margin: 0 auto; padding: 0 32px; }
+
+  .framed { position: relative; border: 1px solid var(--sage); padding: 10px; background: var(--card); }
+  .framed::before { content: ''; position: absolute; inset: 4px; border: 1px solid var(--gold); pointer-events: none; }
+
+  /* ── NAV (shared) ── */
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(250,246,237,0.92); backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--sage-lt);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 20px 32px; max-width: 1180px; margin: 0 auto; }
+  .logotype { font-family: 'Fraunces', serif; font-style: normal; font-weight: 500; font-size: 22px; color: var(--forest); }
+  .nav-links { display: flex; gap: 40px; font-size: 13px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; }
+  .nav-links a { position: relative; padding-bottom: 4px; color: var(--ink); transition: color 0.2s; }
+  .nav-links a::after { content: ''; position: absolute; left: 0; right: 100%; bottom: 0; height: 1px; background: var(--gold); transition: right 0.25s ease; }
+  .nav-links a:hover { color: var(--forest); }
+  .nav-links a:hover::after { right: 0; }
+  .nav-links a.is-active { color: var(--forest); }
+  .nav-links a.is-active::after { right: 0; }
+  .nav-cta { padding: 10px 22px; border: 1px solid var(--forest); font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; transition: background 0.2s, color 0.2s; }
+  .nav-cta:hover { background: var(--forest); color: var(--cream); }
+  .nav-toggle { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; padding: 4px; }
+  .nav-toggle span { width: 24px; height: 1.5px; background: var(--forest); }
+  .nav-mobile { display: none; }
+
+  @media (max-width: 900px) {
+    .nav-links, .nav-cta { display: none; }
+    .nav-toggle { display: flex; }
+    .nav-mobile.open { display: flex; flex-direction: column; gap: 4px; padding: 0 32px 24px; }
+    .nav-mobile a { padding: 12px 0; font-size: 14px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; border-bottom: 1px solid var(--sage-lt); }
+  }
+
+  /* ── PAGE INTRO ── */
+  .page-hero { padding: 80px 0 56px; text-align: center; }
+  .page-hero h1 { font-size: clamp(38px, 5vw, 58px); margin-bottom: 20px; }
+  .page-hero p { max-width: 560px; margin: 0 auto; font-size: 16px; opacity: 0.78; }
+
+  /* ── INQUIRY FORM ── */
+  .inquiry-section { padding: 0 0 100px; }
+  .form-card { padding: 48px 44px; }
+  .form-card .framed-inner { position: relative; }
+  #form-body h2 { font-size: 26px; margin-bottom: 8px; }
+  #form-body .form-sub { font-size: 14px; opacity: 0.7; margin-bottom: 32px; }
+
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 24px; margin-bottom: 22px; }
+  .form-field { display: flex; flex-direction: column; gap: 8px; }
+  .form-field.full { grid-column: 1 / -1; }
+  .form-field label {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--forest); opacity: 0.85;
+  }
+  .form-field input, .form-field select, .form-field textarea {
+    font-family: 'Jost', sans-serif; font-size: 14px; font-weight: 300; color: var(--ink);
+    background: var(--cream); border: 1px solid var(--sage-lt);
+    padding: 13px 14px; outline: none; transition: border-color 0.2s;
+  }
+  .form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color: var(--gold); }
+  .form-field textarea { resize: vertical; min-height: 100px; }
+
+  .form-submit {
+    width: 100%; padding: 16px; margin-top: 6px;
+    background: var(--forest); color: var(--cream); border: none; cursor: pointer;
+    font-family: 'Jost', sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+    transition: background 0.2s;
+  }
+  .form-submit:hover { background: var(--forest-d); }
+  .form-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  .form-success { display: none; text-align: center; padding: 40px 10px; }
+  .form-success.show { display: block; }
+  .form-success .fs-mark {
+    width: 44px; height: 44px; border: 1px solid var(--gold); transform: rotate(45deg);
+    margin: 0 auto 24px; display: flex; align-items: center; justify-content: center;
+  }
+  .form-success .fs-mark span { transform: rotate(-45deg); color: var(--gold); font-size: 18px; }
+  .form-success h3 { font-size: 24px; margin-bottom: 10px; }
+  .form-success p { font-size: 14px; opacity: 0.75; }
+
+  /* ── DIVIDER ── */
+  .or-divider { display: flex; align-items: center; gap: 18px; max-width: 880px; margin: 72px auto; padding: 0 32px; }
+  .or-divider::before, .or-divider::after { content: ''; flex: 1; height: 1px; background: var(--sage-lt); }
+  .or-divider span { font-size: 12px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--forest); opacity: 0.6; }
+
+  /* ── SCHEDULING (Calendly) ── */
+  .sc-section { padding: 0 0 100px; }
+  .sc-label { font-size: 12px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--forest); margin-bottom: 18px; display: flex; align-items: center; gap: 12px; justify-content: center; }
+  .sc-heading { font-size: clamp(30px, 3.6vw, 42px); text-align: center; margin-bottom: 12px; }
+  .sc-sub { font-size: 15px; opacity: 0.75; text-align: center; max-width: 480px; margin: 0 auto 48px; }
+  .sc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+
+  .sc-info-card { background: var(--forest); border-radius: 4px; padding: 40px 36px; position: relative; overflow: hidden; }
+  .sc-info-card::before { content: ''; position: absolute; inset: 0; pointer-events: none; background-image: radial-gradient(circle at 90% 10%, rgba(195,162,87,0.18) 0%, transparent 60%); }
+  .sc-info-title { font-family: 'Fraunces', serif; font-size: 24px; color: #fff; line-height: 1.15; margin-bottom: 12px; position: relative; }
+  .sc-info-sub { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.7; margin-bottom: 26px; position: relative; }
+  .sc-perks { position: relative; }
+  .sc-perks li { font-size: 14px; color: rgba(255,255,255,0.85); margin-bottom: 13px; display: flex; align-items: center; gap: 10px; }
+  .sc-perks li::before { content: '—'; color: var(--gold-lt); flex-shrink: 0; }
+  .sc-contact-line { margin-top: 28px; padding-top: 22px; border-top: 1px solid rgba(195,162,87,0.25); font-size: 13px; color: rgba(255,255,255,0.55); position: relative; }
+  .sc-contact-line a { color: var(--gold-lt); }
+
+  .sc-cal-widget { background: var(--card); border: 1px solid var(--sage-lt); padding: 26px 22px 18px; }
+  .sc-cal-header { font-family: 'Fraunces', serif; font-size: 19px; color: var(--forest); text-align: center; margin-bottom: 16px; }
+  .sc-cal-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .sc-cal-btn { background: var(--sage-lt); border: none; cursor: pointer; width: 32px; height: 32px; border-radius: 50%; font-size: 20px; line-height: 1; color: var(--forest); display: flex; align-items: center; justify-content: center; transition: background 0.15s; }
+  .sc-cal-btn:hover:not(:disabled) { background: var(--gold-lt); }
+  .sc-cal-btn:disabled { opacity: 0.25; cursor: default; }
+  .sc-cal-month { font-size: 14px; font-weight: 500; color: var(--forest); }
+  .sc-cal-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; margin-bottom: 4px; }
+  .sc-cal-weekdays span { font-size: 10px; font-weight: 600; letter-spacing: 0.05em; color: var(--forest); opacity: 0.55; padding: 4px 0; text-transform: uppercase; }
+  .sc-cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+  .sc-cal-day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 13px; border-radius: 50%; cursor: pointer; color: var(--ink); font-weight: 500; position: relative; transition: background 0.15s, color 0.15s; }
+  .sc-cal-day:hover:not(.sc-cal-day--past):not(.sc-cal-day--empty) { background: var(--sage-lt); color: var(--forest); }
+  .sc-cal-day--past { color: #ccc; cursor: default; font-weight: 400; }
+  .sc-cal-day--empty { cursor: default; }
+  .sc-cal-day--today::after { content: ''; position: absolute; bottom: 3px; left: 50%; transform: translateX(-50%); width: 4px; height: 4px; border-radius: 50%; background: var(--gold); }
+  .sc-cal-tz { text-align: center; margin-top: 12px; font-size: 11px; opacity: 0.55; }
+
+  .sc-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(38,36,32,0.65); z-index: 500; align-items: center; justify-content: center; padding: 20px; }
+  .sc-modal-overlay.open { display: flex; }
+  .sc-modal { background: #fff; position: relative; width: 100%; max-width: 440px; overflow: hidden; box-shadow: 0 24px 80px rgba(0,0,0,0.25); }
+  #sc-modal-content iframe { display: block; width: 100%; height: 700px; border: none; }
+  .sc-modal-close { position: absolute; top: 10px; right: 10px; z-index: 10; background: rgba(0,0,0,0.08); border: none; cursor: pointer; width: 30px; height: 30px; border-radius: 50%; font-size: 13px; color: var(--forest); display: flex; align-items: center; justify-content: center; transition: background 0.15s; }
+  .sc-modal-close:hover { background: rgba(0,0,0,0.15); }
+
+  /* ── FOOTER ── */
+  footer { padding: 64px 0 40px; }
+  .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--sage-lt); margin-bottom: 28px; }
+  .footer-col h4 { font-family: 'Jost', sans-serif; font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--forest); margin-bottom: 18px; }
+  .footer-col p, .footer-col a { font-size: 14px; opacity: 0.8; }
+  .footer-col ul li { margin-bottom: 10px; }
+  .footer-col ul a:hover { color: var(--forest); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; font-size: 12px; opacity: 0.55; flex-wrap: wrap; gap: 12px; }
+
+  @media (max-width: 860px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .sc-grid { grid-template-columns: 1fr; gap: 24px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  }
+  @media (max-width: 560px) {
+    .wrap, .wrap-narrow { padding: 0 20px; }
+    .nav-inner { padding: 16px 20px; }
+    .form-card { padding: 32px 22px; }
+    .sc-info-card { padding: 28px 22px; }
+    .or-divider { margin: 48px auto; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <a href="demo-marypapageorge.html" class="logotype">Mary Papageorge Photography</a>
+    <nav class="nav-links">
+      <a href="demo-marypapageorge.html#portfolio">Portfolio</a>
+      <a href="demo-marypapageorge.html#offerings">Offerings</a>
+      <a href="demo-marypapageorge-pricing.html">Pricing</a>
+      <a href="demo-marypapageorge-inquire.html" class="is-active">Inquire</a>
+    </nav>
+    <a href="demo-marypapageorge-inquire.html" class="nav-cta">Book a Call</a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+  <nav class="nav-mobile" id="nav-mobile">
+    <a href="demo-marypapageorge.html#portfolio">Portfolio</a>
+    <a href="demo-marypapageorge.html#offerings">Offerings</a>
+    <a href="demo-marypapageorge-pricing.html">Pricing</a>
+    <a href="demo-marypapageorge-inquire.html">Inquire</a>
+  </nav>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow eyebrow--center" style="justify-content:center;">Get In Touch</div>
+    <h1>Let's start<br /><em>your story.</em></h1>
+    <p>Send a few details about your date or session, or skip straight to booking a free call below.</p>
+  </div>
+</section>
+
+<!-- ── INQUIRY FORM ── -->
+<section class="inquiry-section">
+  <div class="wrap-narrow">
+    <div class="form-card framed">
+      <div class="framed-inner">
+
+        <div id="form-body">
+          <h2>Tell me about your day</h2>
+          <p class="form-sub">I'll reply within 1–2 business days with availability and next steps.</p>
+
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="f-name">Full Name</label>
+              <input type="text" id="f-name" placeholder="Jane Doe" />
+            </div>
+            <div class="form-field">
+              <label for="f-email">Email</label>
+              <input type="email" id="f-email" placeholder="jane@email.com" />
+            </div>
+            <div class="form-field">
+              <label for="f-phone">Phone</label>
+              <input type="tel" id="f-phone" placeholder="(555) 555-0100" />
+            </div>
+            <div class="form-field">
+              <label for="f-service">Service</label>
+              <select id="f-service">
+                <option value="">Select one</option>
+                <option value="wedding">Wedding Photography</option>
+                <option value="wedding-video">Wedding Videography</option>
+                <option value="family">Family Portraits</option>
+                <option value="engagement">Engagement Session</option>
+                <option value="business">Business Portraits</option>
+                <option value="other">Something Else</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="f-date">Preferred Date</label>
+              <input type="date" id="f-date" />
+            </div>
+            <div class="form-field">
+              <label for="f-location">Location / City</label>
+              <input type="text" id="f-location" placeholder="[CLIENT CITY]" />
+            </div>
+            <div class="form-field full">
+              <label for="f-notes">Tell Me More</label>
+              <textarea id="f-notes" placeholder="Venue, vision, how many people, anything you'd like me to know..."></textarea>
+            </div>
+          </div>
+
+          <button class="form-submit" id="submit-btn" onclick="handleSubmit()">Send Inquiry</button>
+        </div>
+
+        <div class="form-success" id="form-success">
+          <div class="fs-mark"><span>✓</span></div>
+          <h3>Thank you, <span id="success-name">friend</span>.</h3>
+          <p>Your inquiry is on its way — I'll be in touch soon.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="or-divider"><span>Or</span></div>
+
+<!-- ── SCHEDULING ── -->
+<section class="sc-section">
+  <div class="wrap-narrow">
+    <div class="sc-label">Schedule Online</div>
+    <h2 class="sc-heading">Book a free<br /><em>consultation call.</em></h2>
+    <p class="sc-sub">Pick a day and time that works for you — we'll talk through your date, vision, and pricing.</p>
+
+    <div class="sc-grid">
+      <div class="sc-info-card">
+        <div class="sc-info-title">What to expect</div>
+        <p class="sc-info-sub">A relaxed 20-minute call — no pressure, no obligation to book.</p>
+        <ul class="sc-perks">
+          <li>Talk through your date and vision</li>
+          <li>Package &amp; pricing recommendations</li>
+          <li>Answers to any questions you have</li>
+          <li>Available 7 days a week</li>
+        </ul>
+        <div class="sc-contact-line">
+          Prefer to call directly? <strong><a href="tel:[CLIENT PHONE]">[CLIENT PHONE]</a></strong>
+        </div>
+      </div>
+
+      <div class="sc-cal-widget">
+        <div class="sc-cal-header">Select a Day</div>
+        <div class="sc-cal-nav">
+          <button class="sc-cal-btn" id="sc-cal-prev">&#8249;</button>
+          <span class="sc-cal-month" id="sc-cal-month"></span>
+          <button class="sc-cal-btn" id="sc-cal-next">&#8250;</button>
+        </div>
+        <div class="sc-cal-weekdays"><span>SUN</span><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span></div>
+        <div class="sc-cal-grid" id="sc-cal-grid"></div>
+        <div class="sc-cal-tz" id="sc-cal-tz"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sc-modal-overlay" id="sc-modal-overlay">
+  <div class="sc-modal">
+    <button class="sc-modal-close" id="sc-modal-close">&#x2715;</button>
+    <div id="sc-modal-content"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="logotype" style="margin-bottom:14px;">Mary Papageorge Photography</div>
+        <p>Wedding &amp; portrait photography serving [CLIENT CITY] and beyond.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="demo-marypapageorge.html#portfolio">Portfolio</a></li>
+          <li><a href="demo-marypapageorge-pricing.html">Pricing</a></li>
+          <li><a href="demo-marypapageorge-inquire.html">Inquire</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Get in Touch</h4>
+        <ul>
+          <li><a href="mailto:[CLIENT EMAIL]">[CLIENT EMAIL]</a></li>
+          <li><a href="tel:[CLIENT PHONE]">[CLIENT PHONE]</a></li>
+          <li><a href="https://instagram.com/[CLIENT INSTAGRAM]">@[CLIENT INSTAGRAM]</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Mary Papageorge Photography. All rights reserved.</span>
+      <span>Site by Bow Lane Leads</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── MOBILE NAV
+  const navToggle = document.getElementById('nav-toggle');
+  const navMobile = document.getElementById('nav-mobile');
+  navToggle.addEventListener('click', () => navMobile.classList.toggle('open'));
+
+  // ── PRE-FILL SERVICE FROM ?service= QUERY PARAM (linked from pricing page)
+  const params = new URLSearchParams(window.location.search);
+  const preselectService = params.get('service');
+  if (preselectService) {
+    const sel = document.getElementById('f-service');
+    if (sel.querySelector('option[value="' + preselectService + '"]')) {
+      sel.value = preselectService;
+    }
+  }
+
+  // ── LEAD FORM SUBMISSION
+  // EDIT: replace with Mary's Apps Script webhook URL once deployed.
+  const WEBHOOK_URL = 'YOUR_APPS_SCRIPT_WEBHOOK_URL_HERE';
+
+  async function handleSubmit() {
+    const name     = document.getElementById('f-name').value.trim();
+    const email    = document.getElementById('f-email').value.trim();
+    const phone    = document.getElementById('f-phone').value.trim();
+    const service  = document.getElementById('f-service').value;
+    const date     = document.getElementById('f-date').value;
+    const location = document.getElementById('f-location').value.trim();
+    const notes    = document.getElementById('f-notes').value.trim();
+
+    if (!name || !email || !service) {
+      alert('Please fill in your name, email, and service type.');
+      return;
+    }
+
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    const payload = {
+      name, email, phone, service,
+      preferredDate: date, location, notes,
+      submitted_at: new Date().toISOString()
+    };
+
+    try {
+      await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify(payload)
+      });
+      document.getElementById('success-name').textContent = name.split(' ')[0];
+      document.getElementById('form-body').style.display = 'none';
+      document.getElementById('form-success').classList.add('show');
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = 'Send Inquiry';
+      alert('Something went wrong. Please email directly at [CLIENT EMAIL].');
+    }
+  }
+
+  // ── CALENDLY BOOKING CALENDAR
+  // EDIT: replace with Mary's Calendly URL and accent hex.
+  const SC_CALENDLY = '[CLIENT_CALENDLY_URL]';
+  const SC_ACCENT_HEX = '[CLIENT_ACCENT_HEX]';
+
+  (function () {
+    const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const userTZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    document.getElementById('sc-cal-tz').textContent = 'Times shown in ' + userTZ.replace(/_/g, ' ');
+
+    const today = new Date(); today.setHours(0,0,0,0);
+    let viewYear = today.getFullYear();
+    let viewMonth = today.getMonth();
+
+    function render() {
+      document.getElementById('sc-cal-month').textContent = MONTHS[viewMonth] + ' ' + viewYear;
+      const prevBtn = document.getElementById('sc-cal-prev');
+      prevBtn.disabled = (viewYear === today.getFullYear() && viewMonth === today.getMonth());
+
+      const grid = document.getElementById('sc-cal-grid');
+      grid.innerHTML = '';
+
+      const firstDay = new Date(viewYear, viewMonth, 1).getDay();
+      const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+
+      for (let i = 0; i < firstDay; i++) {
+        const el = document.createElement('div');
+        el.className = 'sc-cal-day sc-cal-day--empty';
+        grid.appendChild(el);
+      }
+      for (let d = 1; d <= daysInMonth; d++) {
+        const date = new Date(viewYear, viewMonth, d);
+        const el = document.createElement('div');
+        el.className = 'sc-cal-day';
+        el.textContent = d;
+
+        if (date < today) {
+          el.classList.add('sc-cal-day--past');
+        } else {
+          if (date.getTime() === today.getTime()) el.classList.add('sc-cal-day--today');
+          const y = viewYear, m = viewMonth, day = d;
+          el.addEventListener('click', function () { scOpenModal(y, m, day); });
+        }
+        grid.appendChild(el);
+      }
+    }
+
+    document.getElementById('sc-cal-prev').addEventListener('click', function () {
+      if (viewMonth === 0) { viewMonth = 11; viewYear--; } else viewMonth--;
+      render();
+    });
+    document.getElementById('sc-cal-next').addEventListener('click', function () {
+      if (viewMonth === 11) { viewMonth = 0; viewYear++; } else viewMonth++;
+      render();
+    });
+
+    render();
+
+    function scOpenModal(y, m, d) {
+      const dateStr = y + '-' + String(m + 1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
+      const url = SC_CALENDLY + '?date=' + dateStr
+        + '&hide_gdpr_banner=1'
+        + '&primary_color=' + SC_ACCENT_HEX
+        + '&timezone=' + encodeURIComponent(userTZ);
+      document.getElementById('sc-modal-content').innerHTML = '<iframe src="' + url + '" allowfullscreen></iframe>';
+      document.getElementById('sc-modal-overlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function scCloseModal() {
+      document.getElementById('sc-modal-overlay').classList.remove('open');
+      document.getElementById('sc-modal-content').innerHTML = '';
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('sc-modal-close').addEventListener('click', scCloseModal);
+    document.getElementById('sc-modal-overlay').addEventListener('click', function (e) {
+      if (e.target === this) scCloseModal();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') scCloseModal();
+    });
+  })();
+</script>
+
+</body>
+</html>

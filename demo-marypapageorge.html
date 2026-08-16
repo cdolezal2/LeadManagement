@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- ============================================================
+  CUSTOMIZE THIS PAGE:
+  1. Replace [CLIENT PHONE] with Mary's phone number
+  2. Replace [CLIENT EMAIL] with Mary's email
+  3. Replace [CLIENT CITY] with her service area
+  4. Replace [CLIENT INSTAGRAM] with her Instagram handle/link
+  5. Swap the .frame-fill placeholders for real photos when ready —
+     just replace the inner <div class="frame-fill">...</div> with
+     an <img src="..." alt="..." /> and the border/shadow carry over.
+  ============================================================ -->
+
+<title>Mary Papageorge Photography — Wedding &amp; Portrait Photography</title>
+<meta name="description" content="Wedding photography and film, family portraits, engagements, and business portraits — quiet, timeless images by Mary Papageorge." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500;1,9..144,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  /* ── DESIGN TOKENS ── */
+  :root {
+    --cream:   #faf6ed;
+    --card:    #fffdf7;
+    --ink:     #262420;
+    --forest:  #38513f;
+    --forest-d:#2a3d30;
+    --sage:    #b7c4ac;
+    --sage-lt: #dbe3d3;
+    --gold:    #c3a257;
+    --gold-lt: #e2cd97;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Jost', system-ui, sans-serif;
+    font-weight: 300;
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  ul { list-style: none; }
+
+  .eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-size: 12px; font-weight: 500;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--forest);
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 18px;
+  }
+  .eyebrow::before {
+    content: ''; display: block; width: 32px; height: 1px;
+    background: var(--gold);
+  }
+  .eyebrow--center { justify-content: center; }
+  .eyebrow--center::before { display: none; }
+  .eyebrow--light { color: var(--gold-lt); }
+
+  h1, h2, h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    color: var(--forest);
+    line-height: 1.08;
+  }
+  em, .accent-em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--gold);
+  }
+
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+
+  /* ── CORNER-FRAME MOTIF (the signature device) ──────────────────
+     A thin gold + sage double rule with corner ticks, echoing a
+     mounted-print mat frame. Used on the hero image, gallery tiles,
+     and as section dividers throughout. */
+  .framed {
+    position: relative;
+    border: 1px solid var(--sage);
+    padding: 10px;
+    background: var(--card);
+  }
+  .framed::before {
+    content: '';
+    position: absolute; inset: 4px;
+    border: 1px solid var(--gold);
+    pointer-events: none;
+  }
+  .framed-inner { position: relative; overflow: hidden; }
+
+  .divider {
+    display: flex; align-items: center; justify-content: center;
+    gap: 14px; margin: 0 auto;
+  }
+  .divider::before, .divider::after {
+    content: ''; width: 64px; height: 1px; background: var(--sage);
+  }
+  .divider-mark {
+    width: 7px; height: 7px; border: 1px solid var(--gold);
+    transform: rotate(45deg);
+  }
+
+  /* ── NAV ── */
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(250,246,237,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--sage-lt);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 32px;
+    max-width: 1180px; margin: 0 auto;
+  }
+  .logotype {
+    font-family: 'Fraunces', serif;
+    font-style: normal; font-weight: 500;
+    font-size: 22px; color: var(--forest);
+    letter-spacing: 0.01em;
+  }
+  .nav-links {
+    display: flex; gap: 40px;
+    font-size: 13px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .nav-links a {
+    position: relative; padding-bottom: 4px;
+    color: var(--ink); transition: color 0.2s;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; left: 0; right: 100%; bottom: 0;
+    height: 1px; background: var(--gold);
+    transition: right 0.25s ease;
+  }
+  .nav-links a:hover { color: var(--forest); }
+  .nav-links a:hover::after { right: 0; }
+  .nav-links a.is-active { color: var(--forest); }
+  .nav-links a.is-active::after { right: 0; }
+  .nav-cta {
+    padding: 10px 22px;
+    border: 1px solid var(--forest);
+    font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    transition: background 0.2s, color 0.2s;
+  }
+  .nav-cta:hover { background: var(--forest); color: var(--cream); }
+  .nav-toggle {
+    display: none; background: none; border: none; cursor: pointer;
+    flex-direction: column; gap: 5px; padding: 4px;
+  }
+  .nav-toggle span { width: 24px; height: 1.5px; background: var(--forest); }
+  .nav-mobile { display: none; }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 88px 0 100px;
+  }
+  .hero-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 72px; align-items: center;
+  }
+  .hero-kicker {
+    font-family: 'Jost', sans-serif; font-size: 13px; font-weight: 500;
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--forest);
+    margin-bottom: 22px; display: flex; align-items: center; gap: 12px;
+  }
+  .hero-kicker::before { content: ''; width: 32px; height: 1px; background: var(--gold); }
+  .hero h1 {
+    font-size: clamp(42px, 5.2vw, 66px);
+    margin-bottom: 20px;
+  }
+  .hero p.lede {
+    font-size: 15px; font-weight: 300; color: var(--ink);
+    opacity: 0.78; max-width: 420px; margin-bottom: 40px;
+  }
+  .hero-actions { display: flex; gap: 18px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 15px 30px;
+    font-family: 'Jost', sans-serif; font-size: 13px; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.15s;
+  }
+  .btn-primary { background: var(--forest); color: var(--cream); border: 1px solid var(--forest); }
+  .btn-primary:hover { background: var(--forest-d); transform: translateY(-1px); }
+  .btn-ghost { background: transparent; color: var(--forest); border: 1px solid var(--sage); }
+  .btn-ghost:hover { border-color: var(--forest); }
+
+  /* placeholder frame fill */
+  .frame-fill {
+    aspect-ratio: 4 / 5;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(195,162,87,0.10), transparent 55%),
+      linear-gradient(160deg, #eef1e7 0%, #dbe3d3 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 16px; text-align: center; padding: 24px;
+  }
+  .frame-fill svg { width: 46px; height: 46px; opacity: 0.55; }
+  .frame-fill .fp-label {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--forest); opacity: 0.6;
+  }
+  .hero .framed { max-width: 460px; margin-left: auto; }
+
+  /* real photo fill — replaces .frame-fill once a photo is available */
+  .framed-photo { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
+  .hero .framed-photo { aspect-ratio: 4 / 5; }
+  .framed-photo.pos-top { object-position: 50% 12%; }
+  .framed-photo.pos-dog { object-position: 38% 42%; }
+
+  /* ── OFFERINGS ── */
+  .offerings { padding: 100px 0; border-top: 1px solid var(--sage-lt); }
+  .section-head { max-width: 620px; margin-bottom: 64px; }
+  .section-head h2 { font-size: clamp(30px, 3.6vw, 42px); }
+  .section-head--center { margin-left: auto; margin-right: auto; text-align: center; }
+
+  .offer-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+    background: var(--sage-lt);
+    border: 1px solid var(--sage-lt);
+  }
+  .offer-card {
+    background: var(--card); padding: 40px 28px;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .offer-num {
+    font-family: 'Fraunces', serif; font-style: italic; font-size: 15px;
+    color: var(--gold);
+  }
+  .offer-card h3 { font-size: 21px; }
+  .offer-more {
+    display: flex; flex-direction: column; align-items: center; gap: 22px;
+    text-align: center; margin-top: 48px;
+  }
+  .offer-more p { font-size: 14px; opacity: 0.7; }
+
+  /* ── GALLERY ── */
+  .gallery { padding: 100px 0; border-top: 1px solid var(--sage-lt); }
+  .gallery-columns { display: flex; gap: 28px; align-items: flex-start; }
+  .gallery-col { flex: 1; display: flex; flex-direction: column; gap: 28px; }
+  .gallery-col:nth-child(2) { margin-top: 72px; }
+  .gallery-col:nth-child(3) { margin-top: 24px; }
+  .gallery-tile .framed-photo { aspect-ratio: 4 / 5; }
+
+  /* ── CTA BAND ── */
+  .cta-band {
+    background: var(--forest); color: var(--cream);
+    padding: 96px 0; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .cta-band::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(195,162,87,0.14), transparent 60%);
+    pointer-events: none;
+  }
+  .cta-band h2 {
+    color: var(--cream); font-size: clamp(30px, 4vw, 46px);
+    max-width: 640px; margin: 0 auto 32px;
+    position: relative;
+  }
+  .cta-band .btn-primary {
+    background: var(--gold); border-color: var(--gold); color: var(--forest-d);
+    position: relative;
+  }
+  .cta-band .btn-primary:hover { background: var(--gold-lt); border-color: var(--gold-lt); }
+
+  /* ── FOOTER ── */
+  footer { padding: 64px 0 40px; }
+  .footer-grid {
+    display: grid; grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 40px; padding-bottom: 40px;
+    border-bottom: 1px solid var(--sage-lt); margin-bottom: 28px;
+  }
+  .footer-col h4 {
+    font-family: 'Jost', sans-serif; font-size: 12px; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--forest);
+    margin-bottom: 18px;
+  }
+  .footer-col p, .footer-col a { font-size: 14px; opacity: 0.8; }
+  .footer-col ul li { margin-bottom: 10px; }
+  .footer-col ul a:hover { color: var(--forest); }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; opacity: 0.55; flex-wrap: wrap; gap: 12px;
+  }
+
+  @media (max-width: 900px) {
+    .nav-links, .nav-cta { display: none; }
+    .nav-toggle { display: flex; }
+    .nav-mobile.open {
+      display: flex; flex-direction: column; gap: 4px;
+      padding: 0 32px 24px;
+    }
+    .nav-mobile a {
+      padding: 12px 0; font-size: 14px; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      border-bottom: 1px solid var(--sage-lt);
+    }
+    .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+    .hero .framed { max-width: 100%; margin: 0; }
+    .offer-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-columns { flex-direction: column; }
+    .gallery-col, .gallery-col:nth-child(2), .gallery-col:nth-child(3) { margin-top: 0; }
+    .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  }
+  @media (max-width: 560px) {
+    .wrap { padding: 0 20px; }
+    .nav-inner { padding: 16px 20px; }
+    .hero { padding: 56px 0 64px; }
+    .offerings, .gallery { padding: 64px 0; }
+    .offer-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <a href="demo-marypapageorge.html" class="logotype">Mary Papageorge Photography</a>
+    <nav class="nav-links">
+      <a href="#portfolio">Portfolio</a>
+      <a href="#offerings">Offerings</a>
+      <a href="demo-marypapageorge-pricing.html">Pricing</a>
+      <a href="demo-marypapageorge-inquire.html">Inquire</a>
+    </nav>
+    <a href="demo-marypapageorge-inquire.html" class="nav-cta">Book a Call</a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="nav-mobile" id="nav-mobile">
+    <a href="#portfolio">Portfolio</a>
+    <a href="#offerings">Offerings</a>
+    <a href="demo-marypapageorge-pricing.html">Pricing</a>
+    <a href="demo-marypapageorge-inquire.html">Inquire</a>
+  </nav>
+</header>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Capture Your<br /><em>Memories.</em></h1>
+      <p class="lede">Wedding photography and videography, family portraits, and engagement sessions across the Midwest.</p>
+      <div class="hero-actions">
+        <a href="demo-marypapageorge-inquire.html" class="btn btn-primary">Inquire</a>
+        <a href="#portfolio" class="btn btn-ghost">View Portfolio</a>
+      </div>
+    </div>
+    <div class="framed">
+      <img class="framed-inner framed-photo" src="assets/marypapageorge/grad-cap-toss.png" alt="Graduates tossing their caps in front of Bascom Hall" />
+    </div>
+  </div>
+</section>
+
+<!-- ── OFFERINGS ── -->
+<section class="offerings" id="offerings">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">What I Offer</div>
+    </div>
+    <div class="offer-grid">
+      <div class="offer-card">
+        <div class="offer-num">01</div>
+        <h3>Wedding Photo &amp; Video</h3>
+      </div>
+      <div class="offer-card">
+        <div class="offer-num">02</div>
+        <h3>Family Portraits</h3>
+      </div>
+      <div class="offer-card">
+        <div class="offer-num">03</div>
+        <h3>Engagements</h3>
+      </div>
+      <div class="offer-card">
+        <div class="offer-num">04</div>
+        <h3>Business Portraits</h3>
+      </div>
+    </div>
+    <div class="offer-more">
+      <p>And more — see packages for more details on what I offer.</p>
+      <a href="demo-marypapageorge-pricing.html" class="btn btn-ghost">See Packages</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── GALLERY ── -->
+<section class="gallery" id="portfolio">
+  <div class="wrap">
+    <div class="section-head section-head--center">
+      <div class="eyebrow eyebrow--center">The Portfolio</div>
+      <h2>A few favorites.</h2>
+    </div>
+    <div class="gallery-columns">
+      <div class="gallery-col">
+        <div class="gallery-tile framed"><img class="framed-inner framed-photo" src="assets/marypapageorge/family-yard.jpg" alt="Family portrait session in a backyard" /></div>
+        <div class="gallery-tile framed"><img class="framed-inner framed-photo pos-dog" src="assets/marypapageorge/family-dog.jpg" alt="Family portrait session with their dog" /></div>
+      </div>
+      <div class="gallery-col">
+        <div class="gallery-tile framed"><img class="framed-inner framed-photo pos-top" src="assets/marypapageorge/business-group.jpg" alt="Team portrait at Studio Lagree" /></div>
+        <div class="gallery-tile framed"><img class="framed-inner framed-photo" src="assets/marypapageorge/business-portrait.jpg" alt="Business portrait session in a fitness studio" /></div>
+      </div>
+      <div class="gallery-col">
+        <div class="gallery-tile framed"><img class="framed-inner framed-photo" src="assets/marypapageorge/grad-group.jpg" alt="College graduates portrait in front of Bascom Hall" /></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA BAND ── -->
+<section class="cta-band">
+  <div class="wrap">
+    <h2>Interested? Let's talk.</h2>
+    <a href="demo-marypapageorge-inquire.html" class="btn btn-primary">Book a Call to Discuss Options</a>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="logotype" style="margin-bottom:14px;">Mary Papageorge Photography</div>
+        <p>Wedding &amp; portrait photography serving [CLIENT CITY] and beyond.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="demo-marypapageorge-pricing.html">Pricing</a></li>
+          <li><a href="demo-marypapageorge-inquire.html">Inquire</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Get in Touch</h4>
+        <ul>
+          <li><a href="mailto:[CLIENT EMAIL]">[CLIENT EMAIL]</a></li>
+          <li><a href="tel:[CLIENT PHONE]">[CLIENT PHONE]</a></li>
+          <li><a href="https://instagram.com/[CLIENT INSTAGRAM]">@[CLIENT INSTAGRAM]</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Mary Papageorge Photography. All rights reserved.</span>
+      <span>Site by Bow Lane Leads</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('nav-toggle');
+  const navMobile = document.getElementById('nav-mobile');
+  navToggle.addEventListener('click', () => navMobile.classList.toggle('open'));
+</script>
+
+</body>
+</html>
