@@ -225,8 +225,7 @@
     .nav-mobile.open { display: flex; flex-direction: column; gap: 4px; padding: 0 32px 24px; }
     .nav-mobile a { padding: 12px 0; font-size: 14px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; border-bottom: 1px solid var(--sage-lt); }
     .price-panel, .price-panel.reverse { grid-template-columns: 1fr; gap: 32px; }
-    .price-panel.reverse .price-media, .price-panel.reverse .price-body { order: initial; }
-    .price-media .frame-fill { aspect-ratio: 16/10; }
+    .price-media { display: none; }
     .footer-grid { grid-template-columns: 1fr; gap: 28px; }
   }
   @media (max-width: 560px) {
