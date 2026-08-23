@@ -165,24 +165,25 @@
     padding: 88px 0 100px;
   }
   .hero-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 72px; align-items: center;
+    display: grid; grid-template-columns: 1fr 1.3fr 1fr;
+    gap: 40px; align-items: center;
   }
+  .hero-center { text-align: center; }
   .hero-kicker {
     font-family: 'Jost', sans-serif; font-size: 13px; font-weight: 500;
     letter-spacing: 0.22em; text-transform: uppercase; color: var(--forest);
-    margin-bottom: 22px; display: flex; align-items: center; gap: 12px;
+    margin-bottom: 22px; display: flex; align-items: center; justify-content: center; gap: 12px;
   }
-  .hero-kicker::before { content: ''; width: 32px; height: 1px; background: var(--gold); }
   .hero h1 {
-    font-size: clamp(42px, 5.2vw, 66px);
+    font-size: clamp(38px, 4.2vw, 58px);
     margin-bottom: 20px;
   }
   .hero p.lede {
     font-size: 15px; font-weight: 300; color: var(--ink);
-    opacity: 0.78; max-width: 420px; margin-bottom: 40px;
+    opacity: 0.78; max-width: 420px; margin: 0 auto 40px;
   }
-  .hero-actions { display: flex; gap: 18px; flex-wrap: wrap; }
+  .hero-actions { display: flex; gap: 18px; flex-wrap: wrap; justify-content: center; }
+  .hero-side-img.framed { max-width: 100%; }
   .btn {
     display: inline-flex; align-items: center; gap: 10px;
     padding: 15px 30px;
@@ -209,13 +210,13 @@
     font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
     color: var(--forest); opacity: 0.6;
   }
-  .hero .framed { max-width: 460px; margin-left: auto; }
-
   /* real photo fill — replaces .frame-fill once a photo is available */
   .framed-photo { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
-  .hero .framed-photo { aspect-ratio: 4 / 5; }
   .framed-photo.pos-top { object-position: 50% 12%; }
   .framed-photo.pos-dog { object-position: 38% 42%; }
+
+  /* natural (uncropped) photo — used in the hero flanks and portfolio galleries */
+  .framed-photo.no-crop { width: 100%; height: auto; object-fit: contain; }
 
   /* ── OFFERINGS ── */
   .offerings { padding: 100px 0; border-top: 1px solid var(--sage-lt); }
@@ -245,11 +246,13 @@
 
   /* ── GALLERY ── */
   .gallery { padding: 100px 0; border-top: 1px solid var(--sage-lt); }
-  .gallery-columns { display: flex; gap: 28px; align-items: flex-start; }
-  .gallery-col { flex: 1; display: flex; flex-direction: column; gap: 28px; }
-  .gallery-col:nth-child(2) { margin-top: 72px; }
-  .gallery-col:nth-child(3) { margin-top: 24px; }
-  .gallery-tile .framed-photo { aspect-ratio: 4 / 5; }
+  .portfolio-group { margin-top: 80px; }
+  .portfolio-group:first-child { margin-top: 64px; }
+  .portfolio-group-head { text-align: center; margin-bottom: 36px; }
+  .portfolio-group-head h3 { font-size: clamp(22px, 2.6vw, 30px); }
+  .masonry { column-count: 3; column-gap: 28px; }
+  .masonry .gallery-tile { break-inside: avoid; margin-bottom: 28px; }
+  .masonry .framed-photo { aspect-ratio: auto; }
 
   /* ── CTA BAND ── */
   .cta-band {
@@ -309,8 +312,7 @@
     .hero-grid { grid-template-columns: 1fr; gap: 48px; }
     .hero .framed { max-width: 100%; margin: 0; }
     .offer-grid { grid-template-columns: repeat(2, 1fr); }
-    .gallery-columns { flex-direction: column; }
-    .gallery-col, .gallery-col:nth-child(2), .gallery-col:nth-child(3) { margin-top: 0; }
+    .masonry { column-count: 2; }
     .footer-grid { grid-template-columns: 1fr; gap: 28px; }
   }
   @media (max-width: 560px) {
@@ -319,6 +321,8 @@
     .hero { padding: 56px 0 64px; }
     .offerings, .gallery { padding: 64px 0; }
     .offer-grid { grid-template-columns: 1fr; }
+    .masonry { column-count: 1; }
+    .portfolio-group { margin-top: 56px; }
   }
 </style>
 </head>
@@ -349,7 +353,10 @@
 <!-- ── HERO ── -->
 <section class="hero">
   <div class="wrap hero-grid">
-    <div>
+    <div class="framed hero-side-img">
+      <img class="framed-inner framed-photo no-crop" src="assets/marypapageorge/family/family-aperol-spritz.jpg" alt="A family toasting with Aperol spritzes in their garden" />
+    </div>
+    <div class="hero-center">
       <h1>Capture Your<br /><em>Memories.</em></h1>
       <p class="lede">Wedding photography and videography, family portraits, and engagement sessions across the Midwest.</p>
       <div class="hero-actions">
@@ -357,8 +364,8 @@
         <a href="#portfolio" class="btn btn-ghost">View Portfolio</a>
       </div>
     </div>
-    <div class="framed">
-      <img class="framed-inner framed-photo" src="assets/marypapageorge/grad-cap-toss.png" alt="Graduates tossing their caps in front of Bascom Hall" />
+    <div class="framed hero-side-img">
+      <img class="framed-inner framed-photo no-crop" src="assets/marypapageorge/graduation/graduation-gowns-group.jpg" alt="Three graduates in their academic gowns in front of Bascom Hall" />
     </div>
   </div>
 </section>
@@ -401,19 +408,44 @@
       <div class="eyebrow eyebrow--center">The Portfolio</div>
       <h2>A few favorites.</h2>
     </div>
-    <div class="gallery-columns">
-      <div class="gallery-col">
-        <div class="gallery-tile framed"><img class="framed-inner framed-photo" src="assets/marypapageorge/family-yard.jpg" alt="Family portrait session in a backyard" /></div>
-        <div class="gallery-tile framed"><img class="framed-inner framed-photo pos-dog" src="assets/marypapageorge/family-dog.jpg" alt="Family portrait session with their dog" /></div>
-      </div>
-      <div class="gallery-col">
-        <div class="gallery-tile framed"><img class="framed-inner framed-photo pos-top" src="assets/marypapageorge/business-group.jpg" alt="Team portrait at Studio Lagree" /></div>
-        <div class="gallery-tile framed"><img class="framed-inner framed-photo" src="assets/marypapageorge/business-portrait.jpg" alt="Business portrait session in a fitness studio" /></div>
-      </div>
-      <div class="gallery-col">
-        <div class="gallery-tile framed"><img class="framed-inner framed-photo" src="assets/marypapageorge/grad-group.jpg" alt="College graduates portrait in front of Bascom Hall" /></div>
+
+    <div class="portfolio-group">
+      <div class="portfolio-group-head"><h3>Family Portraits</h3></div>
+      <div class="masonry">
+        <div class="gallery-tile framed"><img class="framed-inner framed-photo no-crop" src="assets/marypapageorge/family/family-dog-picnic-blanket.jpg" alt="Family sitting on a picnic blanket in the backyard with their dog" /></div>
+        <div class="gallery-tile framed"><img class="framed-inner framed-photo no-crop" src="assets/marypapageorge/family/family-aperol-spritz.jpg" alt="Family toasting with Aperol spritzes in their garden" /></div>
+        <div class="gallery-tile framed"><img class="framed-inner framed-photo no-crop" src="assets/marypapageorge/family/family-under-tree-portrait.jpg" alt="Family portrait gathered together under a tree" /></div>
+        <div class="gallery-tile framed"><img class="framed-inner framed-photo no-crop" src="assets/marypapageorge/family/family-mother-daughter-embrace.jpg" alt="Mother and daughter portrait" /></div>
+        <div class="gallery-tile framed"><img class="framed-inner framed-photo no-crop" src="assets/marypapageorge/family/family-feeding-chickens.jpg" alt="Woman feeding chickens in the yard" /></div>
+        <div class="gallery-tile framed"><img class="framed-inner framed-photo no-crop" src="assets/marypapageorge/family/family-dog-on-blanket.jpg" alt="Family dog resting on a picnic blanket" /></div>
       </div>
     </div>
+
+    <div class="portfolio-group">
+      <div class="portfolio-group-head"><h3>Business Portraits</h3></div>
+      <div class="masonry">
+        <div class="gallery-tile framed"><img class="framed-inner framed-photo no-crop" src="assets/marypapageorge/business/business-group-photo.jpg" alt="Team group portrait at Studio Lagree" /></div>
+        <div class="gallery-tile framed"><img class="framed-inner framed-photo no-crop" src="assets/marypapageorge/business/business-portrait-arms-out.jpg" alt="Instructor portrait at Studio Lagree" /></div>
+        <div class="gallery-tile framed"><img class="framed-inner framed-photo no-crop" src="assets/marypapageorge/business/business-class-side-stretch.jpg" alt="Class stretching on Lagree machines" /></div>
+        <div class="gallery-tile framed"><img class="framed-inner framed-photo no-crop" src="assets/marypapageorge/business/business-class-lunge-walk.jpg" alt="Class working out on Lagree machines" /></div>
+        <div class="gallery-tile framed"><img class="framed-inner framed-photo no-crop" src="assets/marypapageorge/business/business-class-arm-raise.jpg" alt="Class raising cables during a Lagree session" /></div>
+        <div class="gallery-tile framed"><img class="framed-inner framed-photo no-crop" src="assets/marypapageorge/business/business-portrait-arm-raised.jpg" alt="Instructor portrait during a Lagree session" /></div>
+        <div class="gallery-tile framed"><img class="framed-inner framed-photo no-crop" src="assets/marypapageorge/business/business-portrait-hands-behind-head.jpg" alt="Instructor portrait at Studio Lagree" /></div>
+      </div>
+    </div>
+
+    <div class="portfolio-group">
+      <div class="portfolio-group-head"><h3>Graduation Portraits</h3></div>
+      <div class="masonry">
+        <div class="gallery-tile framed"><img class="framed-inner framed-photo no-crop" src="assets/marypapageorge/graduation/graduation-steps-hand-sign.jpg" alt="Graduates posing on the steps of Bascom Hall" /></div>
+        <div class="gallery-tile framed"><img class="framed-inner framed-photo no-crop" src="assets/marypapageorge/graduation/graduation-colonnade-walk.jpg" alt="Graduates walking through a campus colonnade" /></div>
+        <div class="gallery-tile framed"><img class="framed-inner framed-photo no-crop" src="assets/marypapageorge/graduation/graduation-steps-embrace.jpg" alt="Graduates posing together on the steps of Bascom Hall" /></div>
+        <div class="gallery-tile framed"><img class="framed-inner framed-photo no-crop" src="assets/marypapageorge/graduation/graduation-cap-toss.jpg" alt="Graduates tossing their caps in front of Bascom Hall" /></div>
+        <div class="gallery-tile framed"><img class="framed-inner framed-photo no-crop" src="assets/marypapageorge/graduation/graduation-champagne-spray.jpg" alt="Graduates celebrating with champagne in front of Bascom Hall" /></div>
+        <div class="gallery-tile framed"><img class="framed-inner framed-photo no-crop" src="assets/marypapageorge/graduation/graduation-gowns-group.jpg" alt="Graduates in their academic gowns in front of Bascom Hall" /></div>
+      </div>
+    </div>
+
   </div>
 </section>
 

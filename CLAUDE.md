@@ -57,7 +57,9 @@ For contact info lists inside a dark card:
 
 ## Browser Testing
 
-Always use the Playwright CLI tool for browser testing and screenshots — never the MCP browser tools.
+Always use the Playwright CLI tool for browser testing and screenshots — never the MCP browser tools (never call `mcp__plugin_playwright_playwright__*` tools).
+
+"Playwright CLI" means invoking `npx playwright ...` (e.g. `npx playwright screenshot ...`) via Bash — not the MCP server. If the Playwright browser binaries aren't installed yet, ask before running `npx playwright install` or any other setup/install command; don't run it automatically as a side effect of trying to take a screenshot.
 
 ## Footer Attribution & Legal
 
