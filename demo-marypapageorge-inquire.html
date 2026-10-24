@@ -199,6 +199,11 @@
   .sc-m-submit:disabled { opacity:0.6; cursor:not-allowed; }
   .sc-m-back { background:none; border:none; font-family:'Jost',sans-serif; font-size:12px; color:var(--forest); opacity:0.55; cursor:pointer; padding:0; text-align:left; }
   .sc-m-back:hover { opacity:1; }
+  .sc-call-label { font-size:11px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--forest); opacity:0.85; }
+  .sc-call-type { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:4px; }
+  .sc-call-opt { display:flex; align-items:center; gap:8px; padding:11px 12px; border:1px solid var(--sage-lt); cursor:pointer; font-family:'Jost',sans-serif; font-size:13px; color:var(--forest); transition:background 0.15s,border-color 0.15s; }
+  .sc-call-opt input[type="radio"] { display:none; }
+  .sc-call-opt:has(input:checked) { background:var(--sage-lt); border-color:var(--forest); font-weight:500; }
   .sc-m-success { padding:48px 28px; text-align:center; }
   .sc-m-check { width:44px; height:44px; border:1px solid var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:20px; color:var(--gold); margin:0 auto 20px; }
   .sc-m-s-title { font-family:'Fraunces',serif; font-size:24px; color:var(--forest); margin-bottom:12px; }
@@ -539,9 +544,22 @@
           <div class="sc-m-hd" id="sc-m-dt"></div>
           <div class="sc-m-sub2">Your contact details</div>
           <div class="sc-m-fields">
+            <div>
+              <div class="sc-call-label">Call type</div>
+              <div class="sc-call-type">
+                <label class="sc-call-opt">
+                  <input type="radio" name="sc-call" value="Phone Call" />
+                  Phone Call
+                </label>
+                <label class="sc-call-opt">
+                  <input type="radio" name="sc-call" value="Video Call" />
+                  Video Call
+                </label>
+              </div>
+            </div>
             <input class="sc-m-input" id="sc-m-name"  type="text"  placeholder="Your name" />
             <input class="sc-m-input" id="sc-m-email" type="email" placeholder="Email address" />
-            <input class="sc-m-input" id="sc-m-phone" type="tel"   placeholder="Phone (optional)" />
+            <input class="sc-m-input" id="sc-m-phone" type="tel"   placeholder="Phone number" />
             <textarea class="sc-m-input" id="sc-m-notes" placeholder="Anything Mary should know…" rows="3"></textarea>
             <button class="sc-m-submit" id="sc-m-submit">Book This Time</button>
             <button class="sc-m-back"   id="sc-m-back">← Change time</button>
@@ -576,12 +594,15 @@
 
       // Step 2 → Step 3: submit booking
       document.getElementById('sc-m-submit').addEventListener('click', async function () {
+        const callTypeEl = document.querySelector('input[name="sc-call"]:checked');
+        const callType = callTypeEl ? callTypeEl.value : '';
         const name  = document.getElementById('sc-m-name').value.trim();
         const email = document.getElementById('sc-m-email').value.trim();
         const phone = document.getElementById('sc-m-phone').value.trim();
         const notes = document.getElementById('sc-m-notes').value.trim();
 
-        if (!name || !email) { alert('Please enter your name and email.'); return; }
+        if (!callType) { alert('Please select Phone Call or Video Call.'); return; }
+        if (!name || !email || !phone) { alert('Please enter your name, email, and phone number.'); return; }
 
         const btn = this;
         btn.disabled = true; btn.textContent = 'Booking…';
@@ -591,7 +612,7 @@
             method: 'POST', mode: 'no-cors',
             headers: { 'Content-Type': 'text/plain' },
             body: JSON.stringify({
-              type: 'booking', name, email, phone, notes,
+              type: 'booking', name, email, phone, call_type: callType, notes,
               booking_date: dateLabel, booking_date_key: dateKey,
               booking_time: selectedTime,
               submitted_at: new Date().toISOString()
