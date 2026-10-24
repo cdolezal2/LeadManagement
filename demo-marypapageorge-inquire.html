@@ -183,7 +183,24 @@
   .sc-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(38,36,32,0.65); z-index: 500; align-items: center; justify-content: center; padding: 20px; }
   .sc-modal-overlay.open { display: flex; }
   .sc-modal { background: #fff; position: relative; width: 100%; max-width: 440px; overflow: hidden; box-shadow: 0 24px 80px rgba(0,0,0,0.25); }
-  #sc-modal-content iframe { display: block; width: 100%; height: 700px; border: none; }
+  .sc-m-hd  { font-family:'Fraunces',serif; font-size:20px; color:var(--forest); padding:28px 28px 0; }
+  .sc-m-sub2 { font-size:13px; opacity:0.65; padding:6px 28px 20px; }
+  .sc-time-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; padding:0 28px 28px; }
+  .sc-time-btn { padding:12px 6px; background:var(--cream); border:1px solid var(--sage-lt); font-family:'Jost',sans-serif; font-size:13px; font-weight:500; color:var(--forest); cursor:pointer; transition:background 0.15s,border-color 0.15s; }
+  .sc-time-btn:hover { background:var(--sage-lt); border-color:var(--sage); }
+  .sc-m-fields { padding:0 28px 28px; display:flex; flex-direction:column; gap:10px; }
+  .sc-m-input { width:100%; font-family:'Jost',sans-serif; font-size:13px; font-weight:300; color:var(--ink); background:var(--cream); border:1px solid var(--sage-lt); padding:11px 12px; outline:none; transition:border-color 0.2s; }
+  .sc-m-input:focus { border-color:var(--gold); }
+  textarea.sc-m-input { resize:vertical; }
+  .sc-m-submit { padding:14px; background:var(--forest); color:var(--cream); border:none; font-family:'Jost',sans-serif; font-size:13px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer; transition:background 0.2s; width:100%; }
+  .sc-m-submit:hover { background:var(--forest-d); }
+  .sc-m-submit:disabled { opacity:0.6; cursor:not-allowed; }
+  .sc-m-back { background:none; border:none; font-family:'Jost',sans-serif; font-size:12px; color:var(--forest); opacity:0.55; cursor:pointer; padding:0; text-align:left; }
+  .sc-m-back:hover { opacity:1; }
+  .sc-m-success { padding:48px 28px; text-align:center; }
+  .sc-m-check { width:44px; height:44px; border:1px solid var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:20px; color:var(--gold); margin:0 auto 20px; }
+  .sc-m-s-title { font-family:'Fraunces',serif; font-size:24px; color:var(--forest); margin-bottom:12px; }
+  .sc-m-s-sub { font-size:14px; opacity:0.75; line-height:1.6; }
   .sc-modal-close { position: absolute; top: 10px; right: 10px; z-index: 10; background: rgba(0,0,0,0.08); border: none; cursor: pointer; width: 30px; height: 30px; border-radius: 50%; font-size: 13px; color: var(--forest); display: flex; align-items: center; justify-content: center; transition: background 0.15s; }
   .sc-modal-close:hover { background: rgba(0,0,0,0.15); }
 
@@ -439,13 +456,12 @@
     }
   }
 
-  // ── CALENDLY BOOKING CALENDAR
-  // EDIT: replace with Mary's Calendly URL and accent hex.
-  const SC_CALENDLY = '[CLIENT_CALENDLY_URL]';
-  const SC_ACCENT_HEX = '[CLIENT_ACCENT_HEX]';
-
+  // ── BOOKING CALENDAR
   (function () {
     const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const DAYS   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    const SLOTS  = ['9:00 AM','10:00 AM','11:00 AM','12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM'];
+
     const userTZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
     document.getElementById('sc-cal-tz').textContent = 'Times shown in ' + userTZ.replace(/_/g, ' ');
 
@@ -455,15 +471,11 @@
 
     function render() {
       document.getElementById('sc-cal-month').textContent = MONTHS[viewMonth] + ' ' + viewYear;
-      const prevBtn = document.getElementById('sc-cal-prev');
-      prevBtn.disabled = (viewYear === today.getFullYear() && viewMonth === today.getMonth());
-
+      document.getElementById('sc-cal-prev').disabled = (viewYear === today.getFullYear() && viewMonth === today.getMonth());
       const grid = document.getElementById('sc-cal-grid');
       grid.innerHTML = '';
-
       const firstDay = new Date(viewYear, viewMonth, 1).getDay();
       const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
-
       for (let i = 0; i < firstDay; i++) {
         const el = document.createElement('div');
         el.className = 'sc-cal-day sc-cal-day--empty';
@@ -474,7 +486,6 @@
         const el = document.createElement('div');
         el.className = 'sc-cal-day';
         el.textContent = d;
-
         if (date < today) {
           el.classList.add('sc-cal-day--past');
         } else {
@@ -498,12 +509,89 @@
     render();
 
     function scOpenModal(y, m, d) {
-      const dateStr = y + '-' + String(m + 1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
-      const url = SC_CALENDLY + '?date=' + dateStr
-        + '&hide_gdpr_banner=1'
-        + '&primary_color=' + SC_ACCENT_HEX
-        + '&timezone=' + encodeURIComponent(userTZ);
-      document.getElementById('sc-modal-content').innerHTML = '<iframe src="' + url + '" allowfullscreen></iframe>';
+      const date      = new Date(y, m, d);
+      const dateLabel = DAYS[date.getDay()] + ', ' + MONTHS[m] + ' ' + d;
+      let selectedTime = null;
+
+      document.getElementById('sc-modal-content').innerHTML = `
+        <div id="sc-step-times">
+          <div class="sc-m-hd">${dateLabel}</div>
+          <div class="sc-m-sub2">Pick a time for your free 20-min call</div>
+          <div class="sc-time-grid">
+            ${SLOTS.map(t => `<button class="sc-time-btn" data-time="${t}">${t}</button>`).join('')}
+          </div>
+        </div>
+
+        <div id="sc-step-form" style="display:none">
+          <div class="sc-m-hd" id="sc-m-dt"></div>
+          <div class="sc-m-sub2">Your contact details</div>
+          <div class="sc-m-fields">
+            <input class="sc-m-input" id="sc-m-name"  type="text"  placeholder="Your name" />
+            <input class="sc-m-input" id="sc-m-email" type="email" placeholder="Email address" />
+            <input class="sc-m-input" id="sc-m-phone" type="tel"   placeholder="Phone (optional)" />
+            <textarea class="sc-m-input" id="sc-m-notes" placeholder="Anything Mary should know…" rows="3"></textarea>
+            <button class="sc-m-submit" id="sc-m-submit">Book This Time</button>
+            <button class="sc-m-back"   id="sc-m-back">← Change time</button>
+          </div>
+        </div>
+
+        <div id="sc-step-success" style="display:none">
+          <div class="sc-m-success">
+            <div class="sc-m-check">✓</div>
+            <div class="sc-m-s-title">You're all set!</div>
+            <p class="sc-m-s-sub">Mary will confirm your call for <strong id="sc-m-confirmed"></strong> — check your inbox shortly.</p>
+          </div>
+        </div>
+      `;
+
+      // Step 1 → Step 2: pick a time slot
+      document.querySelectorAll('.sc-time-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          selectedTime = this.dataset.time;
+          document.getElementById('sc-m-dt').textContent = dateLabel + ' at ' + selectedTime;
+          document.getElementById('sc-step-times').style.display = 'none';
+          document.getElementById('sc-step-form').style.display  = '';
+          document.getElementById('sc-m-name').focus();
+        });
+      });
+
+      // Step 2 → Step 1: back
+      document.getElementById('sc-m-back').addEventListener('click', function () {
+        document.getElementById('sc-step-form').style.display  = 'none';
+        document.getElementById('sc-step-times').style.display = '';
+      });
+
+      // Step 2 → Step 3: submit booking
+      document.getElementById('sc-m-submit').addEventListener('click', async function () {
+        const name  = document.getElementById('sc-m-name').value.trim();
+        const email = document.getElementById('sc-m-email').value.trim();
+        const phone = document.getElementById('sc-m-phone').value.trim();
+        const notes = document.getElementById('sc-m-notes').value.trim();
+
+        if (!name || !email) { alert('Please enter your name and email.'); return; }
+
+        const btn = this;
+        btn.disabled = true; btn.textContent = 'Booking…';
+
+        try {
+          await fetch(WEBHOOK_URL, {
+            method: 'POST', mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain' },
+            body: JSON.stringify({
+              type: 'booking', name, email, phone, notes,
+              booking_date: dateLabel, booking_time: selectedTime,
+              submitted_at: new Date().toISOString()
+            })
+          });
+          document.getElementById('sc-m-confirmed').textContent = dateLabel + ' at ' + selectedTime;
+          document.getElementById('sc-step-form').style.display    = 'none';
+          document.getElementById('sc-step-success').style.display = '';
+        } catch (err) {
+          btn.disabled = false; btn.textContent = 'Book This Time';
+          alert('Something went wrong — please email contentbymap@gmail.com directly.');
+        }
+      });
+
       document.getElementById('sc-modal-overlay').classList.add('open');
       document.body.style.overflow = 'hidden';
     }
