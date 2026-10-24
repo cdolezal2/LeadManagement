@@ -529,7 +529,7 @@
 
     async function scOpenModal(y, m, d) {
       const date      = new Date(y, m, d);
-      const dateLabel = DAYS[date.getDay()] + ', ' + MONTHS[m] + ' ' + d;
+      const dateLabel = DAYS[date.getDay()] + ', ' + MONTHS[m] + ' ' + d + ', ' + y;
       const dateKey   = y + '-' + String(m + 1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
       const isSat     = date.getDay() === 6;
       const slots     = isSat ? SLOTS_SAT : SLOTS_WEEKDAY;
@@ -546,7 +546,7 @@
       document.getElementById('sc-modal-content').innerHTML = `
         <div id="sc-step-times">
           <div class="sc-m-hd">${dateLabel}</div>
-          <div class="sc-m-sub2">Pick a time for your free 20-min call</div>
+          <div class="sc-m-sub2">Pick a time for your free 20-min call &nbsp;·&nbsp; <strong>All times Eastern (ET)</strong></div>
           <div class="sc-time-grid${isSat ? ' sc-time-grid--sat' : ''}">
             ${slots.map(t => booked.includes(t)
               ? `<button class="sc-time-btn sc-time-btn--taken" disabled>${t}<span class="sc-taken-lbl">Booked</span></button>`
