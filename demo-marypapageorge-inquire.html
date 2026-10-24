@@ -422,7 +422,7 @@
   }
 
   // ── LEAD FORM SUBMISSION
-  const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxa0oRhzC6cDg-rXgFkin23Dk6fmm9DAT7T2cOl47qSaZ_RayzEjdnq1r9vadaEkPY/exec';
+  const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwVYPWM5DGvwLLaOb_it0Wsk90vDIR6aIWhKu9VsXaN7jYxaF_7vd1_sKRDrMGGD_8/exec';
 
   async function handleSubmit() {
     const name     = document.getElementById('f-name').value.trim();
@@ -549,7 +549,7 @@
           <div class="sc-m-sub2">Pick a time for your free 20-min call &nbsp;·&nbsp; <strong>All times Eastern (ET)</strong></div>
           <div class="sc-time-grid${isSat ? ' sc-time-grid--sat' : ''}">
             ${slots.map(t => booked.includes(t)
-              ? `<button class="sc-time-btn sc-time-btn--taken" disabled>${t}<span class="sc-taken-lbl">Booked</span></button>`
+              ? `<button class="sc-time-btn sc-time-btn--taken" disabled>${t}</button>`
               : `<button class="sc-time-btn" data-time="${t}">${t}</button>`
             ).join('')}
           </div>
