@@ -175,7 +175,8 @@
   .sc-cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
   .sc-cal-day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 13px; border-radius: 50%; cursor: pointer; color: var(--ink); font-weight: 500; position: relative; transition: background 0.15s, color 0.15s; }
   .sc-cal-day:hover:not(.sc-cal-day--past):not(.sc-cal-day--empty) { background: var(--sage-lt); color: var(--forest); }
-  .sc-cal-day--past { color: #ccc; cursor: default; font-weight: 400; }
+  .sc-cal-day--past   { color:#ccc; cursor:default; font-weight:400; }
+  .sc-cal-day--closed { color:#ddd; cursor:default; font-weight:400; text-decoration:line-through; }
   .sc-cal-day--empty { cursor: default; }
   .sc-cal-day--today::after { content: ''; position: absolute; bottom: 3px; left: 50%; transform: translateX(-50%); width: 4px; height: 4px; border-radius: 50%; background: var(--gold); }
   .sc-cal-tz { text-align: center; margin-top: 12px; font-size: 11px; opacity: 0.55; }
@@ -188,6 +189,8 @@
   .sc-time-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; padding:0 28px 28px; }
   .sc-time-btn { padding:12px 6px; background:var(--cream); border:1px solid var(--sage-lt); font-family:'Jost',sans-serif; font-size:13px; font-weight:500; color:var(--forest); cursor:pointer; transition:background 0.15s,border-color 0.15s; }
   .sc-time-btn:hover:not(:disabled) { background:var(--sage-lt); border-color:var(--sage); }
+  .sc-time-grid--sat { grid-template-columns:repeat(5,1fr); }
+  .sc-time-grid--sat .sc-time-btn { font-size:11px; padding:10px 4px; }
   .sc-time-btn--taken { opacity:0.38; cursor:not-allowed; flex-direction:column; gap:2px; }
   .sc-taken-lbl { font-size:10px; letter-spacing:0.06em; text-transform:uppercase; opacity:0.7; }
   .sc-m-fields { padding:0 28px 28px; display:flex; flex-direction:column; gap:10px; }
@@ -466,7 +469,14 @@
   (function () {
     const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
     const DAYS   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-    const SLOTS  = ['5:00 PM','5:30 PM','6:00 PM','6:30 PM','7:00 PM','7:30 PM','8:00 PM','8:30 PM','9:00 PM'];
+    const SLOTS_WEEKDAY = ['5:00 PM','5:30 PM','6:00 PM','6:30 PM','7:00 PM','7:30 PM','8:00 PM','8:30 PM','9:00 PM'];
+    const SLOTS_SAT = [
+      '9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM',
+      '11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM',
+      '2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM',
+      '4:30 PM','5:00 PM','5:30 PM','6:00 PM','6:30 PM',
+      '7:00 PM','7:30 PM','8:00 PM','8:30 PM','9:00 PM'
+    ];
 
     const userTZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
     document.getElementById('sc-cal-tz').textContent = 'Times shown in ' + userTZ.replace(/_/g, ' ');
@@ -494,6 +504,9 @@
         el.textContent = d;
         if (date < today) {
           el.classList.add('sc-cal-day--past');
+        } else if (date.getDay() === 0) {
+          el.classList.add('sc-cal-day--closed');
+          el.title = 'Closed Sundays';
         } else {
           if (date.getTime() === today.getTime()) el.classList.add('sc-cal-day--today');
           const y = viewYear, m = viewMonth, day = d;
@@ -518,6 +531,8 @@
       const date      = new Date(y, m, d);
       const dateLabel = DAYS[date.getDay()] + ', ' + MONTHS[m] + ' ' + d;
       const dateKey   = y + '-' + String(m + 1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
+      const isSat     = date.getDay() === 6;
+      const slots     = isSat ? SLOTS_SAT : SLOTS_WEEKDAY;
       let selectedTime = null;
 
       // Fetch already-booked slots for this date
@@ -532,8 +547,8 @@
         <div id="sc-step-times">
           <div class="sc-m-hd">${dateLabel}</div>
           <div class="sc-m-sub2">Pick a time for your free 20-min call</div>
-          <div class="sc-time-grid">
-            ${SLOTS.map(t => booked.includes(t)
+          <div class="sc-time-grid${isSat ? ' sc-time-grid--sat' : ''}">
+            ${slots.map(t => booked.includes(t)
               ? `<button class="sc-time-btn sc-time-btn--taken" disabled>${t}<span class="sc-taken-lbl">Booked</span></button>`
               : `<button class="sc-time-btn" data-time="${t}">${t}</button>`
             ).join('')}
