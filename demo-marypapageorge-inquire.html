@@ -187,7 +187,9 @@
   .sc-m-sub2 { font-size:13px; opacity:0.65; padding:6px 28px 20px; }
   .sc-time-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; padding:0 28px 28px; }
   .sc-time-btn { padding:12px 6px; background:var(--cream); border:1px solid var(--sage-lt); font-family:'Jost',sans-serif; font-size:13px; font-weight:500; color:var(--forest); cursor:pointer; transition:background 0.15s,border-color 0.15s; }
-  .sc-time-btn:hover { background:var(--sage-lt); border-color:var(--sage); }
+  .sc-time-btn:hover:not(:disabled) { background:var(--sage-lt); border-color:var(--sage); }
+  .sc-time-btn--taken { opacity:0.38; cursor:not-allowed; flex-direction:column; gap:2px; }
+  .sc-taken-lbl { font-size:10px; letter-spacing:0.06em; text-transform:uppercase; opacity:0.7; }
   .sc-m-fields { padding:0 28px 28px; display:flex; flex-direction:column; gap:10px; }
   .sc-m-input { width:100%; font-family:'Jost',sans-serif; font-size:13px; font-weight:300; color:var(--ink); background:var(--cream); border:1px solid var(--sage-lt); padding:11px 12px; outline:none; transition:border-color 0.2s; }
   .sc-m-input:focus { border-color:var(--gold); }
@@ -412,8 +414,7 @@
   }
 
   // ── LEAD FORM SUBMISSION
-  // EDIT: replace with Mary's Apps Script webhook URL once deployed.
-  const WEBHOOK_URL = 'YOUR_APPS_SCRIPT_WEBHOOK_URL_HERE';
+  const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzHlYCgx72zfDy717sVAjtrS9XBQUVBRz9sWOkd1mHHjXUGY0yo8mZKAHQ8xrmIbvs/exec';
 
   async function handleSubmit() {
     const name     = document.getElementById('f-name').value.trim();
@@ -508,17 +509,29 @@
 
     render();
 
-    function scOpenModal(y, m, d) {
+    async function scOpenModal(y, m, d) {
       const date      = new Date(y, m, d);
       const dateLabel = DAYS[date.getDay()] + ', ' + MONTHS[m] + ' ' + d;
+      const dateKey   = y + '-' + String(m + 1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
       let selectedTime = null;
+
+      // Fetch already-booked slots for this date
+      let booked = [];
+      try {
+        const res = await fetch(WEBHOOK_URL + '?date=' + encodeURIComponent(dateKey));
+        const json = await res.json();
+        booked = json.booked || [];
+      } catch (_) {}
 
       document.getElementById('sc-modal-content').innerHTML = `
         <div id="sc-step-times">
           <div class="sc-m-hd">${dateLabel}</div>
           <div class="sc-m-sub2">Pick a time for your free 20-min call</div>
           <div class="sc-time-grid">
-            ${SLOTS.map(t => `<button class="sc-time-btn" data-time="${t}">${t}</button>`).join('')}
+            ${SLOTS.map(t => booked.includes(t)
+              ? `<button class="sc-time-btn sc-time-btn--taken" disabled>${t}<span class="sc-taken-lbl">Booked</span></button>`
+              : `<button class="sc-time-btn" data-time="${t}">${t}</button>`
+            ).join('')}
           </div>
         </div>
 
@@ -579,7 +592,8 @@
             headers: { 'Content-Type': 'text/plain' },
             body: JSON.stringify({
               type: 'booking', name, email, phone, notes,
-              booking_date: dateLabel, booking_time: selectedTime,
+              booking_date: dateLabel, booking_date_key: dateKey,
+              booking_time: selectedTime,
               submitted_at: new Date().toISOString()
             })
           });
